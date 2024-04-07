@@ -19,6 +19,7 @@ public:
     void addBook(const Book& book);
     void removeBook(const Custom_String_Class& ISBN);
     void manageMemberAccounts();
+    void editBook(const Book& book);
     // Other functionalities...
 };
 

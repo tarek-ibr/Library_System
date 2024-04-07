@@ -35,9 +35,52 @@ void Librarian::removeBook(const Custom_String_Class& ISBN) {
     }
 }
 
-void Librarian::editBook(const Book& book)
+void Librarian::editBook(Book& book)
 {
-    // Edit book's data such as number of pages
+    char answer;
+    cout << "Do you want to edit the title ?(Y/N)";
+    cin >> answer;
+    if(answer == 'Y')
+    {
+        cin >> book.Title;
+    }
+    cout << "Do you want to edit the ISBN ?(Y/N)";
+    cin >> answer;
+    if(answer == 'Y')
+    {
+        cin >> book.ISBN;
+    }
+    cout << "Do you want to edit the author ?(Y/N)";
+    cin >> answer;
+    if(answer == 'Y')
+    {
+        cin >> book.Author;
+    }
+    cout << "Do you want to edit the genre ?(Y/N)";
+    cin >> answer;
+    if(answer == 'Y')
+    {
+        cin >> book.Genre;
+    }
+    cout << "Do you want to edit the due date ?(Y/N)";
+    cin >> answer;
+    if(answer == 'Y')
+    {
+        cin >> book.duedate;
+    }
+    cout << "Do you want to edit the publication year ?(Y/N)";
+    cin >> answer;
+    if(answer == 'Y')
+    {
+        cin >> book.Publication_Year;
+    }
+    cout << "Do you want to edit the availability ?(Y/N)";
+    cin >> answer;
+    if(answer == 'Y')
+    {
+        cin >> book.Available;
+    }
+
 }
 void Librarian::manageMemberAccounts() {
     // manage member accounts (register new members, remove members, etc.)

@@ -33,7 +33,7 @@ void Librarian::addBook() {
     Book::Book_List.push_back(newBook);
 }
 void Librarian::removeBook(const Custom_String_Class& ISBN) {
-    for(auto it = Book::Book_List.begin(); it != Book::Book_List.end(); ) {
+    for(auto it = Book::Book_List.begin(); it != Book::Book_List.end() + 1; ) {
         if(it->ISBN.str == ISBN.str) {
             it = Book::Book_List.erase(it);
             return;// erase and get the next valid iterator

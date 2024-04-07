@@ -27,8 +27,6 @@ public:
     static void displaylist();
     void display() const;
     Custom_String_Class getISBN();
-
-
 };
 
 

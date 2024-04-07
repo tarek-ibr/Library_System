@@ -56,6 +56,7 @@ bool Book::loadlibrary() {
         bk.duedate="";
         Book_List.push_back(bk);
     }
+    file.close();
     return true;
 }
 bool Book::savelibrary() {
@@ -76,6 +77,7 @@ bool Book::savelibrary() {
         OUTPUT.push_back(bookJson);
     }
     file<<setw(4)<<OUTPUT<<endl;
+    file.close();
     return true;
 
 }

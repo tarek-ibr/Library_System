@@ -6,7 +6,7 @@
 using namespace std;
 
 Member::Member():Name(""),Type(""),ID(0),Fines(0) {}
-Member::Member(Custom_String_Class N,Custom_String_Class T,int I): Name(N),Type(T),ID(I),Fines(0) {}
+Member::Member(Custom_String_Class N,int I,Custom_String_Class T): Name(N),ID(I),Type(T),Fines(0) {}
 vector<Custom_String_Class> Member::SearchByTitle(Custom_String_Class Title) {
     vector<Custom_String_Class> result;
 }

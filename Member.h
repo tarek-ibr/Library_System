@@ -22,7 +22,7 @@ private:
     Custom_String_Class Type;
 public:
     Member();
-    Member(Custom_String_Class N,Custom_String_Class T,int I);
+    Member(Custom_String_Class N,int I,Custom_String_Class T);
     vector<Custom_String_Class> SearchByTitle(Custom_String_Class Title);
     // Add a book to the checkedOutBooks vector
     void addBook(const Book& book);

@@ -8,8 +8,8 @@
 vector<Book>Book::Book_List = {};
 using json = nlohmann::json;
 Book::Book() {}
-Book::Book(const Custom_String_Class& tit  , const Custom_String_Class& Auth , const Custom_String_Class& ISB , int Pub_yr,bool Avail )
-        : Title(tit), Author(Auth), ISBN(ISB), Publication_Year(Pub_yr),Available(Avail) {}
+Book::Book(const Custom_String_Class& tit  , const Custom_String_Class& Auth , const Custom_String_Class& ISB ,const Custom_String_Class& Gen,const Custom_String_Class& Due, int Pub_yr,bool Avail )
+        : Title(tit), Author(Auth), ISBN(ISB),Genre(Gen),duedate(Due),Publication_Year(Pub_yr),Available(Avail) {}
 void Book::display() const {
     cout << "Title: " << Title << endl;
     cout << "Author: " << Author << endl;

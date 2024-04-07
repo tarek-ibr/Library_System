@@ -22,7 +22,7 @@ public:
     static vector<Book> Book_List;
 
     Book();
-    Book(const Custom_String_Class& , const Custom_String_Class& , const Custom_String_Class& , int ,bool);
+    Book(const Custom_String_Class& , const Custom_String_Class& , const Custom_String_Class& ,const Custom_String_Class&,const Custom_String_Class&, int ,bool);
     static bool loadlibrary();
     void display() const;
     static void displaylist();

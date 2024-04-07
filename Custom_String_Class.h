@@ -11,8 +11,9 @@
 using namespace std;
 
 class Custom_String_Class {
-private:char *str;
+private:
 public:
+    char *str;
     Custom_String_Class();
     Custom_String_Class(char * s);
     Custom_String_Class(string s);

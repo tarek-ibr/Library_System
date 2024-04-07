@@ -16,7 +16,7 @@ public:
 
 
 // Additional functionalities specific to Librarian
-    void addBook(const Book& book);
+    void addBook();
     void removeBook(const Custom_String_Class& ISBN);
     void manageMemberAccounts();
     void editBook(const Book& book);

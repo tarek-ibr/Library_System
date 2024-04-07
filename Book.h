@@ -16,14 +16,16 @@ public:
     Custom_String_Class Author;
     Custom_String_Class ISBN;
     Custom_String_Class Genre;
+    Custom_String_Class duedate;
     int Publication_Year;
     bool Available;
+    static vector<Custom_String_Class> Book_List;
 
-
-
-    // Default constructor
     Book();
-    Book(const Custom_String_Class& t, const Custom_String_Class& a, const Custom_String_Class& i, int y);
+    Book(const Custom_String_Class& , const Custom_String_Class& , const Custom_String_Class& , int ,bool);
+    static bool loadlibrary();
+    void display() const;
+    Custom_String_Class getISBN();
 
 
 };

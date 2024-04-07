@@ -7,15 +7,19 @@
 
 #include <iostream>
 #include "Custom_String_Class.h"
-
+#include <vector>
 using namespace std;
 
 class Member {
-    Custom_String_Class name;
-    int id;
-    bool type;
-    Custom_String_Class Checked_books[50];
-    int fines;
+private:
+    Custom_String_Class Name;
+    int ID;
+    vector<Custom_String_Class> Checked_Books;
+    int Fines;
+public:
+    Member();
+    Member(Custom_String_Class N,int I);
+    vector<Custom_String_Class> SearchByTitle(Custom_String_Class Title);
 };
 
 

@@ -19,10 +19,10 @@ void findbook(vector<Book> books,string s){
     bool found = 0;
     for(auto it:books)
     {
-        if(it.title.find(s)!=string::npos)
+        if(it.Title.find(s)!=string::npos)
         {
             found =1;
-            cout<<"found :"<<it.title<<endl;
+            cout<<"found :"<<it.Title<<endl;
         }
     }
     if(!found)
@@ -46,10 +46,10 @@ int main() {
     std::vector<Book> books;
     for (const auto& book_json : j["books"]) {
         Book bk;
-        bk.title = book_json["title"];
-        bk.author = book_json["author"];
-        bk.isbn = book_json["isbn"];
-        bk.publication_year = book_json["publication_year"];
+        bk.Title = book_json["title"];
+        bk.Author = book_json["author"];
+        bk.ISBN = book_json["isbn"];
+        bk.Publication_Year = book_json["publication_year"];
 
         books.push_back(bk);
     }
@@ -65,7 +65,6 @@ int main() {
     };
 
     j["books"].push_back(new_book_json);
-
 
 
 

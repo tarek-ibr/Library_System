@@ -5,20 +5,24 @@
 #ifndef PROJECT_BOOK_H
 #define PROJECT_BOOK_H
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
 class Book {
 public:
-    std::string title;
-    std::string author;
-    std::string isbn;
-    int publication_year;
+    string Title;
+    string Author;
+    string ISBN;
+    string Genre;
+    int Publication_Year;
+    bool Available;
 
-    Book();
-    Book(const std::string&, const std::string&, const std::string&, int);
 
     // Default constructor
+    Book();
+    Book(const std::string& t, const std::string& a, const std::string& i, int y);
+
 
 };
 

@@ -11,6 +11,7 @@ void Librarian::addBook() {
     cout << "Enter book's title: " << endl;
     cin >> title;
     Custom_String_Class isbn;
+    cout << "Enter book's ISBN: " << endl;
     cin >> isbn;
     Custom_String_Class author;
     cout << "Enter author's name: " << endl;
@@ -34,7 +35,8 @@ void Librarian::addBook() {
 }
 void Librarian::removeBook(const Custom_String_Class& ISBN) {
     for(auto it = Book::Book_List.begin(); it != Book::Book_List.end() + 1; ) {
-        if(it->ISBN.str == ISBN.str) {
+        if(it->ISBN == ISBN) {
+            cout << "Now Iam removing \n";
             it = Book::Book_List.erase(it);
             return;// erase and get the next valid iterator
         } else {
@@ -90,6 +92,7 @@ void Librarian::editBook(Book& book)
     }
 
 }
+//
 void Librarian::manageMemberAccounts() {
     // manage member accounts (register new members, remove members, etc.)
 }

@@ -111,9 +111,15 @@ public:
 int main() {
 
 Book::loadlibrary();
+Librarian L1;
+L1.editBook(Book::Book_List[0]);
 Book::displaylist();
-Book::Book_List.front().Title = "zepy";
 Book::savelibrary();
+
+
+
+
+
 
 
 

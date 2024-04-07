@@ -20,6 +20,7 @@ public:
     bool Available;
 
 
+
     // Default constructor
     Book();
     Book(const Custom_String_Class& t, const Custom_String_Class& a, const Custom_String_Class& i, int y);

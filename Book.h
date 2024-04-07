@@ -20,12 +20,12 @@ public:
     int Publication_Year;
     bool Available;
     static vector<Book> Book_List;
-
     Book();
     Book(const Custom_String_Class& , const Custom_String_Class& , const Custom_String_Class& ,const Custom_String_Class&,const Custom_String_Class&, int ,bool);
     static bool loadlibrary();
-    void display() const;
+    static bool savelibrary();
     static void displaylist();
+    void display() const;
     Custom_String_Class getISBN();
 
 

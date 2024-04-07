@@ -44,18 +44,40 @@ bool Book::loadlibrary() {
     json j;
     file >> j;
 
-    for (const auto& book_json : j["books"]) {
+    for (const auto& book_json : j) {
         Book bk;
 
         bk.Title = (book_json["title"].get<string>());
-        cout<< (book_json["title"].get<string>());
         bk.Author = book_json["author"].get<string>();
         bk.ISBN = book_json["isbn"].get<string>();
+        bk.Genre = book_json["genre"].get<string>();
         bk.Publication_Year = book_json["publication_year"];
         bk.Available=false;
+        bk.duedate="";
         Book_List.push_back(bk);
     }
     return true;
+}
+bool Book::savelibrary() {
+    std::ofstream file("books.json");
+    if (!file.is_open()) {
+        std::cerr << "Failed to open file." << endl;
+        return false;
+    }
+    json OUTPUT;
+    for(auto book : Book_List)
+    {
+        json bookJson;
+        bookJson["title"] = book.Title.str;
+        bookJson["author"] = book.Author.str;
+        bookJson["publication_year"] = book.Publication_Year;
+        bookJson["isbn"] = book.ISBN.str;
+        bookJson["genre"] = book.Genre.str;
+        OUTPUT.push_back(bookJson);
+    }
+    file<<setw(4)<<OUTPUT<<endl;
+    return true;
+
 }
 Custom_String_Class Book::getISBN() {
     return ISBN;

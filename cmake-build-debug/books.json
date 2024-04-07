@@ -1,11 +1,37 @@
-{
-  "books": [
+[
     {
-      "title": "To Kill a Mockingbird",
-      "author": "Harper Lee",
-      "isbn": "978-0061120084",
-      "publication_year": 1960
+        "author": "Harper Lee",
+        "genre": "Fiction",
+        "isbn": "978-0-06-112008-4",
+        "publication_year": 1960,
+        "title": "a7a"
+    },
+    {
+        "author": "George Orwell",
+        "genre": "Science Fiction",
+        "isbn": "978-0-451-52493-5",
+        "publication_year": 1949,
+        "title": "1984"
+    },
+    {
+        "author": "F. Scott Fitzgerald",
+        "genre": "Fiction",
+        "isbn": "978-0-7432-7356-5",
+        "publication_year": 1925,
+        "title": "The Great Gatsby"
+    },
+    {
+        "author": "Jane Austen",
+        "genre": "Romance",
+        "isbn": "978-0-14-143951-8",
+        "publication_year": 1813,
+        "title": "Pride and Prejudice"
+    },
+    {
+        "author": "J.K. Rowling",
+        "genre": "Fantasy",
+        "isbn": "978-0-7475-3269-6",
+        "publication_year": 1997,
+        "title": "Harry Potter and the Philosopher's Stone"
     }
-   
-  ]
-}
+]

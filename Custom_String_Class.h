@@ -15,7 +15,9 @@ private:char *str;
 public:
     Custom_String_Class();
     Custom_String_Class(char * s);
+    Custom_String_Class(string s);
     Custom_String_Class operator+(Custom_String_Class s);
+    Custom_String_Class& operator=(const char *);
     bool operator==(Custom_String_Class s2);
     bool operator!=(Custom_String_Class s2);
     char operator[](int x);

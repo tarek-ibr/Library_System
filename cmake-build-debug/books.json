@@ -5,47 +5,7 @@
       "author": "Harper Lee",
       "isbn": "978-0061120084",
       "publication_year": 1960
-    },
-    {
-      "title": "1984",
-      "author": "George Orwell",
-      "isbn": "978-0451524935",
-      "publication_year": 1949
-    },
-    {
-      "title": "The Great Gatsby",
-      "author": "F. Scott Fitzgerald",
-      "isbn": "978-0743273565",
-      "publication_year": 1925
-    },
-    {
-      "title": "Pride and Prejudice",
-      "author": "Jane Austen",
-      "isbn": "978-0486284736",
-      "publication_year": 1813
-    },
-    {
-      "title": "Moby-Dick",
-      "author": "Herman Melville",
-      "isbn": "978-1853260087",
-      "publication_year": 1851
-    },
-	{
-		"title":" Malware analysis : reworked" ,"author": "Youssef Ayman",
-      "isbn": "978-1853260087",
-      "publication_year": 2030
-	}
-	,
-	{
-		"title":"Practical zena" ,"author": "Youssef Ayman",
-      "isbn": "978-1853260087",
-      "publication_year": 2030
-	}
-	,
-	{
-		"title":"Practical shrmata" ,"author": "Youssef Ayman",
-      "isbn": "978-1853260087",
-      "publication_year": 2030
-	}
+    }
+   
   ]
 }

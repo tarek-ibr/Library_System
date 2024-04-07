@@ -19,12 +19,13 @@ public:
     Custom_String_Class duedate;
     int Publication_Year;
     bool Available;
-    static vector<Custom_String_Class> Book_List;
+    static vector<Book> Book_List;
 
     Book();
     Book(const Custom_String_Class& , const Custom_String_Class& , const Custom_String_Class& , int ,bool);
     static bool loadlibrary();
     void display() const;
+    static void displaylist();
     Custom_String_Class getISBN();
 
 

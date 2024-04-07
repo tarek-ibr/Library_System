@@ -14,6 +14,11 @@ Custom_String_Class::Custom_String_Class(char * s){
     str = new char[len+1];
     strcpy(str,s);
 }
+Custom_String_Class::Custom_String_Class(string s){
+   int m_length = s.length();
+    str = new char[m_length + 1];
+    std::strcpy(str, s.c_str());
+}
 Custom_String_Class Custom_String_Class::operator+(Custom_String_Class s)
 {
     int len = this->strlength()+s.strlength()+1;
@@ -37,7 +42,7 @@ char Custom_String_Class::operator[](int x)
 
 void Custom_String_Class::display()
 {
-    cout<<*this;
+    cout<<str;
 }
 bool Custom_String_Class::find(Custom_String_Class s) {
     strstr(str,s.str);
@@ -49,7 +54,13 @@ int Custom_String_Class::strcompare (Custom_String_Class s){
     return strcmp(str, s.str);
 }
 Custom_String_Class::~Custom_String_Class(){
-    delete str;
-    cout<<"string destructor called";
 
+
+}
+
+Custom_String_Class& Custom_String_Class::operator=(const char * str2) {
+  int len = strlen(str2);
+  str = new char[len+1];
+  strcpy(str,str2);
+  return *this;
 }

@@ -16,7 +16,7 @@ Custom_String_Class::Custom_String_Class(char * s){
 }
 Custom_String_Class Custom_String_Class::operator+(Custom_String_Class s)
 {
-    int len = strlen(this->str)+strlen(s.str)+1;
+    int len = this->strlength()+s.strlength()+1;
     char * newstr = new char[len];
     strcpy(newstr,str);
     strcat(newstr,s.str);
@@ -24,11 +24,11 @@ Custom_String_Class Custom_String_Class::operator+(Custom_String_Class s)
 }
 bool Custom_String_Class::operator==(Custom_String_Class s2)
 {
-    return !strcmp(str,s2.str);
+    return !this->strcompare(s2.str);
 }
 bool Custom_String_Class::operator!=(Custom_String_Class s2)
 {
-    return strcmp(str,s2.str);
+    return this->strcompare(s2.str);
 }
 char Custom_String_Class::operator[](int x)
 {
@@ -38,6 +38,15 @@ char Custom_String_Class::operator[](int x)
 void Custom_String_Class::display()
 {
     cout<<*this;
+}
+bool Custom_String_Class::find(Custom_String_Class s) {
+    strstr(str,s.str);
+}
+int Custom_String_Class::strlength (){
+    return strlen(str);
+}
+int Custom_String_Class::strcompare (Custom_String_Class s){
+    return strcmp(str, s.str);
 }
 Custom_String_Class::~Custom_String_Class(){
     delete str;

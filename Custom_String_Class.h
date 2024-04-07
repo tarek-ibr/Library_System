@@ -29,6 +29,9 @@ public:
         return in;
     }
     void display();
+    bool find(Custom_String_Class s);
+    int strlength ();
+    int strcompare (Custom_String_Class s);
     ~Custom_String_Class();
 };
 

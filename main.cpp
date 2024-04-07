@@ -1,8 +1,6 @@
 #include <iostream>
-#include <cstring>
 #include <fstream>
 #include <vector>
-#include <string>
 
 #include "json.h"
 
@@ -15,7 +13,7 @@
 using namespace std;
 using json = nlohmann::json;
 
-void findbook(vector<Book> books,string s){
+void findbook(vector<Book> books,Custom_String_Class s){
     bool found = 0;
     for(auto it:books)
     {
@@ -53,7 +51,7 @@ int main() {
 
         books.push_back(bk);
     }
-    string n;
+    Custom_String_Class n;
     cout<<"type book name:";
     cin>>n;
     findbook(books,n);

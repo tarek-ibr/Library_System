@@ -19,13 +19,14 @@ private:
     int ID;
     Custom_String_Class Type;
     int fines;
-    vector<Loan> checkedOutBooks;
+    static vector<Loan> checkedOutBooks;
 public:
     Member();
     Member(Custom_String_Class N,int I,Custom_String_Class T);
     int calculateTotalFines ();
     void display();
-
+    void borrowBook(Book);
+    void returnBook(Book);
 };
 
 

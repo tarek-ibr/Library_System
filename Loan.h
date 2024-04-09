@@ -10,14 +10,16 @@
 
 class Loan  {
     int memberID;
-    int bookID;
+    Custom_String_Class bookID;
     Date dueDate;
     bool returned;
 public:
     Loan();
-    Loan(int, int, Date);
+    Loan(int, Custom_String_Class, Date);
+    Custom_String_Class getBookID();
     int calculateFines();
     void displayDetails();
+
 
 
 };

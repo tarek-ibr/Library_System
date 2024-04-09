@@ -5,7 +5,7 @@
 #include "Loan.h"
 
 Loan::Loan(){}
-Loan::Loan(int m, int b, Date d): memberID(m), bookID(b), dueDate(d) {
+Loan::Loan(int m, Custom_String_Class b, Date d): memberID(m), bookID(b), dueDate(d) {
     returned=false;
 }
 int Loan::calculateFines(){
@@ -16,6 +16,9 @@ int Loan::calculateFines(){
     else {
         return 0;
     }
+}
+Custom_String_Class Loan::getBookID(){
+    return bookID;
 }
 void Loan::displayDetails(){
 

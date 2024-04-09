@@ -31,17 +31,20 @@ void findbook(vector<Book> books,string s){
 
 int main() {
 
-    /*Book::loadlibrary();
+    Book::loadlibrary();
     Librarian L1;
     L1.addBook();
     Book::displaylist();
-    Book::savelibrary();*/
+    Book::savelibrary();
+
     Date d1("05/04/2024");
-    Loan l1(22123, 23424, d1);
+    Loan l1(22123, "23424", d1);
     l1.displayDetails();
     cout<<l1.calculateFines()<<endl;
     Date d2=Date::getCrrentDate();
     cout<<d2.getDate();
+
+
 
     return 0;
 }

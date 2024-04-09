@@ -23,7 +23,7 @@ void findbook(vector<Book> books,string s){
     }
     if(!found)
     {
-        cout<<"couldnt find a book";
+        cout<<"couldnt find a book ";
     }
 
     return;

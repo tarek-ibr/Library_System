@@ -8,7 +8,7 @@ Loan::Loan(): memberID(0),bookID(""), returned(false){}
 Loan::Loan(int m, const Custom_String_Class& b, Date d): memberID(m), bookID(b), dueDate(d) {
     returned=false;
 }
-Custom_String_Class Loan::getBookID(){
+Custom_String_Class Loan::getBookID() const{
     return bookID;
 }
 int Loan::getMemberID() const{

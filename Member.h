@@ -21,7 +21,7 @@ protected:
     int ID;
     Custom_String_Class Type;
     int Fines;
-    static vector<Loan> checkedOutBooks;
+    vector<Loan> checkedOutBooks;
     static vector<Member> members;
 public:
     Member();
@@ -37,7 +37,7 @@ public:
     void display();
     void displayloaned() const;
     void borrowBook(Book);
-    void returnBook(Book) const;
+    void returnBook(Book) ;
     static bool loadMembers();
     static bool savelibrary();
     static void displayAllMembers();

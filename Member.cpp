@@ -7,7 +7,7 @@ using namespace std;
 
 using json = nlohmann::json;
 
-vector<Loan> Member::checkedOutBooks={};
+
 vector<Member> Member::members={};
 Member::Member():Name(""),Type(""),ID(0),Fines(0) {}
 Member::Member(const Custom_String_Class& N,int I,const Custom_String_Class& T): Name(N),ID(I),Type(T){
@@ -56,7 +56,7 @@ void Member::display(){
     std::cout << "Overdue Fines: " << calculateTotalFines() << std::endl;
 }
 void Member::displayloaned() const{
-    for(auto it =checkedOutBooks.begin(); it != checkedOutBooks.end() + 1; ++it) {
+    for(auto it =this->checkedOutBooks.begin(); it != this->checkedOutBooks.end() + 1; ++it) {
         if (it->getMemberID() == ID) {
             cout << "you have borrowed a book with ID " <<it->getBookID();
         }
@@ -76,20 +76,20 @@ void Member::borrowBook(Book b){
         else if(Type==Custom_String_Class("Faculty"))
             dueDate = Date::getCrrentDate() + 14;
         Loan newloan(ID, b.ISBN, dueDate);
-        checkedOutBooks.push_back(newloan);
+        this->checkedOutBooks.push_back(newloan);
     }
     else{
         cout << "there is no copies of the book available"<<endl;
     }
 }
-void Member::returnBook(Book b) const{
+void Member::returnBook(Book b) {
     if(b.Quantity==0)
         b.Available=true;
     b.Quantity++;
-    for(auto it =checkedOutBooks.begin(); it != checkedOutBooks.end() + 1; ) {
+    for(auto it =this->checkedOutBooks.begin(); it != this->checkedOutBooks.end() + 1; ) {
         if(it->getBookID() == b.ISBN && it->getMemberID()==ID) {
             cout << "Now Iam removing \n";
-            checkedOutBooks.erase(it);
+           this->checkedOutBooks.erase(it);
             return;
         } else {
             ++it;

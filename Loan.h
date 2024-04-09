@@ -16,7 +16,7 @@ class Loan  {
 public:
     Loan();
     Loan(int, const Custom_String_Class&, Date);
-    Custom_String_Class getBookID();
+    Custom_String_Class getBookID() const;
     int getMemberID() const;
     Date getDueDate();
     bool getReturned() const;

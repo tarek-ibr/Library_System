@@ -111,10 +111,6 @@ int Date::operator - (Date d){
     int thisDays = daysSinceReferenceDate();
     int dDays = d.daysSinceReferenceDate();
 
-cout<<this->getDate();
-    cout<<"zebhyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"<<thisDays<< dDays<<endl;
-
-
     return thisDays - dDays;
 }
 

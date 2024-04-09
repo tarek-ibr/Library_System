@@ -16,12 +16,12 @@ public:
     Custom_String_Class Author;
     Custom_String_Class ISBN;
     Custom_String_Class Genre;
-    Custom_String_Class duedate;
+    unsigned int Quantity;
     int Publication_Year;
     bool Available;
     static vector<Book> Book_List;
     Book();
-    Book(const Custom_String_Class& , const Custom_String_Class& , const Custom_String_Class& ,const Custom_String_Class&,const Custom_String_Class&, int ,bool);
+    Book(const Custom_String_Class& , const Custom_String_Class& , const Custom_String_Class& ,const Custom_String_Class&, int ,bool, int);
     static bool loadlibrary();
     static bool savelibrary();
     static void displaylist();

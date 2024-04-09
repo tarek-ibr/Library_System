@@ -12,23 +12,13 @@ using namespace std;
 using json = nlohmann::json;
 
 
-
-
 int main() {
 
 Book::loadlibrary();
 Librarian L1;
-L1.editBook(Book::Book_List[0]);
+L1.addBook();
 Book::displaylist();
 Book::savelibrary();
-
-
-
-
-
-
-
-
 
     return 0;
 }

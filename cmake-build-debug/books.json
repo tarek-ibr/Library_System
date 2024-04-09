@@ -1,37 +1,65 @@
 [
     {
         "author": "Ziad",
+        "available": true,
         "genre": "Fiction",
         "isbn": "1234",
         "publication_year": 2003,
-        "title": "Behiry"
+        "quantity": 10,
+        "title": "A7A"
     },
     {
         "author": "George Orwell",
+        "available": true,
         "genre": "Science Fiction",
         "isbn": "978-0-451-52493-5",
         "publication_year": 1949,
+        "quantity": 5,
         "title": "1984"
     },
     {
         "author": "F. Scott Fitzgerald",
+        "available": true,
         "genre": "Fiction",
         "isbn": "978-0-7432-7356-5",
         "publication_year": 1925,
+        "quantity": 3,
         "title": "The Great Gatsby"
     },
     {
         "author": "Jane Austen",
+        "available": true,
         "genre": "Romance",
         "isbn": "978-0-14-143951-8",
         "publication_year": 1813,
+        "quantity": 7,
         "title": "Pride and Prejudice"
     },
     {
         "author": "J.K. Rowling",
+        "available": true,
         "genre": "Fantasy",
         "isbn": "978-0-7475-3269-6",
         "publication_year": 1997,
+        "quantity": 20,
         "title": "Harry Potter and the Philosopher's Stone"
+    },
+    {
+        "author": "aaaaaaaaaaaaaaaaaaaaaaaaaaah",
+        "available": false,
+        "genre": "aaaaaaaaaaaaaaaaaaaaaaaaaaaah",
+        "isbn": "aaaaaaaaaaaaaah",
+        "publication_year": 2002,
+        "quantity": 0,
+        "title": "aaaaaaaaaaaah"
+    },
+    {
+        "author": "AAAAA",
+        "available": false,
+        "genre": "AAAAAAAA",
+        "isbn": "AAAAAA",
+        "publication_year": 2000,
+        "quantity": 0,
+        "title": "AAAAAAAAAAAAAH"
     }
 ]

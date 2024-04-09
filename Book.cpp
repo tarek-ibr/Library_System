@@ -8,8 +8,8 @@
 vector<Book>Book::Book_List = {};
 using json = nlohmann::json;
 Book::Book() {}
-Book::Book(const Custom_String_Class& tit  , const Custom_String_Class& Auth , const Custom_String_Class& ISB ,const Custom_String_Class& Gen,const Custom_String_Class& Due, int Pub_yr,bool Avail )
-        : Title(tit), Author(Auth), ISBN(ISB),Genre(Gen),duedate(Due),Publication_Year(Pub_yr),Available(Avail) {}
+Book::Book(const Custom_String_Class& tit  , const Custom_String_Class& Auth , const Custom_String_Class& ISB ,const Custom_String_Class& Gen, int Pub_yr,bool Avail=true , int Quant=1 )
+        : Title(tit), Author(Auth), ISBN(ISB),Genre(Gen),Publication_Year(Pub_yr),Available(Avail),Quantity(Quant) {}
 void Book::display() const {
     cout << "Title: " << Title << endl;
     cout << "Author: " << Author << endl;
@@ -17,9 +17,7 @@ void Book::display() const {
     cout << "Publication Year: " << Publication_Year << endl;
     cout << "Genre: " << Genre << endl;
     cout << "Availability: " << (Available ? "Available" : "Checked out") << endl;
-    if (!Available) {
-        cout << "Due Date: " << duedate << endl;
-    }
+
 }
 void Book::displaylist() {
     for (const auto &it: (Book::Book_List)) {
@@ -29,9 +27,7 @@ void Book::displaylist() {
         cout << "Publication Year: " << it.Publication_Year << endl;
         cout << "Genre: " << it.Genre << endl;
         cout << "Availability: " << (it.Available ? "Available" : "Checked out") << endl;
-        if (!it.Available) {
-            cout << "Due Date: " << it.duedate << endl;
-        }
+        cout << "Quantity: " << it.Quantity<< endl;
     }
 }
 bool Book::loadlibrary() {
@@ -52,8 +48,8 @@ bool Book::loadlibrary() {
         bk.ISBN = book_json["isbn"].get<string>();
         bk.Genre = book_json["genre"].get<string>();
         bk.Publication_Year = book_json["publication_year"];
-        bk.Available=false;
-        bk.duedate="";
+        bk.Available=book_json["available"].get<bool>();
+        bk.Quantity=book_json["quantity"];
         Book_List.push_back(bk);
     }
     file.close();
@@ -74,6 +70,8 @@ bool Book::savelibrary() {
         bookJson["publication_year"] = book.Publication_Year;
         bookJson["isbn"] = book.ISBN.str;
         bookJson["genre"] = book.Genre.str;
+        bookJson["available"] = book.Available;
+        bookJson["quantity"] = book.Quantity;
         OUTPUT.push_back(bookJson);
     }
     file<<setw(4)<<OUTPUT<<endl;

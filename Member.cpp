@@ -44,7 +44,7 @@ int Member::calculateTotalFines (){
         fines+=it.calculateFines();
     }
 }
-void Member::display() {
+void Member::display(){
     std::cout << "Name: " << Name << std::endl;
     std::cout << "ID: " << ID << std::endl;
     std::cout << "Type: " << Type << std::endl;

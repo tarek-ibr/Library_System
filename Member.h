@@ -14,7 +14,7 @@
 using namespace std;
 
 class Member {
-private:
+protected:
     Custom_String_Class Name;
     int ID;
     Custom_String_Class Type;
@@ -23,14 +23,14 @@ private:
     static vector<Member> members;
 public:
     Member();
-    Member(Custom_String_Class N,int I,Custom_String_Class T);
+    Member(Custom_String_Class ,int ,Custom_String_Class );
     Custom_String_Class getName();
     int getID();
     Custom_String_Class getType();
     int getFines();
-    void setName(Custom_String_Class name);
-    void setID(int id);
-    void setType(Custom_String_Class type);
+    void setName(Custom_String_Class);
+    void setID(int);
+    void setType(Custom_String_Class);
     int calculateTotalFines ();
     void display();
     void displayloaned();

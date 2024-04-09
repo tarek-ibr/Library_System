@@ -20,6 +20,9 @@ int Loan::calculateFines(){
 Custom_String_Class Loan::getBookID(){
     return bookID;
 }
+int Loan::getMemberID(){
+    return memberID;
+}
 void Loan::displayDetails(){
 
     std::cout << "memberID " << memberID <<endl;

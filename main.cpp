@@ -33,7 +33,7 @@ int main() {
 
     Book::loadlibrary();
     Librarian L1;
-    L1.addBook();
+    //L1.addBook();
     Book::displaylist();
     Book::savelibrary();
 
@@ -43,6 +43,9 @@ int main() {
     cout<<l1.calculateFines()<<endl;
     Date d2=Date::getCrrentDate();
     cout<<d2.getDate();
+
+    Member m1("tarek", 2222, "student");
+    m1.displayloaned();
 
 
 

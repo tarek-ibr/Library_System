@@ -25,6 +25,7 @@ public:
     Member(Custom_String_Class N,int I,Custom_String_Class T);
     int calculateTotalFines ();
     void display();
+    void displayloaned();
     void borrowBook(Book);
     void returnBook(Book);
 };

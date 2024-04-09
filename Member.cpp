@@ -5,6 +5,7 @@
 #include "Member.h"
 using namespace std;
 
+vector<Loan> Member::checkedOutBooks={};
 Member::Member():Name(""),Type(""),ID(0),fines(0) {}
 Member::Member(Custom_String_Class N,int I,Custom_String_Class T): Name(N),ID(I),Type(T){
     fines=0;
@@ -21,6 +22,13 @@ void Member::display() {
     std::cout << "Type: " << Type << std::endl;
     std::cout << "Number of Checked Out Books: " << checkedOutBooks.size() << std::endl;
     std::cout << "Overdue Fines: " << calculateTotalFines() << std::endl;
+}
+void Member::displayloaned(){
+    for(auto it =checkedOutBooks.begin(); it != checkedOutBooks.end() + 1; ++it) {
+        if (it->getMemberID() == ID) {
+            cout << "you have borrowed a book with ID " <<it->getBookID();
+        }
+    }
 }
 void Member::borrowBook(Book b){
     if(b.Quantity>0) {

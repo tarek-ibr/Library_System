@@ -17,6 +17,7 @@ public:
     Loan();
     Loan(int, Custom_String_Class, Date);
     Custom_String_Class getBookID();
+    int getMemberID();
     int calculateFines();
     void displayDetails();
 

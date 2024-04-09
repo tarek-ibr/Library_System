@@ -51,7 +51,7 @@ void Member::returnBook(Book b){
     for(auto it =checkedOutBooks.begin(); it != checkedOutBooks.end() + 1; ) {
         if(it->getBookID() == b.ISBN) {
             cout << "Now Iam removing \n";
-            checkedOutBooks.erase(it);
+            it = checkedOutBooks.erase(it);
             return;
         } else {
             ++it;

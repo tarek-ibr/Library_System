@@ -36,12 +36,12 @@ int main() {
     L1.addBook();
     Book::displaylist();
     Book::savelibrary();*/
-    /*Date d1("06/04/2023");
+    Date d1("06/04/2024");
     Loan l1(22123, 23424, d1);
     l1.displayDetails();
     cout<<l1.calculateFines()<<endl;
     Date d2=Date::getCrrentDate();
-    cout<<d2.getDate();*/
+    cout<<d2.getDate();
 
     return 0;
 }

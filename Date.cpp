@@ -111,7 +111,6 @@ int Date::operator - (Date d){
     int thisDays = daysSinceReferenceDate();
     int dDays = d.daysSinceReferenceDate();
 
-    cout<<"zebhyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"<<thisDays - dDays<<endl;
 
     return thisDays - dDays;
 }
@@ -119,7 +118,7 @@ int Date::operator - (Date d){
 int Date::daysSinceReferenceDate() {
     int days = 0;
     for (int yr = REFERENCE_YEAR; yr < year; ++yr) {
-        days += days += ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))? 366: 365;
+        days += ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))? 366: 365;
     }
     for (int mon = 1; mon < month; ++mon) {
         days += daysInMonth(mon, year);

@@ -1,0 +1,32 @@
+[
+  {
+    "Name": "Tarek",
+    "ID": 11111,
+    "Type": "Librarian",
+    "Fines": 0
+  },
+  {
+    "Name": "Ziad",
+    "ID": 222222,
+    "Type": "Student",
+    "Fines": 2003
+  },
+  {
+    "Name": "Behiry",
+    "ID": 33333,
+    "Type": "Faculty",
+    "Fines": 0
+  },
+  {
+    "Name": "seif",
+    "ID": 44444,
+    "Type": "Staff",
+    "Fines": 0
+  },
+  {
+    "Name": "Ammar",
+    "ID": 55555,
+    "Type": "Student",
+    "Fines": 0
+  }
+]

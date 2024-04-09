@@ -21,17 +21,17 @@ public:
     Date(int, int, int);
     Date(Custom_String_Class);
     void setDate (Custom_String_Class);
-    Custom_String_Class getDate();
+    Custom_String_Class getDate() const;
     static Date getCrrentDate();
     bool operator > (Date);
     bool operator < (Date);
-    bool operator == (Date d);
+    bool operator == (Date d) const;
     Date operator = (Date);
     Date operator = (Custom_String_Class);
     Date operator + (int);
     int operator - (Date d);
     int daysSinceReferenceDate();
-    int daysInMonth(int, int);
+    static int daysInMonth(int, int);
 
 };
 

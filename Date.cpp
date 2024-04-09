@@ -4,7 +4,7 @@
 
 #include "Date.h"
 
-Date::Date(){}
+Date::Date():day(0), month(0), year(0){}
 Date::Date(int d, int m, int y): day(d), month(m), year(y){}
 Date::Date(Custom_String_Class d) {
     day=int(d[0])-48;
@@ -30,7 +30,7 @@ void Date::setDate (Custom_String_Class d){
     year=year*10+int(d[8])-48;
     year=year*10+int(d[9])-48;
 }
-Custom_String_Class Date::getDate(){
+Custom_String_Class Date::getDate() const{
     Custom_String_Class d;
     if (day<10)
         d='0' + to_string(day) + '/'+ to_string(month) + '/' +to_string(year);
@@ -55,7 +55,7 @@ Date Date::getCrrentDate(){
     int month = localTime->tm_mon + 1;
     int day = localTime->tm_mday;
 
-    return Date(day,month,year);
+    return {day,month,year};
 }
 bool Date::operator>( Date d)  {
     int days =*this-d;
@@ -67,7 +67,7 @@ bool Date::operator<( Date d) {
     return days<0; // Return true if day is less, false otherwise
 }
 
-bool Date::operator == (Date d){
+bool Date::operator == (Date d) const{
     if (year==d.year && month==d.month && day==d.day)
         return true;
     else

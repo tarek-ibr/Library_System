@@ -15,13 +15,13 @@ class Loan  {
     bool returned;
 public:
     Loan();
-    Loan(int, Custom_String_Class, Date);
+    Loan(int, const Custom_String_Class&, Date);
     Custom_String_Class getBookID();
-    int getMemberID();
+    int getMemberID() const;
     Date getDueDate();
-    bool getReturned();
+    bool getReturned() const;
     void setMemberID(int);
-    void setBookID(Custom_String_Class);
+    void setBookID(const Custom_String_Class&);
     void setDueDate(Date);
     void setReturned(bool);
     int calculateFines();

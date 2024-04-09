@@ -3,11 +3,12 @@
 //
 
 #include "Book.h"
-#include "json.h"
-#include <fstream>
-vector<Book>Book::Book_List = {};
+
+
 using json = nlohmann::json;
-Book::Book() {}
+
+vector<Book>Book::Book_List = {};
+Book::Book() : Title(""), Author(""), ISBN(""),Genre(""),Publication_Year(0),Quantity(0), Available(false) {}
 Book::Book(const Custom_String_Class& tit  , const Custom_String_Class& Auth , const Custom_String_Class& ISB ,const Custom_String_Class& Gen, int Pub_yr, int Quant=1 )
         : Title(tit), Author(Auth), ISBN(ISB),Genre(Gen),Publication_Year(Pub_yr),Quantity(Quant) {
     Available=Quantity>0;
@@ -64,7 +65,7 @@ bool Book::savelibrary() {
         return false;
     }
     json OUTPUT;
-    for(auto book : Book_List)
+    for(const auto& book : Book_List)
     {
         json bookJson;
         bookJson["title"] = book.Title.str;
@@ -80,7 +81,7 @@ bool Book::savelibrary() {
     return true;
 
 }
-Custom_String_Class Book::getISBN() {
+Custom_String_Class Book::getISBN() const {
     return ISBN;
 }
 

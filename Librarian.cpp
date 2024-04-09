@@ -1,9 +1,9 @@
 #include "Librarian.h"
 
 
-Librarian::Librarian() {}
+Librarian::Librarian():Member() {}
 
-Librarian::Librarian(const Custom_String_Class& name, int ID) : Member(name, ID, "Librarian") {}
+Librarian::Librarian(const Custom_String_Class& name, int ID) : Member(name, ID, Custom_String_Class("Librarian")) {}
 
 void Librarian::addBook() {
     // add a book to the library inventory

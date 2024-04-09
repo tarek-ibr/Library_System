@@ -5,17 +5,19 @@
 #include "Member.h"
 using namespace std;
 
+using json = nlohmann::json;
+
 vector<Loan> Member::checkedOutBooks={};
 vector<Member> Member::members={};
-Member::Member():Name(""),Type(""),ID(0),fines(0) {}
-Member::Member(Custom_String_Class N,int I,Custom_String_Class T): Name(N),ID(I),Type(T){
-    fines=0;
+Member::Member():Name(""),Type(""),ID(0),Fines(0) {}
+Member::Member(const Custom_String_Class& N,int I,const Custom_String_Class& T): Name(N),ID(I),Type(T){
+    Fines=0;
 }
 Custom_String_Class Member::getName() {
     return Name;
 }
 
-int Member::getID() {
+int Member::getID() const {
     return ID;
 }
 
@@ -24,11 +26,11 @@ Custom_String_Class Member::getType() {
 }
 
 int Member::getFines() {
-    fines=calculateTotalFines();
-    return fines;
+    Fines=calculateTotalFines();
+    return Fines;
 }
 
-void Member::setName(Custom_String_Class name) {
+void Member::setName(const Custom_String_Class& name) {
     Name = name;
 }
 
@@ -36,14 +38,15 @@ void Member::setID(int id) {
     ID = id;
 }
 
-void Member::setType(Custom_String_Class type) {
+void Member::setType(const Custom_String_Class& type) {
     Type = type;
 }
 int Member::calculateTotalFines (){
-    fines=0;
+    Fines=0;
     for(auto it: checkedOutBooks){
-        fines+=it.calculateFines();
+        Fines+=it.calculateFines();
     }
+    return Fines;
 }
 void Member::display(){
     std::cout << "Name: " << Name << std::endl;
@@ -52,7 +55,7 @@ void Member::display(){
     std::cout << "Number of Checked Out Books: " << checkedOutBooks.size() << std::endl;
     std::cout << "Overdue Fines: " << calculateTotalFines() << std::endl;
 }
-void Member::displayloaned(){
+void Member::displayloaned() const{
     for(auto it =checkedOutBooks.begin(); it != checkedOutBooks.end() + 1; ++it) {
         if (it->getMemberID() == ID) {
             cout << "you have borrowed a book with ID " <<it->getBookID();
@@ -61,11 +64,17 @@ void Member::displayloaned(){
 }
 void Member::borrowBook(Book b){
     if(b.Quantity>0) {
-        if (b.Quantity=1){
+        Date dueDate;
+        if (b.Quantity==1){
             b.Available= false;
         }
         b.Quantity--;
-        Date dueDate = Date::getCrrentDate() + 7;
+        if(Type==Custom_String_Class("Member"))
+            dueDate = Date::getCrrentDate() + 7;
+        else if(Type==Custom_String_Class("Staff"))
+            dueDate = Date::getCrrentDate() + 10;
+        else if(Type==Custom_String_Class("Faculty"))
+            dueDate = Date::getCrrentDate() + 14;
         Loan newloan(ID, b.ISBN, dueDate);
         checkedOutBooks.push_back(newloan);
     }
@@ -73,7 +82,7 @@ void Member::borrowBook(Book b){
         cout << "there is no copies of the book available"<<endl;
     }
 }
-void Member::returnBook(Book b){
+void Member::returnBook(Book b) const{
     if(b.Quantity==0)
         b.Available=true;
     b.Quantity++;
@@ -85,5 +94,56 @@ void Member::returnBook(Book b){
         } else {
             ++it;
         }
+    }
+}
+bool Member::loadMembers() {
+    std::ifstream file("members.json");
+    if (!file.is_open()) {
+        std::cerr << "Failed to open file." << std::endl;
+        return false;
+    }
+
+    json j;
+    file >> j;
+
+    for (const auto& member_json : j) {
+        Member m;
+
+        m.Name = (member_json["Name"].get<string>());
+        m.ID = member_json["ID"].get<int>();
+        m.Type = member_json["Type"].get<string>();
+        m.Fines = member_json["Fines"].get<int>();
+        members.push_back(m);
+    }
+    file.close();
+    return true;
+}
+bool Member::savelibrary() {
+    std::ofstream file("members.json");
+    if (!file.is_open()) {
+        std::cerr << "Failed to open file." << endl;
+        return false;
+    }
+    json OUTPUT;
+    for(const auto& member : members)
+    {
+        json bookJson;
+
+        bookJson["Name"] = member.Name.str;
+        bookJson["ID"] = member.ID;
+        bookJson["Type"] = member.Type.str;
+        bookJson["Fines"] = member.Fines;
+
+        OUTPUT.push_back(bookJson);
+    }
+    file<<setw(4)<<OUTPUT<<endl;// what is the meaning of setw(4) ya ziad
+    file.close();
+    return true;
+}
+void Member::displayAllMembers() {
+    std::cout << "List of Members:\n";
+    for (auto &member: members) {
+        member.display();
+        std::cout << "-------------------------\n";
     }
 }

@@ -4,36 +4,27 @@
 
 #include "Loan.h"
 
-Loan::Loan(){}
-Loan::Loan(int m, Custom_String_Class b, Date d): memberID(m), bookID(b), dueDate(d) {
+Loan::Loan(): memberID(0),bookID(""), returned(false){}
+Loan::Loan(int m, const Custom_String_Class& b, Date d): memberID(m), bookID(b), dueDate(d) {
     returned=false;
-}
-int Loan::calculateFines(){
-    if(dueDate<Date::getCrrentDate()){
-        int days=Date::getCrrentDate()-dueDate;
-        return days*2;
-    }
-    else {
-        return 0;
-    }
 }
 Custom_String_Class Loan::getBookID(){
     return bookID;
 }
-int Loan::getMemberID(){
+int Loan::getMemberID() const{
     return memberID;
 }
 Date Loan::getDueDate(){
     return dueDate;
 }
-bool Loan::getReturned(){
+bool Loan::getReturned() const{
     return returned;
 }
 void Loan::setMemberID(int m) {
     memberID = m;
 }
 
-void Loan::setBookID(Custom_String_Class b) {
+void Loan::setBookID(const Custom_String_Class& b) {
     bookID = b;
 }
 
@@ -43,6 +34,15 @@ void Loan::setDueDate(Date d) {
 
 void Loan::setReturned(bool r) {
     returned = r;
+}
+int Loan::calculateFines(){
+    if(dueDate<Date::getCrrentDate()){
+        int days=Date::getCrrentDate()-dueDate;
+        return days*2;
+    }
+    else {
+        return 0;
+    }
 }
 void Loan::displayDetails(){
 

@@ -7,6 +7,8 @@
 #include <iostream>
 #include <vector>
 #include "Custom_String_Class.h"
+#include "json.h"
+#include <fstream>
 
 using namespace std;
 
@@ -26,7 +28,7 @@ public:
     static bool savelibrary();
     static void displaylist();
     void display() const;
-    Custom_String_Class getISBN();
+    Custom_String_Class getISBN() const;
     bool checkAvailability();
 };
 

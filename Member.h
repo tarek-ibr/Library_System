@@ -10,6 +10,8 @@
 #include <vector>
 #include "Book.h"
 #include "Loan.h"
+#include <fstream>
+#include "json.h"
 
 using namespace std;
 
@@ -18,24 +20,27 @@ protected:
     Custom_String_Class Name;
     int ID;
     Custom_String_Class Type;
-    int fines;
+    int Fines;
     static vector<Loan> checkedOutBooks;
     static vector<Member> members;
 public:
     Member();
-    Member(Custom_String_Class ,int ,Custom_String_Class );
+    Member(const Custom_String_Class& ,int ,const Custom_String_Class& );
     Custom_String_Class getName();
-    int getID();
+    int getID() const;
     Custom_String_Class getType();
     int getFines();
-    void setName(Custom_String_Class);
+    void setName(const Custom_String_Class&);
     void setID(int);
-    void setType(Custom_String_Class);
+    void setType(const Custom_String_Class&);
     int calculateTotalFines ();
     void display();
-    void displayloaned();
+    void displayloaned() const;
     void borrowBook(Book);
-    void returnBook(Book);
+    void returnBook(Book) const;
+    static bool loadMembers();
+    static bool savelibrary();
+    static void displayAllMembers();
 };
 
 

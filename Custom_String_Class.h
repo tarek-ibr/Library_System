@@ -16,12 +16,12 @@ public:
     char *str;
     Custom_String_Class();
     Custom_String_Class(char * s);
-    Custom_String_Class(string s);
-    Custom_String_Class operator+(Custom_String_Class s);
+    Custom_String_Class(const string& s);
+    Custom_String_Class operator+(const Custom_String_Class& s) const;
     Custom_String_Class& operator=(const char *);
-    bool operator==(Custom_String_Class s2);
-    bool operator!=(Custom_String_Class s2);
-    char operator[](int x);
+    bool operator==(const Custom_String_Class& s2) const;
+    bool operator!=(const Custom_String_Class& s2) const;
+    char operator[](int x) const;
     friend ostream& operator<<(std::ostream& out, const Custom_String_Class& c){
         out << c.str;
         return out;
@@ -31,10 +31,10 @@ public:
         in >> c.str;
         return in;
     }
-    void display();
-    bool find(Custom_String_Class s);
-    int strlength ();
-    int strcompare (Custom_String_Class s);
+    void display() const;
+    bool find(const Custom_String_Class& s) const;
+    int strlength () const;
+    int strcompare (const Custom_String_Class& s) const;
     ~Custom_String_Class();
 };
 

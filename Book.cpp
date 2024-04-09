@@ -8,8 +8,11 @@
 vector<Book>Book::Book_List = {};
 using json = nlohmann::json;
 Book::Book() {}
-Book::Book(const Custom_String_Class& tit  , const Custom_String_Class& Auth , const Custom_String_Class& ISB ,const Custom_String_Class& Gen, int Pub_yr,bool Avail=true , int Quant=1 )
-        : Title(tit), Author(Auth), ISBN(ISB),Genre(Gen),Publication_Year(Pub_yr),Available(Avail),Quantity(Quant) {}
+Book::Book(const Custom_String_Class& tit  , const Custom_String_Class& Auth , const Custom_String_Class& ISB ,const Custom_String_Class& Gen, int Pub_yr, int Quant=1 )
+        : Title(tit), Author(Auth), ISBN(ISB),Genre(Gen),Publication_Year(Pub_yr),Quantity(Quant) {
+    Available=Quantity>0;
+}
+
 void Book::display() const {
     cout << "Title: " << Title << endl;
     cout << "Author: " << Author << endl;
@@ -26,7 +29,7 @@ void Book::displaylist() {
         cout << "ISBN: " << it.ISBN << endl;
         cout << "Publication Year: " << it.Publication_Year << endl;
         cout << "Genre: " << it.Genre << endl;
-        cout << "Availability: " << (it.Available ? "Available" : "Checked out") << endl;
+        cout << "Availability: " << ((it.Available) ? "Available" : "Checked out") << endl;
         cout << "Quantity: " << it.Quantity<< endl;
     }
 }
@@ -48,7 +51,6 @@ bool Book::loadlibrary() {
         bk.ISBN = book_json["isbn"].get<string>();
         bk.Genre = book_json["genre"].get<string>();
         bk.Publication_Year = book_json["publication_year"];
-        bk.Available=book_json["available"].get<bool>();
         bk.Quantity=book_json["quantity"];
         Book_List.push_back(bk);
     }
@@ -70,7 +72,6 @@ bool Book::savelibrary() {
         bookJson["publication_year"] = book.Publication_Year;
         bookJson["isbn"] = book.ISBN.str;
         bookJson["genre"] = book.Genre.str;
-        bookJson["available"] = book.Available;
         bookJson["quantity"] = book.Quantity;
         OUTPUT.push_back(bookJson);
     }
@@ -82,3 +83,5 @@ bool Book::savelibrary() {
 Custom_String_Class Book::getISBN() {
     return ISBN;
 }
+
+

@@ -14,4 +14,6 @@ add_executable(project main.cpp
         Librarian.h
         Loan.cpp
         Loan.h
-        json.h)
+        json.h
+        Date.cpp
+        Date.h)

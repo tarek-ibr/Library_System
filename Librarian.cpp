@@ -25,21 +25,10 @@ void Librarian::addBook() {
     int publicationYear;
     cout << "Enter book's publication year: " << endl;
     cin >> publicationYear;
-    bool availablity;
-    cout << "Enter whether the book is available or not(Y/N): " << endl;
-    char ans;
-    cin >> ans;
     int Quantity;
-    if(ans='N')
-      Quantity=0;
-    else
-    {
-        cout<<"Enter Book Quantity:";
-        cin>>Quantity;
-    }
-
-    (ans == 'Y')? availablity = 1: availablity = 0;
-    Book newBook(title,author,isbn,genre,publicationYear,availablity,Quantity);
+    cout<<"Enter Book Quantity:";
+    cin>>Quantity;
+    Book newBook(title,author,isbn,genre,publicationYear,Quantity);
     Book::Book_List.push_back(newBook);
 }
 void Librarian::removeBook(const Custom_String_Class& ISBN) {
@@ -86,12 +75,6 @@ void Librarian::editBook(Book& book)
     if(answer == 'Y')
     {
         cin >> book.Publication_Year;
-    }
-    cout << "Do you want to edit the availability ?(Y/N)" << endl;
-    cin >> answer;
-    if(answer == 'Y')
-    {
-        cin >> book.Available;
     }
 
 }

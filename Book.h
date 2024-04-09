@@ -21,12 +21,13 @@ public:
     bool Available;
     static vector<Book> Book_List;
     Book();
-    Book(const Custom_String_Class& , const Custom_String_Class& , const Custom_String_Class& ,const Custom_String_Class&, int ,bool, int);
+    Book(const Custom_String_Class& , const Custom_String_Class& , const Custom_String_Class& ,const Custom_String_Class&, int , int);
     static bool loadlibrary();
     static bool savelibrary();
     static void displaylist();
     void display() const;
     Custom_String_Class getISBN();
+    bool checkAvailability();
 };
 
 

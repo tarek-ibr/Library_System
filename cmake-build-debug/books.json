@@ -1,7 +1,6 @@
 [
     {
         "author": "Ziad",
-        "available": true,
         "genre": "Fiction",
         "isbn": "1234",
         "publication_year": 2003,
@@ -10,7 +9,6 @@
     },
     {
         "author": "George Orwell",
-        "available": true,
         "genre": "Science Fiction",
         "isbn": "978-0-451-52493-5",
         "publication_year": 1949,
@@ -19,7 +17,6 @@
     },
     {
         "author": "F. Scott Fitzgerald",
-        "available": true,
         "genre": "Fiction",
         "isbn": "978-0-7432-7356-5",
         "publication_year": 1925,
@@ -28,7 +25,6 @@
     },
     {
         "author": "Jane Austen",
-        "available": true,
         "genre": "Romance",
         "isbn": "978-0-14-143951-8",
         "publication_year": 1813,
@@ -37,7 +33,6 @@
     },
     {
         "author": "J.K. Rowling",
-        "available": true,
         "genre": "Fantasy",
         "isbn": "978-0-7475-3269-6",
         "publication_year": 1997,
@@ -46,7 +41,6 @@
     },
     {
         "author": "aaaaaaaaaaaaaaaaaaaaaaaaaaah",
-        "available": false,
         "genre": "aaaaaaaaaaaaaaaaaaaaaaaaaaaah",
         "isbn": "aaaaaaaaaaaaaah",
         "publication_year": 2002,
@@ -55,7 +49,6 @@
     },
     {
         "author": "AAAAA",
-        "available": false,
         "genre": "AAAAAAAA",
         "isbn": "AAAAAA",
         "publication_year": 2000,

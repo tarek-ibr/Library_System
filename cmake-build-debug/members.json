@@ -28,5 +28,11 @@
     "ID": 55555,
     "Type": "Student",
     "Fines": 0
+  },
+  {
+    "Name": "Eljooker",
+    "ID": 66666,
+    "Type": "Faculty",
+    "Fines": 0
   }
 ]

@@ -32,8 +32,8 @@ void Librarian::removeBook(const Custom_String_Class& ISBN) {
     for(auto it = Book::Book_List.begin(); it != Book::Book_List.end() + 1; ) {
         if(it->ISBN == ISBN) {
             cout << "Now Iam removing \n";
-            it = Book::Book_List.erase(it);
-            return;// erase and get the next valid iterator
+            Book::Book_List.erase(it);
+            return;
         } else {
             ++it; // move to the next element
         }
@@ -95,8 +95,7 @@ void Librarian::manageMemberAccounts() {
     do {
         cout << "1. Register new member\n";
         cout << "2. Remove member\n";
-        cout << "3. Update member information\n";
-        cout << "4. Display all members\n";
+        cout << "3. Display all members\n";
         cout << "0. Exit\n";
         cout << "Enter your choice: ";
         cin >> choice;
@@ -136,10 +135,6 @@ void Librarian::manageMemberAccounts() {
                 break;
             }
             case 3: {
-                // Update member information (if needed)
-                break;
-            }
-            case 4: {
                 // Display all members
                 std::cout << "List of Members:\n";
                 for (auto& member : members) {

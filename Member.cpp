@@ -6,6 +6,7 @@
 using namespace std;
 
 vector<Loan> Member::checkedOutBooks={};
+vector<Member> Member::members={};
 Member::Member():Name(""),Type(""),ID(0),fines(0) {}
 Member::Member(Custom_String_Class N,int I,Custom_String_Class T): Name(N),ID(I),Type(T){
     fines=0;
@@ -77,9 +78,9 @@ void Member::returnBook(Book b){
         b.Available=true;
     b.Quantity++;
     for(auto it =checkedOutBooks.begin(); it != checkedOutBooks.end() + 1; ) {
-        if(it->getBookID() == b.ISBN) {
+        if(it->getBookID() == b.ISBN && it->getMemberID()==ID) {
             cout << "Now Iam removing \n";
-            it = checkedOutBooks.erase(it);
+            checkedOutBooks.erase(it);
             return;
         } else {
             ++it;

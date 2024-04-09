@@ -23,6 +23,27 @@ Custom_String_Class Loan::getBookID(){
 int Loan::getMemberID(){
     return memberID;
 }
+Date Loan::getDueDate(){
+    return dueDate;
+}
+bool Loan::getReturned(){
+    return returned;
+}
+void Loan::setMemberID(int m) {
+    memberID = m;
+}
+
+void Loan::setBookID(Custom_String_Class b) {
+    bookID = b;
+}
+
+void Loan::setDueDate(Date d) {
+    dueDate = d;
+}
+
+void Loan::setReturned(bool r) {
+    returned = r;
+}
 void Loan::displayDetails(){
 
     std::cout << "memberID " << memberID <<endl;

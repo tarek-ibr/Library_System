@@ -10,6 +10,34 @@ Member::Member():Name(""),Type(""),ID(0),fines(0) {}
 Member::Member(Custom_String_Class N,int I,Custom_String_Class T): Name(N),ID(I),Type(T){
     fines=0;
 }
+Custom_String_Class Member::getName() {
+    return Name;
+}
+
+int Member::getID() {
+    return ID;
+}
+
+Custom_String_Class Member::getType() {
+    return Type;
+}
+
+int Member::getFines() {
+    fines=calculateTotalFines();
+    return fines;
+}
+
+void Member::setName(Custom_String_Class name) {
+    Name = name;
+}
+
+void Member::setID(int id) {
+    ID = id;
+}
+
+void Member::setType(Custom_String_Class type) {
+    Type = type;
+}
 int Member::calculateTotalFines (){
     fines=0;
     for(auto it: checkedOutBooks){

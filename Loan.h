@@ -18,11 +18,14 @@ public:
     Loan(int, Custom_String_Class, Date);
     Custom_String_Class getBookID();
     int getMemberID();
+    Date getDueDate();
+    bool getReturned();
+    void setMemberID(int);
+    void setBookID(Custom_String_Class);
+    void setDueDate(Date);
+    void setReturned(bool);
     int calculateFines();
     void displayDetails();
-
-
-
 };
 
 

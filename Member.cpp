@@ -63,19 +63,19 @@ void Member::displayloaned() const{
     }
 }
 void Member::borrowBook(Book b){
-    if(b.Quantity>0) {
+    if(b.getQuantity()>0) {
         Date dueDate;
-        if (b.Quantity==1){
-            b.Available= false;
+        if (b.getQuantity()==1){
+            b.setAvailability(false);
         }
-        b.Quantity--;
+        b.setQuantity(b.getQuantity()-1);
         if(Type==Custom_String_Class("Member"))
             dueDate = Date::getCrrentDate() + 7;
         else if(Type==Custom_String_Class("Staff"))
             dueDate = Date::getCrrentDate() + 10;
         else if(Type==Custom_String_Class("Faculty"))
             dueDate = Date::getCrrentDate() + 14;
-        Loan newloan(ID, b.ISBN, dueDate);
+        Loan newloan(ID, b.getISBN(), dueDate);
         this->checkedOutBooks.push_back(newloan);
     }
     else{
@@ -83,11 +83,11 @@ void Member::borrowBook(Book b){
     }
 }
 void Member::returnBook(Book b) {
-    if(b.Quantity==0)
-        b.Available=true;
-    b.Quantity++;
+    if(b.getQuantity()==0)
+        b.setAvailability(true);
+    b.setQuantity(b.getQuantity()+1);
     for(auto it =this->checkedOutBooks.begin(); it != this->checkedOutBooks.end() + 1; ) {
-        if(it->getBookID() == b.ISBN && it->getMemberID()==ID) {
+        if(it->getBookID() == b.getISBN() && it->getMemberID()==ID) {
             cout << "Now Iam removing \n";
            this->checkedOutBooks.erase(it);
             return;

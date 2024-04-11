@@ -26,13 +26,13 @@ void Librarian::addBook() {
     cout<<"Enter Book's Quantity:";
     cin>>Quantity;
     Book newBook(title,author,isbn,genre,publicationYear,Quantity);
-    Book::Book_List.push_back(newBook);
+    Book::getBookList().push_back(newBook);
 }
 void Librarian::removeBook(const Custom_String_Class& ISBN) {
-    for(auto it = Book::Book_List.begin(); it != Book::Book_List.end() + 1; ) {
-        if(it->ISBN == ISBN) {
+    for(auto it = Book::getBookList().begin(); it != Book::getBookList().end() + 1; ) {
+        if(it->getISBN() == ISBN) {
             cout << "Now Iam removing \n";
-            Book::Book_List.erase(it);
+            Book::getBookList().erase(it);
             return;
         } else {
             ++it; // move to the next element
@@ -48,44 +48,44 @@ void Librarian::editBook(Book& book)
     if(answer == 'Y')
     {
         cout << "Enter book's title: " << endl;
-        cin >> book.Title;
+        cin >> book.getTitle();
     }
     cout << "Do you want to edit the ISBN ?(Y/N)" << endl;
     cin >> answer;
     if(answer == 'Y')
     {
         cout << "Enter book's ISBN: " << endl;
-        cin >> book.ISBN;
+        cin >> book.getISBN();
     }
     cout << "Do you want to edit the author ?(Y/N)" << endl;
     cin >> answer;
     if(answer == 'Y')
     {
         cout << "Enter author's name: " << endl;
-        cin >> book.Author;
+        cin >> book.getAuthor();
     }
     cout << "Do you want to edit the genre ?(Y/N)" << endl;
     cin >> answer;
     if(answer == 'Y')
     {
         cout << "Enter book's genre: " << endl;
-        cin >> book.Genre;
+        cin >> book.getGenre();
     }
     cout << "Do you want to edit the publication year ?(Y/N)" << endl;
     cin >> answer;
     if(answer == 'Y')
     {
         cout << "Enter book's publication year: " << endl;
-        cin >> book.Publication_Year;
+        cin >> book.getPubYear();
     }
     cout << "Do you want to edit the quantity ?(Y/N)" << endl;
     cin >> answer;
     if(answer == 'Y')
     {
         cout<<"Enter Book's Quantity:";
-        cin>>book.Quantity;
+        cin>>book.getQuantity();
     }
-    book.Available=book.Quantity>0;
+    book.setAvailability(book.getQuantity()>0);
 
 }
 //

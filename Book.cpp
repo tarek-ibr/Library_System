@@ -81,8 +81,51 @@ bool Book::savelibrary() {
     return true;
 
 }
-Custom_String_Class Book::getISBN() const {
+Custom_String_Class& Book::getISBN()  {
     return ISBN;
+}
+Custom_String_Class& Book::getTitle()  {
+    return Title;
+}
+Custom_String_Class& Book::getAuthor()  {
+    return Author;
+}
+Custom_String_Class& Book::getGenre()  {
+    return Genre;
+}
+unsigned int& Book::getPubYear()  {
+    return Publication_Year;
+}
+unsigned int& Book::getQuantity()  {
+    return Quantity;
+}
+vector<Book>& Book::getBookList() {
+    return Book_List;
+}
+void Book::setAuthor(const Custom_String_Class & AuthorName) {
+    Author = AuthorName;
+}
+void Book::setTitle(const Custom_String_Class & newTitle) {
+    Title = newTitle;
+}
+void Book::setGenre(const Custom_String_Class & newGenre) {
+    Author = newGenre;
+}
+void Book::setISBN(const Custom_String_Class & newISBN) {
+    ISBN = newISBN;
+
+}
+void Book::setPubYear(unsigned int newPubYear) {
+    Publication_Year = newPubYear;
+}
+void Book::setQuantity(unsigned int newQuantity) {
+    Quantity = newQuantity;
+}
+bool Book::checkAvailability() const {
+    return (Quantity>0);
+}
+void Book::setAvailability(bool X) {
+    Available=X;
 }
 
 

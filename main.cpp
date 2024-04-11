@@ -15,10 +15,10 @@ void findbook(vector<Book> books,string s){
     bool found = 0;
     for(auto it:books)
     {
-        if(it.Title.find(s)!=string::npos)
+        if(it.getTitle().find(s)!=string::npos)
         {
             found =1;
-            cout<<"found :"<<it.Title<<endl;
+            cout<<"found :"<<it.getTitle()<<endl;
         }
     }
     if(!found)
@@ -33,7 +33,7 @@ int main() {
 
     Book::loadlibrary();
     Librarian L1;
-    //L1.addBook();
+    L1.addBook();
     Book::displaylist();
     Book::savelibrary();
 

@@ -14,22 +14,41 @@ using namespace std;
 
 class Book {
 public:
+private:
     Custom_String_Class Title;
     Custom_String_Class Author;
     Custom_String_Class ISBN;
     Custom_String_Class Genre;
     unsigned int Quantity;
-    int Publication_Year;
+    unsigned int Publication_Year;
     bool Available;
     static vector<Book> Book_List;
+public:
     Book();
     Book(const Custom_String_Class& , const Custom_String_Class& , const Custom_String_Class& ,const Custom_String_Class&, int , int);
+    Custom_String_Class& getTitle() ;
+    Custom_String_Class& getAuthor();
+    Custom_String_Class& getISBN();
+    Custom_String_Class& getGenre();
+    unsigned int& getQuantity();
+    unsigned int& getPubYear();
+    bool checkAvailability() const;
+    static vector<Book>& getBookList();
+
+
+    void setTitle(const Custom_String_Class&);
+    void setAuthor(const Custom_String_Class&);
+    void setISBN(const Custom_String_Class&);
+    void setGenre(const Custom_String_Class&);
+    void setQuantity(unsigned int);
+    void setPubYear(unsigned int);
+    void setAvailability(bool);
+
     static bool loadlibrary();
     static bool savelibrary();
     static void displaylist();
+
     void display() const;
-    Custom_String_Class getISBN() const;
-    bool checkAvailability();
 };
 
 

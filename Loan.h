@@ -7,7 +7,10 @@
 #include "Custom_String_Class.h"
 #include "Date.h"
 #include <iostream>
-
+#include <fstream>
+#include <vector>
+#include "json.h"
+using json = nlohmann::json;
 class Loan  {
     int memberID;
     Custom_String_Class bookID;
@@ -26,6 +29,10 @@ public:
     void setReturned(bool);
     int calculateFines();
     void displayDetails();
+    static void loadLoans();
+    static void saveLoans();
+    static std::vector<Loan> Loans_List;
+    static void displaylist();
 };
 
 

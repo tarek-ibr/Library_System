@@ -3,8 +3,8 @@
 //
 
 #include "Loan.h"
-
-Loan::Loan(): memberID(0),bookID(""), returned(false){}
+std::vector<Loan> Loan::Loans_List;
+Loan::Loan(): memberID(0),bookID(""){}
 Loan::Loan(int m, const Custom_String_Class& b, Date d): memberID(m), bookID(b), dueDate(d) {
     returned=false;
 }
@@ -53,4 +53,43 @@ void Loan::displayDetails(){
         std::cout << "it is already returned" <<endl;
     else
         std::cout << "it is not returned" <<endl;
+}
+void Loan::loadLoans() {
+    std::ifstream file("loaned.json");
+    if (!file.is_open()) {
+        std::cerr << "Failed to open file." << std::endl;
+             return;
+    }
+
+    json j;
+    file >> j;
+
+    for (const auto& loan_json : j) {
+    Loan ln(loan_json["memberID"],loan_json["bookID"].get<string>(),Custom_String_Class(loan_json["dueDate"].get<string>()));
+    Loan::Loans_List.push_back(ln);
+    }
+    file.close();
+}
+void Loan::saveLoans() {
+    std::ofstream file("loaned.json");
+    if (!file.is_open()) {
+        std::cerr << "Failed to open file." << endl;
+        return;
+    }
+    json OUTPUT;
+    for(const auto& loan : Loan::Loans_List)
+    {
+        json loanJSON;
+        loanJSON["memberID"]=loan.memberID;
+        loanJSON["dueDate"] =loan.dueDate.getDate().str;
+        loanJSON["bookID"] =loan.bookID.str;
+        OUTPUT.push_back(loanJSON);
+    }
+    file<<std::setw(4)<<OUTPUT<<std::endl;
+    file.close();
+}
+void Loan::displaylist() {
+    for (const auto &it: (Loan::Loans_List)) {
+     cout<<it.bookID<<endl;
+    }
 }

@@ -77,6 +77,7 @@ void Member::borrowBook(Book b){
             dueDate = Date::getCrrentDate() + 14;
         Loan newloan(ID, b.getISBN(), dueDate);
         this->checkedOutBooks.push_back(newloan);
+        Loan::Loans_List.push_back(newloan);
     }
     else{
         cout << "there is no copies of the book available"<<endl;

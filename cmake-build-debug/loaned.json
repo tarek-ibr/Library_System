@@ -1,0 +1,32 @@
+[
+    {
+        "bookID": "ABC123",
+        "dueDate": "30/04/2024",
+        "memberID": 123
+    },
+    {
+        "bookID": "DEF456",
+        "dueDate": "15/05/2024",
+        "memberID": 456
+    },
+    {
+        "bookID": "GHI789",
+        "dueDate": "10/06/2024",
+        "memberID": 789
+    },
+    {
+        "bookID": "JKL101",
+        "dueDate": "20/07/2024",
+        "memberID": 101
+    },
+    {
+        "bookID": "MNO112",
+        "dueDate": "05/08/2024",
+        "memberID": 112
+    },
+    {
+        "bookID": "1234",
+        "dueDate": "19/04/2024",
+        "memberID": 123
+    }
+]

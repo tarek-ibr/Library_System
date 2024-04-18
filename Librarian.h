@@ -20,7 +20,8 @@ public:
     void removeBook(const Custom_String_Class& ISBN);
     void manageMemberAccounts();
     void editBook( Book& book);
-    // Other functionalities...
+    void borrowBook(Member& member, Book& book);
+    void returnBook(Member& member, Book& book);
 };
 
 

@@ -34,8 +34,8 @@ public:
     unsigned int& getPubYear();
     bool checkAvailability() const;
     static vector<Book>& getBookList();
-
-
+    static Book findByName(Custom_String_Class);
+    static Book findByISBN(Custom_String_Class);
     void setTitle(const Custom_String_Class&);
     void setAuthor(const Custom_String_Class&);
     void setISBN(const Custom_String_Class&);

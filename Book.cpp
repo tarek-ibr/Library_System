@@ -3,11 +3,13 @@
 //
 
 #include "Book.h"
+#include <cstring>
 
 
 
 
 vector<Book>Book::Book_List = {};
+
 Book::Book() : Title(""), Author(""), ISBN(""),Genre(""),Publication_Year(0),Quantity(0), Available(false) {}
 Book::Book(const Custom_String_Class& tit  , const Custom_String_Class& Auth , const Custom_String_Class& ISB ,const Custom_String_Class& Gen, int Pub_yr, int Quant=1 )
         : Title(tit), Author(Auth), ISBN(ISB),Genre(Gen),Publication_Year(Pub_yr),Quantity(Quant) {
@@ -128,5 +130,45 @@ bool Book::checkAvailability() const {
 void Book::setAvailability(bool X) {
     Available=X;
 }
+Book Book::findByName(Custom_String_Class name) {
+        vector<Book> results;
+        int found = 0;
+    cout<<"found :"<<endl;
+        for(auto it:Book_List)
+        {
+            if(it.getTitle().find(name))
+            {
+                found++;
+                cout<<found<<":"<<it.getTitle()<<endl;
+                results.push_back(it);
+            }
+        }
+        if(!found)
+        {
+            cout<<"couldnt find a book ";
+        }
+        pick:
+    cout<<"Pick a Book by Number :";
+        int choice;
+        cin>>choice;
+        if(choice<=found)
+        return results[choice-1];
+        else
+            goto pick;
+
+    }
+Book Book::findByISBN(Custom_String_Class ID) {
+    for(auto it:Book_List)
+    {
+        if(it.getISBN()==ID)
+        {
+            cout<<"found book : "<<endl;
+            return it;
+        }
+    }
+        cout<<"Couldnt Find a Book"<<endl;
+}
+
+
 
 

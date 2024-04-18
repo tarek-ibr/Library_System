@@ -63,19 +63,22 @@ void Member::displayloaned() const{
     }
 }
 void Member::borrowBook(Book b){
-    if(b.getQuantity()>0) {
+    vector<Book> bkList= Book::getBookList();
+    int i;
+    for(i=0; bkList[i].getISBN() != b.getISBN(); i++);
+    if(bkList[i].getQuantity()>0) {
         Date dueDate;
-        if (b.getQuantity()==1){
-            b.setAvailability(false);
+        if (bkList[i].getQuantity()==1){
+            bkList[i].setAvailability(false);
         }
-        b.setQuantity(b.getQuantity()-1);
+        bkList[i].setQuantity(bkList[i].getQuantity()-1);
         if(Type==Custom_String_Class("Member"))
             dueDate = Date::getCrrentDate() + 7;
         else if(Type==Custom_String_Class("Staff"))
             dueDate = Date::getCrrentDate() + 10;
         else if(Type==Custom_String_Class("Faculty"))
             dueDate = Date::getCrrentDate() + 14;
-        Loan newloan(ID, b.getISBN(), dueDate);
+        Loan newloan(ID, bkList[i].getISBN(), dueDate);
         this->checkedOutBooks.push_back(newloan);
         Loan::Loans_List.push_back(newloan);
     }
@@ -84,13 +87,25 @@ void Member::borrowBook(Book b){
     }
 }
 void Member::returnBook(Book b) {
-    if(b.getQuantity()==0)
-        b.setAvailability(true);
-    b.setQuantity(b.getQuantity()+1);
+    vector<Book> bkList= Book::getBookList();
+    int i;
+    for(i=0; bkList[i].getISBN() != bkList[i].getISBN(); i++);
+    if(bkList[i].getQuantity()==0)
+        bkList[i].setAvailability(true);
+    bkList[i].setQuantity(bkList[i].getQuantity()+1);
     for(auto it =this->checkedOutBooks.begin(); it != this->checkedOutBooks.end() + 1; ) {
-        if(it->getBookID() == b.getISBN() && it->getMemberID()==ID) {
+        if(it->getBookID() == bkList[i].getISBN() && it->getMemberID()==ID) {
             cout << "Now Iam removing \n";
-           this->checkedOutBooks.erase(it);
+            checkedOutBooks.erase(it);
+            return;
+        } else {
+            ++it;
+        }
+    }
+    for(auto it =Loan::Loans_List.begin(); it != Loan::Loans_List.end() + 1; ) {
+        if(it->getBookID() == bkList[i].getISBN() && it->getMemberID()==ID) {
+            cout << "Now Iam removing \n";
+            Loan::Loans_List.erase(it);
             return;
         } else {
             ++it;

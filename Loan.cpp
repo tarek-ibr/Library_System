@@ -65,8 +65,9 @@ void Loan::loadLoans() {
     file >> j;
 
     for (const auto& loan_json : j) {
-    Loan ln(loan_json["memberID"],loan_json["bookID"].get<string>(),Custom_String_Class(loan_json["dueDate"].get<string>()));
-    Loan::Loans_List.push_back(ln);
+        Loan ln(loan_json["memberID"], loan_json["bookID"].get<string>(),
+                Custom_String_Class(loan_json["dueDate"].get<string>()));
+        Loan::Loans_List.push_back(ln);
     }
     file.close();
 }

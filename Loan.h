@@ -17,7 +17,7 @@ class Loan  {
     Date dueDate;
     bool returned;
 public:
-    Loan();
+    Loan();//hgh
     Loan(int, const Custom_String_Class&, Date);
     Custom_String_Class getBookID() const;
     int getMemberID() const;

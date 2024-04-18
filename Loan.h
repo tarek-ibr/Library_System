@@ -27,7 +27,7 @@ public:
     void setBookID(const Custom_String_Class&);
     void setDueDate(Date);
     void setReturned(bool);
-    int calculateFines();
+    int calculateFines();//hhhh
     void displayDetails();
     static void loadLoans();
     static void saveLoans();

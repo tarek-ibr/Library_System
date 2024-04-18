@@ -40,6 +40,15 @@ void Librarian::removeBook(const Custom_String_Class& ISBN) {
     }
 }
 
+void Librarian::borrowBook(Member& member, Book& book) {
+    member.borrowBook(book);
+}
+
+void Librarian::returnBook(Member& member, Book& book) {
+    member.returnBook(book);
+}
+
+
 void Librarian::editBook(Book& book)
 {
     char answer;

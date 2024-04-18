@@ -162,7 +162,7 @@ Book Book::findByISBN(Custom_String_Class ID) {
     {
         if(it.getISBN()==ID)
         {
-            cout<<"found book : "<<endl;
+            cout<<"found book :"<<endl;
             return it;
         }
     }

@@ -8,7 +8,6 @@ Custom_String_Class::Custom_String_Class()
 {
     str = new char[50];
 }
-
 Custom_String_Class::Custom_String_Class(char * s){
     int len = strlen(s);
     str = new char[len+1];

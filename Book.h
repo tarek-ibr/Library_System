@@ -43,7 +43,6 @@ public:
     void setQuantity(unsigned int);
     void setPubYear(unsigned int);
     void setAvailability(bool);
-
     static bool loadlibrary();
     static bool savelibrary();
     static void displaylist();

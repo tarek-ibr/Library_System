@@ -32,7 +32,6 @@ void findbook(vector<Book> books,string s){
 int main() {
  Book::loadlibrary();
  Book::findByName("A");
-
    /* Book::loadlibrary();
     Librarian L1;
     L1.addBook();

@@ -6,7 +6,7 @@
 #define PROJECT_CUSTOM_STRING_CLASS_H
 
 #include <iostream>
-#include <cstring>
+
 
 using namespace std;
 
@@ -17,7 +17,7 @@ public:
     Custom_String_Class();
     Custom_String_Class(char * s);
     Custom_String_Class(const string& s);
-    Custom_String_Class operator+(const Custom_String_Class& s) const;
+    Custom_String_Class operator+(const Custom_String_Class& s);
     Custom_String_Class& operator=(const char *);
     bool operator==(const Custom_String_Class& s2) const;
     bool operator!=(const Custom_String_Class& s2) const;
@@ -35,6 +35,9 @@ public:
     bool find(const Custom_String_Class& s) const;
     int strlength () const;
     int strcompare (const Custom_String_Class& s) const;
+    char* strcpy(char*,const char*);
+    char* strcat(char*,const char*);
+    static int strlen(const char*);
     ~Custom_String_Class();
 };
 

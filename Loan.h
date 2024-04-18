@@ -15,18 +15,18 @@ class Loan  {
     int memberID;
     Custom_String_Class bookID;
     Date dueDate;
-    bool returned;
+    Date borrowDate;
 public:
     Loan();//hgh
     Loan(int, const Custom_String_Class&, Date);
     Custom_String_Class getBookID() const;
     int getMemberID() const;
     Date getDueDate();
-    bool getReturned() const;
+    Date getBorrowDate() const;
     void setMemberID(int);
     void setBookID(const Custom_String_Class&);
     void setDueDate(Date);
-    void setReturned(bool);
+    void setBorrowDate(Date);
     int calculateFines();//hhhh
     void displayDetails();
     static void loadLoans();

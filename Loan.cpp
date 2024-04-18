@@ -4,9 +4,9 @@
 
 #include "Loan.h"
 std::vector<Loan> Loan::Loans_List;
-Loan::Loan(): memberID(0),bookID(""){}
+Loan::Loan(): memberID(0),bookID(""), dueDate(0,0,0), borrowDate(0,0,0){}
 Loan::Loan(int m, const Custom_String_Class& b, Date d): memberID(m), bookID(b), dueDate(d) {
-    returned=false;
+    borrowDate=Date::getCrrentDate();
 }
 Custom_String_Class Loan::getBookID() const{
     return bookID;
@@ -17,8 +17,8 @@ int Loan::getMemberID() const{
 Date Loan::getDueDate(){
     return dueDate;
 }
-bool Loan::getReturned() const{
-    return returned;
+Date Loan::getBorrowDate() const{
+    return borrowDate;
 }
 void Loan::setMemberID(int m) {
     memberID = m;
@@ -32,8 +32,8 @@ void Loan::setDueDate(Date d) {
     dueDate = d;
 }
 
-void Loan::setReturned(bool r) {
-    returned = r;
+void Loan::setBorrowDate(Date r) {
+    borrowDate = r;
 }
 int Loan::calculateFines(){
     if(dueDate<Date::getCrrentDate()){
@@ -49,10 +49,7 @@ void Loan::displayDetails(){
     std::cout << "memberID " << memberID <<endl;
     std::cout << "bookID " << bookID <<endl;
     std::cout << "due date " <<dueDate.getDate() <<endl;
-    if (returned)
-        std::cout << "it is already returned" <<endl;
-    else
-        std::cout << "it is not returned" <<endl;
+    std::cout << "borrow date " <<borrowDate.getDate() <<endl;
 }
 void Loan::loadLoans() {
     std::ifstream file("loaned.json");
@@ -65,8 +62,8 @@ void Loan::loadLoans() {
     file >> j;
 //hhhh
     for (const auto& loan_json : j) {
-        Loan ln(loan_json["memberID"], loan_json["bookID"].get<string>(),
-                Custom_String_Class(loan_json["dueDate"].get<string>()));
+        Loan ln(loan_json["memberID"], loan_json["bookID"].get<string>(), Custom_String_Class(loan_json["dueDate"].get<string>()));
+        ln.setBorrowDate(Custom_String_Class(loan_json["borrowDate"].get<string>()));
         Loan::Loans_List.push_back(ln);
     }
     file.close();
@@ -82,8 +79,9 @@ void Loan::saveLoans() {
     {
         json loanJSON;
         loanJSON["memberID"]=loan.memberID;
-        loanJSON["dueDate"] =loan.dueDate.getDate().str;
         loanJSON["bookID"] =loan.bookID.str;
+        loanJSON["dueDate"] =loan.dueDate.getDate().str;
+        loanJSON["borrowDate"] =loan.borrowDate.getDate().str;
         OUTPUT.push_back(loanJSON);
     }
     file<<std::setw(4)<<OUTPUT<<std::endl;

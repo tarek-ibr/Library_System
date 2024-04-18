@@ -20,9 +20,12 @@ public:
     Date();
     Date(int, int, int);
     Date(Custom_String_Class);
+
     void setDate (Custom_String_Class);
     Custom_String_Class getDate() const;
+
     static Date getCrrentDate();
+
     bool operator > (Date);
     bool operator < (Date);
     bool operator == (Date d) const;
@@ -30,10 +33,9 @@ public:
     Date operator = (Custom_String_Class);
     Date operator + (int);
     int operator - (Date d);
+
     int daysSinceReferenceDate();
     static int daysInMonth(int, int);
-
 };
-
 
 #endif //PROJECT_DATE_H

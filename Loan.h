@@ -12,13 +12,17 @@
 #include "json.h"
 using json = nlohmann::json;
 class Loan  {
+private:
     int memberID;
     Custom_String_Class bookID;
     Date dueDate;
     Date borrowDate;
+    static std::vector<Loan> Loans_List;
+    friend class Member;
 public:
     Loan();//hgh
     Loan(int, const Custom_String_Class&, Date);
+
     Custom_String_Class getBookID() const;
     int getMemberID() const;
     Date getDueDate();
@@ -27,11 +31,12 @@ public:
     void setBookID(const Custom_String_Class&);
     void setDueDate(Date);
     void setBorrowDate(Date);
-    int calculateFines();//hhhh
-    void displayDetails();
+
     static void loadLoans();
     static void saveLoans();
-    static std::vector<Loan> Loans_List;
+
+    int calculateFines();
+    void displayDetails();
     static void displaylist();
 };
 

@@ -3,8 +3,12 @@
 //
 
 #include "Loan.h"
-std::vector<Loan> Loan::Loans_List;
+
+
+std::vector<Loan> Loan::Loans_List={};
+
 Loan::Loan(): memberID(0),bookID(""), dueDate(0,0,0), borrowDate(0,0,0){}
+
 Loan::Loan(int m, const Custom_String_Class& b, Date d): memberID(m), bookID(b), dueDate(d) {
     borrowDate=Date::getCrrentDate();
 }

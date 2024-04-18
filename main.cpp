@@ -11,27 +11,11 @@
 using namespace std;
 using json = nlohmann::json;
 
-void findbook(vector<Book> books,string s){
-    bool found = 0;
-    for(auto it:books)
-    {
-        if(it.getTitle().find(s)!=string::npos)
-        {
-            found =1;
-            cout<<"found :"<<it.getTitle()<<endl;
-        }
-    }
-    if(!found)
-    {
-        cout<<"couldnt find a book ";
-    }
-
-    return;
-}
-
 int main() {
  Book::loadlibrary();
- Book::findByName("A");
+ Custom_String_Class s;
+ cin>>s;
+ Book::findByName(s).display();
    /* Book::loadlibrary();
     Librarian L1;
     L1.addBook();

@@ -98,6 +98,47 @@ void Librarian::editBook(Book& book)
 
 }
 //
+void Librarian::registerNewMember(){
+    Custom_String_Class name, type;
+    int id;
+    cout << "Enter name: ";
+    cin >> name;
+    cout << "Enter ID: ";
+    cin >> id;
+    cout << "Enter type: ";
+    cin >> type;
+    members.push_back(Member(name, id, type));
+    cout << "New member registered successfully.\n";
+}
+
+void Librarian::removeMember()
+{
+    int id;
+    cout << "Enter member ID to remove: ";
+    cin >> id;
+    bool found = false;
+    for (auto it = members.begin(); it != members.end() + 1 ; ++it) {
+        if (it->getID() == id) {
+            members.erase(it);
+            cout << "Member with ID " << id << " removed successfully.\n";
+            found = true;
+            break;
+        }
+    }
+    if (!found) {
+        cout << "Member not found.\n";
+    }
+}
+
+void Librarian::displayAllMembers() {
+    std::cout << "List of Members:\n";
+    for (auto& member : members) {
+        member.display();
+        std::cout << "-------------------------\n";
+    }
+
+}
+
 void Librarian::manageMemberAccounts() {
 
     int choice;
@@ -112,44 +153,17 @@ void Librarian::manageMemberAccounts() {
         switch(choice) {
             case 1: {
                 // Register new member
-                Custom_String_Class name, type;
-                int id;
-                cout << "Enter name: ";
-                cin >> name;
-                cout << "Enter ID: ";
-                cin >> id;
-                cout << "Enter type: ";
-                cin >> type;
-                members.push_back(Member(name, id, type));
-                cout << "New member registered successfully.\n";
+                registerNewMember();
                 break;
             }
             case 2: {
                 // Remove member
-                int id;
-                cout << "Enter member ID to remove: ";
-                cin >> id;
-                bool found = false;
-                for (auto it = members.begin(); it != members.end() + 1 ; ++it) {
-                    if (it->getID() == id) {
-                        members.erase(it);
-                        cout << "Member with ID " << id << " removed successfully.\n";
-                        found = true;
-                        break;
-                    }
-                }
-                if (!found) {
-                    cout << "Member not found.\n";
-                }
+                removeMember();
                 break;
             }
             case 3: {
                 // Display all members
-                std::cout << "List of Members:\n";
-                for (auto& member : members) {
-                    member.display();
-                    std::cout << "-------------------------\n";
-                }
+                displayAllMembers();
                 break;
             }
 

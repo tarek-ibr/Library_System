@@ -22,6 +22,9 @@ public:
     void editBook( Book& book);
     void borrowBook(Member& member, Book& book);
     void returnBook(Member& member, Book& book);
+    void registerNewMember();
+    void removeMember();
+    void displayAllMembers();
 };
 
 

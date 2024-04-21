@@ -21,9 +21,9 @@ protected:
     int ID;
     Custom_String_Class Type;
     int Fines;
-    vector<Loan> checkedOutBooks;
     static vector<Member> members;
 public:
+    vector<Loan> checkedOutBooks;
     Member();
     Member(const Custom_String_Class& ,int ,const Custom_String_Class& );
     Custom_String_Class getName();

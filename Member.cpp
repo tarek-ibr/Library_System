@@ -56,16 +56,18 @@ void Member::display(){
     std::cout << "Overdue Fines: " << calculateTotalFines() << std::endl;
 }
 void Member::displayloaned() const{
-    for(auto it =this->checkedOutBooks.begin(); it != this->checkedOutBooks.end() + 1; ++it) {
+    for(auto it =this->checkedOutBooks.begin();!this->checkedOutBooks.empty() && it != this->checkedOutBooks.end() + 1; ++it) {
         if (it->getMemberID() == ID) {
             cout << "you have borrowed a book with ID " <<it->getBookID();
         }
     }
 }
 void Member::borrowBook(Book b){
-    vector<Book> bkList= Book::getBookList();
+    vector<Book>& bkList= Book::getBookList();
+
     int i;
-    for(i=0; bkList[i].getISBN() != b.getISBN(); i++);
+    for(i=0; !(bkList[i].getISBN() == b.getISBN()); i++);
+
     if(bkList[i].getQuantity()>0) {
         Date dueDate;
         if (bkList[i].getQuantity()==1){
@@ -84,6 +86,7 @@ void Member::borrowBook(Book b){
     }
     else{
         cout << "there is no copies of the book available"<<endl;
+        return;
     }
 }
 void Member::returnBook(Book b) {
@@ -115,20 +118,36 @@ void Member::returnBook(Book b) {
 bool Member::loadMembers() {
     std::ifstream file("members.json");
     if (!file.is_open()) {
-        std::cerr << "Failed to open file." << std::endl;
+        std::cerr << "Failed to open members file." << std::endl;
         return false;
     }
+    ifstream file2("loaned.json");
+    if (!file.is_open()) {
+        std::cerr << "Failed to open loans file." << std::endl;
+        return false;
+    }
+    json mems,loans;
+    file >> mems;
+    file2 >>loans;
 
-    json j;
-    file >> j;
-
-    for (const auto& member_json : j) {
+    for (const auto& member_json : mems) {
         Member m;
 
         m.Name = (member_json["Name"].get<string>());
         m.ID = member_json["ID"].get<int>();
         m.Type = member_json["Type"].get<string>();
         m.Fines = member_json["Fines"].get<int>();
+        for(const auto &loans_json:loans){
+            if(loans_json["memberID"]==m.ID){
+             Loan l;
+             l.setBookID(loans_json["bookID"].get<string>());
+             l.setBorrowDate(Date(loans_json["borrowDate"].get<string>()));
+             l.setDueDate(Date(loans_json["dueDate"].get<string>()));
+             l.setMemberID(m.ID);
+             m.checkedOutBooks.push_back(l);
+
+            }
+        }
         members.push_back(m);
     }
     file.close();

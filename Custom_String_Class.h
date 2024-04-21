@@ -31,8 +31,9 @@ public:
         in >> c.str;
         return in;
     }
+    char reverseCase(char c);
     void display() const;
-    bool find(const Custom_String_Class& s) const;
+    bool find(Custom_String_Class& s);
     int strlength () const;
     int strcompare (const Custom_String_Class& s) const;
     char* strcpy(char*,const char*);

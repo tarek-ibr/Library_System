@@ -10,9 +10,9 @@
 #include <fstream>
 #include "json.h"
 #include "Librarian.h"
+
+using json = nlohmann::json;
 using namespace std;
-
-
 
 
 class Member {

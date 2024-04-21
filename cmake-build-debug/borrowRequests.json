@@ -1,0 +1,8 @@
+[
+  {
+    "bookID": "ABC123",
+    "dueDate": "30/04/2024",
+    "borrowDate": "23/04/2024",
+    "memberID": 123
+  }
+]

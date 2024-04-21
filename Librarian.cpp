@@ -1,7 +1,9 @@
 #include "Librarian.h"
 
 
+std::vector<Loan> Librarian::borrowRequests= {};
 Librarian::Librarian():Member() {}
+
 
 Librarian::Librarian(const Custom_String_Class& name, int ID) : Member(name, ID, Custom_String_Class("Librarian")) {}
 

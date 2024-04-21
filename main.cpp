@@ -19,9 +19,11 @@ int main() {
     Book::loadlibrary();
 
     Book b1= Book::findByName("1984");
-    Member m1= Member::findByID(66666);
-    Librarian l1= Librarian::findByID(11111);
 
+    Member m1= Member::findByID(66666);
+    cout<<"=============="<<endl;
+    Librarian l1= Librarian::findByID(11111);
+    cout<<"=============="<<endl;
     m1.displayloaned();
 
     m1.requestBorrow(b1);

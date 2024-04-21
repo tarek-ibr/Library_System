@@ -19,7 +19,6 @@ public:
     static void addBorrowRequest(Loan&);
     bool borrowBook(Book, Member);
     void approveBorrowRequest(Loan);
-    void rejectBorrowRequest();
     static void returnBook(Member& member, Book& book);
     void registerNewMember();
     void removeMember();

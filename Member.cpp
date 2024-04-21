@@ -2,7 +2,7 @@
 // Created by tarek on 4/5/2024.
 //
 
-#include "Librarian.h"
+#include "Member.h"
 using namespace std;
 
 using json = nlohmann::json;
@@ -28,10 +28,6 @@ Custom_String_Class Member::getType() {
 int Member::getFines() {
     Fines=calculateTotalFines();
     return Fines;
-}
-
-vector<Loan>& Member::getCheckedOutBooks(){
-    return checkedOutBooks;
 }
 
 void Member::setName(const Custom_String_Class& name) {
@@ -66,12 +62,55 @@ void Member::displayloaned() const{
         }
     }
 }
-void Member::requestBorrow(Book& book) {
-    Loan ln(ID, book.getISBN());
-    Librarian::addBorrowRequest(ln);
+void Member::borrowBook(Book b){
+    vector<Book> bkList= Book::getBookList();
+    int i;
+    for(i=0; bkList[i].getISBN() != b.getISBN(); i++);
+    if(bkList[i].getQuantity()>0) {
+        Date dueDate;
+        if (bkList[i].getQuantity()==1){
+            bkList[i].setAvailability(false);
+        }
+        bkList[i].setQuantity(bkList[i].getQuantity()-1);
+        if(Type==Custom_String_Class("Member"))
+            dueDate = Date::getCrrentDate() + 7;
+        else if(Type==Custom_String_Class("Staff"))
+            dueDate = Date::getCrrentDate() + 10;
+        else if(Type==Custom_String_Class("Faculty"))
+            dueDate = Date::getCrrentDate() + 14;
+        Loan newloan(ID, bkList[i].getISBN(), dueDate);
+        this->checkedOutBooks.push_back(newloan);
+        Loan::Loans_List.push_back(newloan);
+    }
+    else{
+        cout << "there is no copies of the book available"<<endl;
+    }
 }
-void Member::returnBook(Book book) {
-    Librarian::returnBook(*this, book);
+void Member::returnBook(Book b) {
+    vector<Book> bkList= Book::getBookList();
+    int i;
+    for(i=0; bkList[i].getISBN() != bkList[i].getISBN(); i++);
+    if(bkList[i].getQuantity()==0)
+        bkList[i].setAvailability(true);
+    bkList[i].setQuantity(bkList[i].getQuantity()+1);
+    for(auto it =this->checkedOutBooks.begin(); it != this->checkedOutBooks.end() + 1; ) {
+        if(it->getBookID() == bkList[i].getISBN() && it->getMemberID()==ID) {
+            cout << "Now Iam removing \n";
+            checkedOutBooks.erase(it);
+            return;
+        } else {
+            ++it;
+        }
+    }
+    for(auto it =Loan::Loans_List.begin(); it != Loan::Loans_List.end() + 1; ) {
+        if(it->getBookID() == bkList[i].getISBN() && it->getMemberID()==ID) {
+            cout << "Now Iam removing \n";
+            Loan::Loans_List.erase(it);
+            return;
+        } else {
+            ++it;
+        }
+    }
 }
 bool Member::loadMembers() {
     std::ifstream file("members.json");
@@ -95,7 +134,7 @@ bool Member::loadMembers() {
     file.close();
     return true;
 }
-bool Member::saveMembers() {
+bool Member::savelibrary() {
     std::ofstream file("members.json");
     if (!file.is_open()) {
         std::cerr << "Failed to open file." << endl;
@@ -117,18 +156,6 @@ bool Member::saveMembers() {
     file.close();
     return true;
 }
-
-Member Member::findByID(int id){
-    for(auto it:members)
-    {
-        if(it.getID()==id)
-        {
-            return it;
-        }
-    }
-    cout<<"Couldn't Find a Book"<<endl;
-}
-
 void Member::displayAllMembers() {
     std::cout << "List of Members:\n";
     for (auto &member: members) {

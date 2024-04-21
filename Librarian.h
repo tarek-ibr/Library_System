@@ -2,7 +2,7 @@
 #ifndef PROJECT_LIBRARIAN_H
 #define PROJECT_LIBRARIAN_H
 
-
+#include "Request.h"
 #include "Member.h"
 
 class Librarian : public Member {
@@ -20,11 +20,16 @@ public:
     void removeBook(const Custom_String_Class& ISBN);
     void manageMemberAccounts();
     void editBook( Book& book);
-    void borrowBook(Member& member, Book& book);
+    static void addBorrowRequest(Request& request);
+    void approveBorrowRequest();
+    void rejectBorrowRequest();
     void returnBook(Member& member, Book& book);
     void registerNewMember();
     void removeMember();
     void displayAllMembers();
+    static std::vector<Request> borrowRequests;
+    void displayRequests();
+
 };
 
 

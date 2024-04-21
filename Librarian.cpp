@@ -1,4 +1,6 @@
 #include "Librarian.h"
+#include "Request.h"
+
 
 
 Librarian::Librarian():Member() {}
@@ -40,9 +42,118 @@ void Librarian::removeBook(const Custom_String_Class& ISBN) {
     }
 }
 
-void Librarian::borrowBook(Member& member, Book& book) {
-    member.borrowBook(book);
+void Librarian::addBorrowRequest(Request& request) {
+    borrowRequests.push_back(request);
 }
+void Librarian::displayRequests() {
+    cout << "Pending Borrow Requests:\n";
+    for (size_t i = 0; i < borrowRequests.size(); ++i) {
+        const auto& request = borrowRequests[i];
+        cout << i + 1 << ". Member ID: " << request.memberID
+             << ", Book ISBN: " << request.bookISBN << std::endl;
+    }
+}
+
+void Librarian::approveBorrowRequest() {
+    if (borrowRequests.empty()) {
+        cout << "No pending borrow requests." << std::endl;
+        return;
+    }
+
+    int choice;
+    cout << "Enter the number of the request to approve (or 0 to cancel): ";
+    cin >> choice;
+
+    if (choice == 0) {
+        cout << "Request approval canceled." << std::endl;
+        return;
+    }
+
+    if (choice > 0 && choice <= borrowRequests.size()) {
+        const auto& approvedRequest = borrowRequests[choice - 1];
+        // Find the member
+        auto memberIt = std::find_if(Member::members.begin(), Member::members.end(),
+                                     [&approvedRequest](const Member& m) {
+                                         return m.getID() == approvedRequest.memberID;
+                                     });
+
+        // Find the book
+        auto bookIt = std::find_if(Book::getBookList().begin(), Book::getBookList().end(),
+                                   [&approvedRequest](const Book& b) {
+                                       return b.getISBN() == approvedRequest.bookISBN;
+                                   });
+
+        if (memberIt != Member::members.end() && bookIt != Book::getBookList().end()) {
+            Member& member = *memberIt;
+            Book& book = *bookIt;
+
+            if (book.getQuantity() > 0) {
+                // Adjust book inventory
+                if (book.getQuantity() == 1) {
+                    book.setAvailability(false);
+                }
+                book.setQuantity(book.getQuantity() - 1);
+
+                // Assign due date based on member type
+                Date dueDate;
+                if (member.getType() == Custom_String_Class("Member")) {
+                    dueDate = Date::getCrrentDate() + 7;
+                } else if (member.getType() == Custom_String_Class("Staff")) {
+                    dueDate = Date::getCrrentDate() + 10;
+                } else if (member.getType() == Custom_String_Class("Faculty")) {
+                    dueDate = Date::getCrrentDate() + 14;
+                }
+
+                Loan newLoan(member.getID(), book.getISBN(), dueDate);
+                member.checkedOutBooks.push_back(newLoan);
+                Loan::Loans_List.push_back(newLoan);
+
+                cout << "Borrow request approved and book issued." << std::endl;
+
+                // Remove the approved request from the list
+                borrowRequests.erase(borrowRequests.begin() + choice - 1);
+            } else {
+                cout << "No copies of the book are available." << std::endl;
+            }
+        } else {
+            cout << "Invalid request. Either the member or book could not be found." << std::endl;
+        }
+    } else {
+        cout << "Invalid choice." << std::endl;
+    }
+}
+
+void Librarian::rejectBorrowRequest() {
+    if (borrowRequests.empty()) {
+        cout << "No pending borrow requests." << std::endl;
+        return;
+    }
+
+    cout << "Pending Borrow Requests:\n";
+    for (size_t i = 0; i < borrowRequests.size(); ++i) {
+        const auto& request = borrowRequests[i];
+        cout << i + 1 << ". Member ID: " << request.memberID
+             << ", Book ISBN: " << request.bookISBN << std::endl;
+    }
+
+    int choice;
+    cout << "Enter the number of the request to reject (or 0 to cancel): ";
+    cin >> choice;
+
+    if (choice == 0) {
+        cout << "Request rejection canceled." << std::endl;
+        return;
+    }
+
+    if (choice > 0 && choice <= borrowRequests.size()) {
+        cout << "Borrow request rejected." << std::endl;
+        // Remove the rejected request from the list
+        borrowRequests.erase(borrowRequests.begin() + choice - 1);
+    } else {
+        cout << "Invalid choice." << std::endl;
+    }
+}
+
 
 void Librarian::returnBook(Member& member, Book& book) {
     member.returnBook(book);

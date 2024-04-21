@@ -12,7 +12,8 @@
 #include "Loan.h"
 #include <fstream>
 #include "json.h"
-
+#include "Request.h"
+#include "Librarian.h"
 using namespace std;
 
 class Member {
@@ -36,7 +37,7 @@ public:
     int calculateTotalFines ();
     void display();
     void displayloaned() const;
-    void borrowBook(Book);
+    void requestBorrow(Book& book);
     void returnBook(Book) ;
     static bool loadMembers();
     static bool savelibrary();

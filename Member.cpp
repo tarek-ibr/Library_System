@@ -62,29 +62,10 @@ void Member::displayloaned() const{
         }
     }
 }
-void Member::borrowBook(Book b){
-    vector<Book> bkList= Book::getBookList();
-    int i;
-    for(i=0; bkList[i].getISBN() != b.getISBN(); i++);
-    if(bkList[i].getQuantity()>0) {
-        Date dueDate;
-        if (bkList[i].getQuantity()==1){
-            bkList[i].setAvailability(false);
-        }
-        bkList[i].setQuantity(bkList[i].getQuantity()-1);
-        if(Type==Custom_String_Class("Member"))
-            dueDate = Date::getCrrentDate() + 7;
-        else if(Type==Custom_String_Class("Staff"))
-            dueDate = Date::getCrrentDate() + 10;
-        else if(Type==Custom_String_Class("Faculty"))
-            dueDate = Date::getCrrentDate() + 14;
-        Loan newloan(ID, bkList[i].getISBN(), dueDate);
-        this->checkedOutBooks.push_back(newloan);
-        Loan::Loans_List.push_back(newloan);
-    }
-    else{
-        cout << "there is no copies of the book available"<<endl;
-    }
+void Member::requestBorrow(Book& book) {
+    // Sends a request to the librarian for borrowing the book
+    Librarian::addBorrowRequest(Request{ID, book.getISBN()});
+    cout << "Request to borrow book with ISBN " << book.getISBN() << " has been sent to the librarian." << std::endl;
 }
 void Member::returnBook(Book b) {
     vector<Book> bkList= Book::getBookList();

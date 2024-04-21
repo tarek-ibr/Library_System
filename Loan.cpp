@@ -9,20 +9,27 @@ std::vector<Loan> Loan::Loans_List={};
 
 Loan::Loan(): memberID(0),bookID(""), dueDate(0,0,0), borrowDate(0,0,0){}
 
+Loan::Loan(int m, const Custom_String_Class& b, Date due, Date borrow): memberID(m), bookID(b), dueDate(due), borrowDate(borrow) {}
+
 Loan::Loan(int m, const Custom_String_Class& b, Date d): memberID(m), bookID(b), dueDate(d) {
     borrowDate=Date::getCrrentDate();
 }
+Loan::Loan(int m, const Custom_String_Class& b): memberID(m), bookID(b), dueDate(0,0,0), borrowDate(0,0,0) {}
+
 Custom_String_Class Loan::getBookID() const{
     return bookID;
 }
 int Loan::getMemberID() const{
     return memberID;
 }
-Date Loan::getDueDate(){
+Date Loan::getDueDate() const{
     return dueDate;
 }
 Date Loan::getBorrowDate() const{
     return borrowDate;
+}
+vector<Loan>& Loan::getLoans_List(){
+    return Loans_List;
 }
 void Loan::setMemberID(int m) {
     memberID = m;
@@ -59,7 +66,7 @@ void Loan::loadLoans() {
     std::ifstream file("loaned.json");
     if (!file.is_open()) {
         std::cerr << "Failed to open file." << std::endl;
-             return;
+        return;
     }
 
     json j;
@@ -93,6 +100,6 @@ void Loan::saveLoans() {
 }
 void Loan::displaylist() {
     for (const auto &it: (Loan::Loans_List)) {
-     cout<<it.bookID<<endl;
+        cout<<it.bookID<<endl;
     }
 }

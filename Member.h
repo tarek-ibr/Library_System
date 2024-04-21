@@ -12,16 +12,19 @@
 #include "Loan.h"
 #include <fstream>
 #include "json.h"
-
+#include "Librarian.h"
 using namespace std;
 
 class Member {
+private:
+    vector<Loan> checkedOutBooks;
+    int Fines;
 protected:
     Custom_String_Class Name;
     int ID;
     Custom_String_Class Type;
-    int Fines;
-    vector<Loan> checkedOutBooks;
+
+
     static vector<Member> members;
 public:
     Member();
@@ -30,16 +33,18 @@ public:
     int getID() const;
     Custom_String_Class getType();
     int getFines();
+    vector<Loan>& getCheckedOutBooks();
     void setName(const Custom_String_Class&);
     void setID(int);
     void setType(const Custom_String_Class&);
     int calculateTotalFines ();
     void display();
     void displayloaned() const;
-    void borrowBook(Book);
+    void requestBorrow(Book&);
     void returnBook(Book) ;
     static bool loadMembers();
-    static bool savelibrary();
+    static bool saveMembers();
+    static Member findByID(int);
     static void displayAllMembers();
 };
 

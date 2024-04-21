@@ -40,109 +40,12 @@ void Librarian::removeBook(const Custom_String_Class& ISBN) {
     }
 }
 
-void Librarian::addBorrowRequest(Loan& ln) {
-    borrowRequests.push_back(ln);
-}
-void Librarian::displayRequests() {
-    if (borrowRequests.empty()) {
-        cout << "No pending borrow requests." << std::endl;
-        return;
-    }
-
-    cout << "Pending Borrow Requests:\n";
-    for (size_t i = 0; i < borrowRequests.size(); ++i) {
-        const auto& request = borrowRequests[i];
-        cout << i + 1 << ". Member ID: " << request.getMemberID()
-             << ", Book ISBN: " << request.getBookID() << std::endl;
-    }
-}
-
-bool Librarian::borrowBook(Book b, Member member){
-    vector<Book>& bkList= Book::getBookList();
-    vector<Loan>& checkedBooks= member.getCheckedOutBooks();
-    vector<Loan>& loansList= Loan::getLoans_List();
-
-    int i;
-    for(i=0; !(bkList[i].getISBN() == b.getISBN()); i++);
-
-    if(bkList[i].getQuantity()>0) {
-        Date dueDate;
-        if (bkList[i].getQuantity()==1){
-            bkList[i].setAvailability(false);
-        }
-        bkList[i].setQuantity(bkList[i].getQuantity()-1);
-        if(Type==Custom_String_Class("Member"))
-            dueDate = Date::getCrrentDate() + 7;
-        else if(Type==Custom_String_Class("Staff"))
-            dueDate = Date::getCrrentDate() + 10;
-        else if(Type==Custom_String_Class("Faculty"))
-            dueDate = Date::getCrrentDate() + 14;
-        Loan newloan(ID, bkList[i].getISBN(), dueDate);
-        checkedBooks.push_back(newloan);
-        loansList.push_back(newloan);
-        return true;
-    }
-    else{
-        cout << "there is no copies of the book available"<<endl;
-        return false;
-    }
-}
-
-void Librarian::approveBorrowRequest(Loan ln) {
-    int i=0;
-    Book bk = Book::findByISBN(ln.getBookID());
-    Member member = Member::findByID(ln.getMemberID());
-
-    for(auto it =borrowRequests.begin(); it != borrowRequests.end() + 1; ) {
-        if(it->getBookID() == ln.getBookID() && it->getMemberID() ==ln.getMemberID()) {
-            break;
-        } else {
-            i++;
-            ++it;
-        }
-    }
-    for(auto it =borrowRequests.begin(); it != borrowRequests.end() + 1; ) {
-        if(it->getBookID() == ln.getBookID() && it->getMemberID() ==ln.getMemberID()) {
-            cout << "Now Iam removing \n";
-            borrowRequests.erase(it);
-            break;
-        } else {
-            ++it;
-        }
-    }
-
-    if(borrowBook(bk, member))
-        cout << "Borrow request approved and book issued." << endl;
+void Librarian::borrowBook(Member& member, Book& book) {
+    member.borrowBook(book);
 }
 
 void Librarian::returnBook(Member& member, Book& book) {
-    vector<Book>& bkList= Book::getBookList();
-    vector<Loan>& checkedBooks= member.getCheckedOutBooks();
-    vector<Loan>& loansList= Loan::getLoans_List();
-
-    int i;
-    for(i=0; bkList[i].getISBN() != bkList[i].getISBN(); i++);
-    if(bkList[i].getQuantity()==0)
-        bkList[i].setAvailability(true);
-    bkList[i].setQuantity(bkList[i].getQuantity()+1);
-    for(auto it = checkedBooks.begin(); it != checkedBooks.end() + 1; ) {
-        if(it->getBookID() == bkList[i].getISBN() && it->getMemberID()==member.getID()) {
-            cout << "Now Iam removing \n";
-            checkedBooks.erase(it);
-            break;
-        } else {
-            ++it;
-        }
-    }
-    for(auto it =loansList.begin(); it != loansList.end() + 1; ) {
-        if(it->getBookID() == bkList[i].getISBN() && it->getMemberID()==member.getID()) {
-            cout << "Now Iam removing \n";
-            loansList.erase(it);
-            break;
-        } else {
-            ++it;
-        }
-    }
+    member.returnBook(book);
 }
 
 
@@ -273,42 +176,3 @@ void Librarian::manageMemberAccounts() {
     } while (choice != 0);
 }
 
-bool Librarian::loadLibrarian() {
-    std::ifstream file("borrowRequests.json");
-    if (!file.is_open()) {
-        std::cerr << "Failed to open file." << std::endl;
-        return false;
-    }
-
-    json j;
-    file >> j;
-
-    for (const auto& Requests_json : j) {
-        Loan ln(Requests_json["memberID"], Custom_String_Class(Requests_json["bookID"].get<string>()), Date(Custom_String_Class(Requests_json["dueDate"].get<string>())), Date(Custom_String_Class(Requests_json["borrowDate"].get<string>())));
-        borrowRequests.push_back(ln);
-    }
-    file.close();
-    return true;
-}
-bool Librarian::saveLibrarian() {
-    std::ofstream file("borrowRequests.json");
-    if (!file.is_open()) {
-        std::cerr << "Failed to open file." << endl;
-        return false;
-    }
-    json OUTPUT;
-    for(const auto& ln : borrowRequests)
-    {
-        json bookJson;
-
-        bookJson["memberID"] = ln.getMemberID();
-        bookJson["bookID"] = ln.getBookID().str;
-        bookJson["dueDate"] = ln.getDueDate().getDate().str;
-        bookJson["borrowDate"] = ln.getBorrowDate().getDate().str;
-
-        OUTPUT.push_back(bookJson);
-    }
-    file<<setw(4)<<OUTPUT<<endl;// what is the meaning of setw(4) ya ziad
-    file.close();
-    return true;
-}

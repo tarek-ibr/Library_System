@@ -3,6 +3,7 @@
 //
 
 #include "Member.h"
+using namespace std;
 
 using json = nlohmann::json;
 

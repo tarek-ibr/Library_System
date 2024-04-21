@@ -66,7 +66,7 @@ void Loan::loadLoans() {
     std::ifstream file("loaned.json");
     if (!file.is_open()) {
         std::cerr << "Failed to open file." << std::endl;
-        return;
+             return;
     }
 
     json j;
@@ -100,6 +100,6 @@ void Loan::saveLoans() {
 }
 void Loan::displaylist() {
     for (const auto &it: (Loan::Loans_List)) {
-        cout<<it.bookID<<endl;
+     cout<<it.bookID<<endl;
     }
 }

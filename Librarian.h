@@ -4,7 +4,6 @@
 
 #include "Member.h"
 
-
 class Librarian : public Member{
 public:
     Librarian();

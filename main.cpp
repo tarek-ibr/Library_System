@@ -3,8 +3,7 @@
 #include <vector>
 #include "json.h"
 #include "Book.h"
-#include "Member.h"
-#include "Librarian.h"
+#include "User.h"
 #include "Loan.h"
 #include "Custom_String_Class.h"
 //Ammar
@@ -13,21 +12,23 @@ using json = nlohmann::json;
 
 int main() {
 
-    Member::loadMembers();
+
     Loan::loadLoans();
+    Member::loadMembers();
     Librarian::loadLibrarian();
     Book::loadlibrary();
 
-    Member m1("tamer", 77777, "Student");
-    Librarian l1("elgayar", 88888);
-
     Book b1= Book::findByName("1984");
+    Member m1= Member::findByID(66666);
+    Librarian l1= Librarian::findByID(11111);
+
+    m1.displayloaned();
 
     m1.requestBorrow(b1);
     l1.displayRequests();
 
-    //vector<Loan>& ln= Member::getCheckedOutBooks();
-    //l1.approveBorrowRequest();
+    Loan ln(77777, "978-0-451-52493-5");
+    l1.approveBorrowRequest(ln);
 
 
 

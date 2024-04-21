@@ -1,4 +1,4 @@
-#include "Librarian.h"
+#include "User.h"
 
 
 std::vector<Loan> Librarian::borrowRequests= {};
@@ -93,6 +93,8 @@ bool Librarian::borrowBook(Book b, Member member){
 void Librarian::approveBorrowRequest(Loan ln) {
     int i=0;
     Book bk = Book::findByISBN(ln.getBookID());
+    cout<<"======="<<ln.getMemberID()<<"============"<<endl;
+    Member::displayAllMembers();
     Member member = Member::findByID(ln.getMemberID());
 
     for(auto it =borrowRequests.begin(); it != borrowRequests.end() + 1; ) {
@@ -313,4 +315,15 @@ bool Librarian::saveLibrarian() {
     file<<setw(4)<<OUTPUT<<endl;// what is the meaning of setw(4) ya ziad
     file.close();
     return true;
+}
+
+Librarian Librarian::findByID(int id){
+    for(auto it:members)
+    {
+        if(it.getID()==id)
+        {
+            return it;
+        }
+    }
+    cout<<"Couldn't Find member"<<endl;
 }

@@ -2,7 +2,7 @@
 // Created by tarek on 4/5/2024.
 //
 
-#include "Librarian.h"
+#include "User.h"
 using namespace std;
 
 using json = nlohmann::json;
@@ -50,6 +50,7 @@ int Member::calculateTotalFines (){
     for(auto it: checkedOutBooks){
         Fines+=it.calculateFines();
     }
+    Member::saveMembers();
     return Fines;
 }
 void Member::display(){
@@ -60,9 +61,10 @@ void Member::display(){
     std::cout << "Overdue Fines: " << calculateTotalFines() << std::endl;
 }
 void Member::displayloaned() const{
+
     for(auto it =this->checkedOutBooks.begin(); it != this->checkedOutBooks.end() + 1; ++it) {
         if (it->getMemberID() == ID) {
-            cout << "you have borrowed a book with ID " <<it->getBookID();
+            cout << "you have borrowed a book with ID " <<it->getBookID()<< endl;
         }
     }
 }
@@ -82,7 +84,6 @@ bool Member::loadMembers() {
 
     json j;
     file >> j;
-
     for (const auto& member_json : j) {
         Member m;
 
@@ -90,6 +91,12 @@ bool Member::loadMembers() {
         m.ID = member_json["ID"].get<int>();
         m.Type = member_json["Type"].get<string>();
         m.Fines = member_json["Fines"].get<int>();
+
+        for(auto& it: Loan::getLoans_List()){
+            if(m.ID==it.getMemberID()){
+                m.checkedOutBooks.push_back(it);
+            }
+        }
         members.push_back(m);
     }
     file.close();
@@ -126,7 +133,7 @@ Member Member::findByID(int id){
             return it;
         }
     }
-    cout<<"Couldn't Find a Book"<<endl;
+    cout<<"Couldn't Find member"<<endl;
 }
 
 void Member::displayAllMembers() {

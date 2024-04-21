@@ -17,16 +17,19 @@ private:
     Custom_String_Class bookID;
     Date dueDate;
     Date borrowDate;
-    static std::vector<Loan> Loans_List;
-    friend class Member;
+    static vector<Loan> Loans_List;
+    friend class Librarian;
 public:
     Loan();//hgh
+    Loan(int, const Custom_String_Class&, Date, Date);
     Loan(int, const Custom_String_Class&, Date);
+    Loan(int m, const Custom_String_Class& b);
 
     Custom_String_Class getBookID() const;
     int getMemberID() const;
-    Date getDueDate();
+    Date getDueDate() const;
     Date getBorrowDate() const;
+    static vector<Loan>& getLoans_List();
     void setMemberID(int);
     void setBookID(const Custom_String_Class&);
     void setDueDate(Date);

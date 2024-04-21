@@ -12,25 +12,30 @@ using namespace std;
 using json = nlohmann::json;
 
 int main() {
- Book::loadlibrary();
- Custom_String_Class s;
- cin>>s;
- Book::findByName(s).display();
-   /* Book::loadlibrary();
-    Librarian L1;
-    L1.addBook();
-    Book::displaylist();
-    Book::savelibrary();
-
-    Date d1(Custom_String_Class("05/04/2024"));
-    Loan l1(22123, Custom_String_Class("23424"), d1);
-    l1.displayDetails();
-    cout<<l1.calculateFines()<<endl;
-    Date d2=Date::getCrrentDate();
-    cout<<d2.getDate()<<endl;
 
     Member::loadMembers();
-    Member::displayAllMembers();*/
+    Loan::loadLoans();
+    Librarian::loadLibrarian();
+    Book::loadlibrary();
+
+    Member m1("tamer", 77777, "Student");
+    Librarian l1("elgayar", 88888);
+
+    Book b1= Book::findByName("1984");
+
+    m1.requestBorrow(b1);
+    l1.displayRequests();
+
+    //vector<Loan>& ln= Member::getCheckedOutBooks();
+    //l1.approveBorrowRequest();
+
+
+
+    Member::saveMembers();
+    Loan::saveLoans();
+    Librarian::saveLibrarian();
+    Book::loadlibrary();
+
 
 
     return 0;

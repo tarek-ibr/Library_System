@@ -1,13 +1,5 @@
 [
     {
-        "author": "Ziad",
-        "genre": "Fiction",
-        "isbn": "1234",
-        "publication_year": 2003,
-        "quantity": 10,
-        "title": "A7A"
-    },
-    {
         "author": "George Orwell",
         "genre": "Science Fiction",
         "isbn": "978-0-451-52493-5",
@@ -38,29 +30,5 @@
         "publication_year": 1997,
         "quantity": 20,
         "title": "Harry Potter and the Philosopher's Stone"
-    },
-    {
-        "author": "aaaaaaaaaaaaaaaaaaaaaaaaaaah",
-        "genre": "aaaaaaaaaaaaaaaaaaaaaaaaaaaah",
-        "isbn": "aaaaaaaaaaaaaah",
-        "publication_year": 2002,
-        "quantity": 0,
-        "title": "aaaaaaaaaaaah"
-    },
-    {
-        "author": "AAAAA",
-        "genre": "AAAAAAAA",
-        "isbn": "AAAAAA",
-        "publication_year": 2000,
-        "quantity": 0,
-        "title": "AAAAAAAAAAAAAH"
-    },
-    {
-        "author": "prof.Ziad",
-        "genre": "sex-education",
-        "isbn": "6969696969",
-        "publication_year": 2024,
-        "quantity": 69,
-        "title": "AssVStits"
     }
 ]

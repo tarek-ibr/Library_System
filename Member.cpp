@@ -2,7 +2,7 @@
 // Created by tarek on 4/5/2024.
 //
 
-#include "Member.h"
+#include "Librarian.h"
 using namespace std;
 
 using json = nlohmann::json;
@@ -28,6 +28,10 @@ Custom_String_Class Member::getType() {
 int Member::getFines() {
     Fines=calculateTotalFines();
     return Fines;
+}
+
+vector<Loan>& Member::getCheckedOutBooks(){
+    return checkedOutBooks;
 }
 
 void Member::setName(const Custom_String_Class& name) {
@@ -63,35 +67,11 @@ void Member::displayloaned() const{
     }
 }
 void Member::requestBorrow(Book& book) {
-    // Sends a request to the librarian for borrowing the book
-    Librarian::addBorrowRequest(Request{ID, book.getISBN()});
-    cout << "Request to borrow book with ISBN " << book.getISBN() << " has been sent to the librarian." << std::endl;
+    Loan ln(ID, book.getISBN());
+    Librarian::addBorrowRequest(ln);
 }
-void Member::returnBook(Book b) {
-    vector<Book> bkList= Book::getBookList();
-    int i;
-    for(i=0; bkList[i].getISBN() != bkList[i].getISBN(); i++);
-    if(bkList[i].getQuantity()==0)
-        bkList[i].setAvailability(true);
-    bkList[i].setQuantity(bkList[i].getQuantity()+1);
-    for(auto it =this->checkedOutBooks.begin(); it != this->checkedOutBooks.end() + 1; ) {
-        if(it->getBookID() == bkList[i].getISBN() && it->getMemberID()==ID) {
-            cout << "Now Iam removing \n";
-            checkedOutBooks.erase(it);
-            return;
-        } else {
-            ++it;
-        }
-    }
-    for(auto it =Loan::Loans_List.begin(); it != Loan::Loans_List.end() + 1; ) {
-        if(it->getBookID() == bkList[i].getISBN() && it->getMemberID()==ID) {
-            cout << "Now Iam removing \n";
-            Loan::Loans_List.erase(it);
-            return;
-        } else {
-            ++it;
-        }
-    }
+void Member::returnBook(Book book) {
+    Librarian::returnBook(*this, book);
 }
 bool Member::loadMembers() {
     std::ifstream file("members.json");
@@ -115,7 +95,7 @@ bool Member::loadMembers() {
     file.close();
     return true;
 }
-bool Member::savelibrary() {
+bool Member::saveMembers() {
     std::ofstream file("members.json");
     if (!file.is_open()) {
         std::cerr << "Failed to open file." << endl;
@@ -137,6 +117,18 @@ bool Member::savelibrary() {
     file.close();
     return true;
 }
+
+Member Member::findByID(int id){
+    for(auto it:members)
+    {
+        if(it.getID()==id)
+        {
+            return it;
+        }
+    }
+    cout<<"Couldn't Find a Book"<<endl;
+}
+
 void Member::displayAllMembers() {
     std::cout << "List of Members:\n";
     for (auto &member: members) {

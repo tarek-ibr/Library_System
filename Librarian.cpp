@@ -127,7 +127,7 @@ void Librarian::returnBook(Member& member, Book& book) {
     vector<Loan>& loansList= Loan::getLoans_List();
 
     int i;
-    for(i=0; book.getISBN() != bkList[i].getISBN(); i++);
+    for(i=0; !(book.getISBN() == bkList[i].getISBN()); i++);
     if(bkList[i].getQuantity()==0)
         bkList[i].setAvailability(true);
     bkList[i].setQuantity(bkList[i].getQuantity()+1);
@@ -151,6 +151,7 @@ void Librarian::returnBook(Member& member, Book& book) {
         }
     }
 }
+
 
 
 void Librarian::editBook(Book& book)

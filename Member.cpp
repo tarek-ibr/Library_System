@@ -66,10 +66,13 @@ void Member::display(){
 }
 void Member::displayloaned() const{
 
-    for(auto it =this->checkedOutBooks.begin(); it != this->checkedOutBooks.end() + 1; ++it) {
+    /*for(auto it =this->checkedOutBooks.begin(); it != this->checkedOutBooks.end() ; ++it) {
         if (it->getMemberID() == ID) {
             cout << "you have borrowed a book with ID " <<it->getBookID()<< endl;
         }
+    }*/
+    for (int i = 0; i < this->checkedOutBooks.size(); ++i) {
+        std::cout << "you have borrowed a book with ID " << this->checkedOutBooks[i].getBookID() << " ";
     }
 }
 void Member::requestBorrow(Book& book) {

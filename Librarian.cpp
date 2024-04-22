@@ -32,7 +32,7 @@ void Librarian::addBook() {
     Book::getBookList().push_back(newBook);
 }
 void Librarian::removeBook(const Custom_String_Class& ISBN) {
-    for(auto it = Book::getBookList().begin(); it != Book::getBookList().end() + 1; ) {
+    for(auto it = Book::getBookList().begin(); it != Book::getBookList().end(); ) {        //removed +1
         if(it->getISBN() == ISBN) {
             cout << "Now Iam removing \n";
             Book::getBookList().erase(it);
@@ -107,7 +107,7 @@ void Librarian::approveBorrowRequest(Loan ln) {
     }*/     //msh faker kant bte3m3l eh
 
 
-    for(auto it =borrowRequests.begin(); it != borrowRequests.end() + 1; ) {
+    for(auto it =borrowRequests.begin(); it != borrowRequests.end(); ) {
         if(it->getBookID() == ln.getBookID() && it->getMemberID() ==ln.getMemberID()) {
             cout << "Now Iam removing \n";
             borrowRequests.erase(it);
@@ -134,7 +134,6 @@ void Librarian::returnBook(Member& member, Book& book) {
     for(auto it = checkedBooks.begin(); it != checkedBooks.end(); ) {
         if((it->getBookID() == bkList[i].getISBN()) && (it->getMemberID()==member.getID())) {
             cout << "Now Iam removing \n";
-            //member.checkedOutBooks.erase(it);                 the return fuction doesn't delete the loan from checkedoutbooks vector
             checkedBooks.erase(it);
             break;
         } else {
@@ -222,7 +221,7 @@ void Librarian::removeMember()
     cout << "Enter member ID to remove: ";
     cin >> id;
     bool found = false;
-    for (auto it = members.begin(); it != members.end() + 1 ; ++it) {
+    for (auto it = members.begin(); it != members.end() ; ++it) {
         if (it->getID() == id) {
             members.erase(it);
             cout << "Member with ID " << id << " removed successfully.\n";

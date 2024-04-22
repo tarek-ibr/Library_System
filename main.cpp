@@ -21,20 +21,18 @@ int main() {
     Librarian l1= Librarian::findByID(11111);
     Book b1= Book::findByISBN("978-0-7475-3269-6");
     b1.display();
-    Loan ln;
+    Loan ln(66666, "978-0-7475-3269-6");
     Book::displaylist();
     Loan::displaylist();
     Member::displayAllMembers();
 
-    ln.displaylist();
-    cout<<"\n**************\n";
+    m1.requestBorrow(b1);
+    l1.displayRequests();
+    l1.approveBorrowRequest(ln);
+    l1.displayRequests();
+    cout<<"\n**********************************\n";
     m1.displayloaned();
-    cout<<"\n**************\n";
-    m1.returnBook(b1);
-    cout<<"\n**************\n";
-    m1.displayloaned();
-    cout<<"\n**************\n";
-    ln.displaylist();
+
 
     Librarian::saveMembers();
     Loan::saveLoans();

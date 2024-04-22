@@ -13,7 +13,7 @@ Member::Member():Name(""),Type(""),ID(0),Fines(0) {}
 Member::Member(const Custom_String_Class& N,int I,const Custom_String_Class& T): Name(N),ID(I),Type(T){
     Fines=0;
 }
-Custom_String_Class Member::getName() {
+Custom_String_Class Member::getName() const{
     return Name;
 }
 
@@ -21,12 +21,11 @@ int Member::getID() const {
     return ID;
 }
 
-Custom_String_Class Member::getType() {
+Custom_String_Class Member::getType() const{
     return Type;
 }
 
-int Member::getFines() {
-    Fines=calculateTotalFines();
+int Member::getFines() const{
     return Fines;
 }
 
@@ -45,13 +44,18 @@ void Member::setID(int id) {
 void Member::setType(const Custom_String_Class& type) {
     Type = type;
 }
+void Member::setFines(int f){
+    Fines=f;
+}
 int Member::calculateTotalFines (){
     Fines=0;
     for(auto it: checkedOutBooks){
         Fines+=it.calculateFines();
     }
-    Member::saveMembers();
     return Fines;
+}
+void Member::updateTotalFines (){
+    Fines=calculateTotalFines();
 }
 void Member::display(){
     std::cout << "Name: " << Name << std::endl;
@@ -74,55 +78,6 @@ void Member::requestBorrow(Book& book) {
 }
 void Member::returnBook(Book book) {
     Librarian::returnBook(*this, book);
-}
-bool Member::loadMembers() {
-    std::ifstream file("members.json");
-    if (!file.is_open()) {
-        std::cerr << "Failed to open file." << std::endl;
-        return false;
-    }
-
-    json j;
-    file >> j;
-    for (const auto& member_json : j) {
-        Member m;
-
-        m.Name = (member_json["Name"].get<string>());
-        m.ID = member_json["ID"].get<int>();
-        m.Type = member_json["Type"].get<string>();
-        m.Fines = member_json["Fines"].get<int>();
-
-        for(auto& it: Loan::getLoans_List()){
-            if(m.ID==it.getMemberID()){
-                m.checkedOutBooks.push_back(it);
-            }
-        }
-        members.push_back(m);
-    }
-    file.close();
-    return true;
-}
-bool Member::saveMembers() {
-    std::ofstream file("members.json");
-    if (!file.is_open()) {
-        std::cerr << "Failed to open file." << endl;
-        return false;
-    }
-    json OUTPUT;
-    for(const auto& member : members)
-    {
-        json bookJson;
-
-        bookJson["Name"] = member.Name.str;
-        bookJson["ID"] = member.ID;
-        bookJson["Type"] = member.Type.str;
-        bookJson["Fines"] = member.Fines;
-
-        OUTPUT.push_back(bookJson);
-    }
-    file<<setw(4)<<OUTPUT<<endl;// what is the meaning of setw(4) ya ziad
-    file.close();
-    return true;
 }
 
 Member Member::findByID(int id){

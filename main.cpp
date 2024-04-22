@@ -12,29 +12,28 @@ using json = nlohmann::json;
 
 int main() {
 
-
-    Loan::loadLoans();
-    Member::loadMembers();
-    Librarian::loadLibrarian();
     Book::loadlibrary();
-
-    Book b1= Book::findByName("1984");
+    Loan::loadLoans();
+    Librarian::loadMembers();
+    Librarian::loadLibrarian();
 
     Member m1= Member::findByID(66666);
-    cout<<"=============="<<endl;
     Librarian l1= Librarian::findByID(11111);
-    cout<<"=============="<<endl;
+    Book b1= Book::findByName("1984");
+    Loan ln;
+
+
+    ln.displaylist();
+    cout<<"\n**************\n";
     m1.displayloaned();
+    cout<<"\n**************\n";
+    m1.returnBook(b1);
+    cout<<"\n**************\n";
+    m1.displayloaned();
+    cout<<"\n**************\n";
+    ln.displaylist();
 
-    m1.requestBorrow(b1);
-    l1.displayRequests();
-
-    Loan ln(77777, "978-0-451-52493-5");
-    l1.approveBorrowRequest(ln);
-
-
-
-    Member::saveMembers();
+    Librarian::saveMembers();
     Loan::saveLoans();
     Librarian::saveLibrarian();
     Book::loadlibrary();

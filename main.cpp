@@ -6,40 +6,58 @@
 #include "User.h"
 #include "Loan.h"
 #include "Custom_String_Class.h"
-//Ammar
+#include "Functionalities.h"
+
 using namespace std;
 using json = nlohmann::json;
 
 int main() {
-
     Book::loadlibrary();
     Loan::loadLoans();
     Librarian::loadMembers();
     Librarian::loadLibrarian();
 
-    Member m1= Member::findByID(66666);
-    Librarian l1= Librarian::findByID(11111);
-    Book b1= Book::findByISBN("978-0-7475-3269-6");
-    b1.display();
-    Loan ln(66666, "978-0-7475-3269-6");
-    Book::displaylist();
-    Loan::displaylist();
-    Member::displayAllMembers();
+    int id;
+    cout<<"Enter your ID: ";
+    cin>>id;
 
-    m1.requestBorrow(b1);
-    l1.displayRequests();
-    l1.approveBorrowRequest(ln);
-    l1.displayRequests();
-    cout<<"\n**********************************\n";
-    m1.displayloaned();
+    Custom_String_Class type = login(id);
 
+    if(type=="member"){
+        Member member = Member::findByID(id);
+        while(true){
+            diplayMenuMember();
+
+            int memberOption;
+            cin>>memberOption;
+
+            if(memberOption==6)
+                break;
+            implementMemberChoice(member, memberOption);
+        }
+    }
+    else if(type=="librarian"){
+        Librarian librarian = Librarian::findByID(id);
+
+        while(true){
+            displayMenuLibrarian();
+
+            int librarianOption;
+            cin >> librarianOption;
+
+            if (librarianOption == 11) {
+                break;
+            }
+        }
+    }
+    else if(type=="not found"){
+        cout<<"You are not registered in our system, Please check your ID again!!"<<endl;
+    }
 
     Librarian::saveMembers();
     Loan::saveLoans();
     Librarian::saveLibrarian();
     Book::savelibrary();
-
-
 
     return 0;
 }

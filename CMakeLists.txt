@@ -16,4 +16,6 @@ add_executable(project main.cpp
         json.h
         Date.cpp
         Date.h
+        Functionalities.h
+        Functionalities.cpp
 )

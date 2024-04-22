@@ -17,9 +17,10 @@ private:
     Custom_String_Class bookID;
     Date dueDate;
     Date borrowDate;
-    static vector<Loan> Loans_List;
+
     friend class Librarian;
 public:
+    static vector<Loan> Loans_List;
     Loan();//hgh
     Loan(int, const Custom_String_Class&, Date, Date);
     Loan(int, const Custom_String_Class&, Date);

@@ -7,11 +7,10 @@ add_executable(project main.cpp
         Book.cpp
         Book.h
         Member.cpp
-        Member.h
         Custom_String_Class.cpp
         Custom_String_Class.h
         Librarian.cpp
-        Librarian.h
+        User.h
         Loan.cpp
         Loan.h
         json.h

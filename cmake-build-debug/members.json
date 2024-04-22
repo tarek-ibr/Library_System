@@ -1,12 +1,6 @@
 [
     {
         "Fines": 0,
-        "ID": 11111,
-        "Name": "Tarek",
-        "Type": "Librarian"
-    },
-    {
-        "Fines": 2003,
         "ID": 222222,
         "Name": "Ziad",
         "Type": "Student"
@@ -34,5 +28,11 @@
         "ID": 66666,
         "Name": "Eljooker",
         "Type": "Faculty"
+    },
+    {
+        "Fines": 0,
+        "ID": 11111,
+        "Name": "Tarek",
+        "Type": "Librarian"
     }
 ]

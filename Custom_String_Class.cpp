@@ -44,14 +44,7 @@ bool Custom_String_Class::operator==(const Custom_String_Class& str2) const {
 }
 bool Custom_String_Class::operator!=(const Custom_String_Class& s2) const
 {
-        if(this->strlength()==s2.strlength())
-            return 0;
-        for(int i=0;i<s2.strlength();i++)
-        {
-            if(str[i]==s2[i])
-                return false;
-        }
-        return true;
+      return !(*this==s2);
 }
 
 char Custom_String_Class::operator[](int x) const

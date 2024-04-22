@@ -19,9 +19,12 @@ int main() {
 
     Member m1= Member::findByID(66666);
     Librarian l1= Librarian::findByID(11111);
-    Book b1= Book::findByName("1984");
+    Book b1= Book::findByISBN("978-0-7475-3269-6");
+    b1.display();
     Loan ln;
-
+    Book::displaylist();
+    Loan::displaylist();
+    Member::displayAllMembers();
 
     ln.displaylist();
     cout<<"\n**************\n";
@@ -36,7 +39,7 @@ int main() {
     Librarian::saveMembers();
     Loan::saveLoans();
     Librarian::saveLibrarian();
-    Book::loadlibrary();
+    Book::savelibrary();
 
 
 

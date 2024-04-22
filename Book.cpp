@@ -22,7 +22,7 @@ void Book::display() const {
     cout << "ISBN: " << ISBN << endl;
     cout << "Publication Year: " << Publication_Year << endl;
     cout << "Genre: " << Genre << endl;
-    cout << "Availability: " << (Available ? "Available" : "Checked out") << endl;
+    cout << "Availability: " << (Quantity>0 ? "Available" : "Checked out") << endl;
 
 }
 void Book::displaylist() {
@@ -32,7 +32,7 @@ void Book::displaylist() {
         cout << "ISBN: " << it.ISBN << endl;
         cout << "Publication Year: " << it.Publication_Year << endl;
         cout << "Genre: " << it.Genre << endl;
-        cout << "Availability: " << ((it.Available) ? "Available" : "Checked out") << endl;
+        cout << "Availability: " << ((it.Quantity)>0 ? "Available" : "Checked out") << endl;
         cout << "Quantity: " << it.Quantity<< endl;
     }
 }

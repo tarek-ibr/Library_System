@@ -13,7 +13,6 @@
 using namespace std;
 using json = nlohmann::json;
 class Book {
-public:
 private:
     Custom_String_Class Title;
     Custom_String_Class Author;
@@ -24,19 +23,18 @@ private:
     bool Available;
     static vector<Book> Book_List;
 public:
+
     Book();
     Book(const Custom_String_Class& , const Custom_String_Class& , const Custom_String_Class& ,const Custom_String_Class&, int , int);
+
     Custom_String_Class& getTitle() ;
     Custom_String_Class& getAuthor();
     Custom_String_Class& getISBN();
     Custom_String_Class& getGenre();
     unsigned int& getQuantity();
     unsigned int& getPubYear();
-    bool checkAvailability() const;
     static vector<Book>& getBookList();
-    static Book findByName(Custom_String_Class);
-    static Book findByISBN(Custom_String_Class);
-    static Book findByAuthor(Custom_String_Class);
+
     void setTitle(const Custom_String_Class&);
     void setAuthor(const Custom_String_Class&);
     void setISBN(const Custom_String_Class&);
@@ -44,10 +42,17 @@ public:
     void setQuantity(unsigned int);
     void setPubYear(unsigned int);
     void setAvailability(bool);
+
+    static Book findByName(Custom_String_Class);
+    static Book findByISBN(Custom_String_Class);
+    static Book findByAuthor(Custom_String_Class);
+
     static bool loadlibrary();
     static bool savelibrary();
+
+    bool checkAvailability() const;
     static void displaylist();
-    void display() const;
+    void displayBook() const;
 };
 
 

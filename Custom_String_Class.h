@@ -19,6 +19,7 @@ public:
     Custom_String_Class(const string& s);
     Custom_String_Class operator+(const Custom_String_Class& s);
     Custom_String_Class& operator=(const char *);
+
     bool operator==(const Custom_String_Class& s2) const;
     bool operator!=(const Custom_String_Class& s2) const;
     char operator[](int x) const;
@@ -33,7 +34,9 @@ public:
         delete[] buffer;
         return is;
     }
+
     char * getSTR() const;
+
     char reverseCase(char c);
     void display() const;
     bool find(Custom_String_Class& s);

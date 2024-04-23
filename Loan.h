@@ -10,6 +10,7 @@
 #include <fstream>
 #include <vector>
 #include "json.h"
+
 using json = nlohmann::json;
 class Loan  {
 private:
@@ -17,11 +18,11 @@ private:
     Custom_String_Class bookID;
     Date dueDate;
     Date borrowDate;
-
+    static vector<Loan> Loans_List;
     friend class Librarian;
 public:
-    static vector<Loan> Loans_List;
-    Loan();//hgh
+
+    Loan();
     Loan(int, const Custom_String_Class&, Date, Date);
     Loan(int, const Custom_String_Class&, Date);
     Loan(int m, const Custom_String_Class& b);

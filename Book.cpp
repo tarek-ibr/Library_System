@@ -12,7 +12,7 @@ Book::Book(const Custom_String_Class& tit, const Custom_String_Class& Auth, cons
     Available = Quantity > 0;
 }
 
-void Book::display() const {
+void Book::displayBook() const {
     cout << "Title: " << Title << endl;
     cout << "Author: " << Author << endl;
     cout << "ISBN: " << ISBN << endl;
@@ -22,7 +22,9 @@ void Book::display() const {
 }
 
 void Book::displaylist() {
+    int i=1;
     for (const auto& it : Book::Book_List) {
+        cout<<i++<<" ";
         cout << "Title: " << it.Title << endl;
         cout << "Author: " << it.Author << endl;
         cout << "ISBN: " << it.ISBN << endl;

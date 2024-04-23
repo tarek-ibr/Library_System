@@ -17,18 +17,14 @@ using namespace std;
 
 class Member {
 private:
-
-
-protected:
+    vector<Loan> checkedOutBooks;
     int Fines;
+protected:
     Custom_String_Class Name;
     int ID;
     Custom_String_Class Type;
-
-
     static vector<Member> members;
 public:
-    vector<Loan> checkedOutBooks;
     Member();
     Member(const Custom_String_Class& ,int ,const Custom_String_Class& );
 
@@ -38,6 +34,7 @@ public:
     int getFines() const;
     static vector<Member>& getMembers();
     vector<Loan>& getCheckedOutBooks();
+
     void setName(const Custom_String_Class&);
     void setID(int);
     void setType(const Custom_String_Class&);
@@ -54,21 +51,19 @@ public:
 
     static Member findByID(int);
     static Book findBookByAuthor(Custom_String_Class);
-    static void displayAllMembers();
-
-
 };
 
 
 class Librarian : public Member{
+private:
+    static std::vector<Loan> borrowRequests;
+    static std::vector<Librarian> librarians;
 public:
     Librarian();
     Librarian(const Custom_String_Class& name, int ID);
 
-    static std::vector<Loan> borrowRequests;
-    static std::vector<Librarian> librarians;
     static vector<Librarian>& getLibrarians();
-// Additional functionalities specific to Librarian
+    static vector<Loan>& getBorrowRequests();
 
     void addBook();
     void removeBook(const Custom_String_Class& ISBN);
@@ -77,12 +72,15 @@ public:
     static void addBorrowRequest(Loan&);
     bool borrowBook(Book, Member);
     void approveBorrowRequest(Loan);
-    static void returnBook(Member& member, Book& book);//not working
+    static void returnBook(Member& member, Book& book);
     void registerNewMember();
     void removeMember();
+
     void displayAllMembers();
+
     static bool loadLibrarian();
     static bool saveLibrarian();
+
     static Librarian findByID(int);
 
     static bool loadMembers();

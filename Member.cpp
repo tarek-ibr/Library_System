@@ -73,7 +73,9 @@ void Member::displayloaned() const{
             cout << "you have borrowed a book with ID " <<it->getBookID()<< endl;
         }
     }*/
+    int j=1;
     for (int i = 0; i < this->checkedOutBooks.size(); ++i) {
+        cout<<j++<<" ";
         std::cout << "you have borrowed a book with ID " << this->checkedOutBooks[i].getBookID() << " ";
     }
 }
@@ -95,13 +97,6 @@ Member Member::findByID(int id){
     cout<<"Couldn't Find member"<<endl;
 }
 
-void Member::displayAllMembers() {
-    std::cout << "List of Members:\n";
-    for (auto &member: members) {
-        member.display();
-        std::cout << "-------------------------\n";
-    }
-}
 Book  Member::findBookByAuthor(Custom_String_Class name) {
     vector<Book> results;
     int found = 0;

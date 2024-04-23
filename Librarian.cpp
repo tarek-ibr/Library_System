@@ -239,8 +239,11 @@ void Librarian::removeMember()
 }
 
 void Librarian::displayAllMembers() {
+    int i=1;
+
     std::cout << "List of Members:\n";
     for (auto& member : members) {
+        cout<<i++<<" ";
         member.display();
         std::cout << "-------------------------\n";
     }
@@ -344,6 +347,7 @@ bool Librarian::loadMembers() {
 
     json j;
     file >> j;
+
     for (const auto& member_json : j) {
         if(member_json["Type"].get<string>()!="Librarian") {
             Member m;
@@ -355,7 +359,7 @@ bool Librarian::loadMembers() {
 
             for (auto &it: Loan::getLoans_List()) {
                 if (m.getID() == it.getMemberID()) {
-                    m.checkedOutBooks.push_back(it);
+                    m.getCheckedOutBooks().push_back(it);
                 }
             }
             members.push_back(m);
@@ -413,4 +417,8 @@ bool Librarian::saveMembers() {
 
 vector<Librarian>& Librarian::getLibrarians(){
     return librarians;
+}
+
+vector<Loan>& Librarian::getBorrowRequests(){
+    return borrowRequests;
 }

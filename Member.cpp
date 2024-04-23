@@ -16,7 +16,9 @@ Member::Member(const Custom_String_Class& N,int I,const Custom_String_Class& T):
 Custom_String_Class Member::getName() const{
     return Name;
 }
-
+vector<Member>& Member::getMembers(){
+    return members;
+}
 int Member::getID() const {
     return ID;
 }
@@ -82,7 +84,6 @@ void Member::requestBorrow(Book& book) {
 void Member::returnBook(Book book) {
     Librarian::returnBook(*this, book);
 }
-
 Member Member::findByID(int id){
     for(auto it:members)
     {
@@ -101,3 +102,28 @@ void Member::displayAllMembers() {
         std::cout << "-------------------------\n";
     }
 }
+Book  Member::findBookByAuthor(Custom_String_Class name) {
+    vector<Book> results;
+    int found = 0;
+    cout << "found :" << endl;
+    for (auto it : Book::getBookList()) {
+        if (it.getAuthor().find(name)) {
+            found++;
+            cout << found << ":" << it.getTitle() << endl;
+            results.push_back(it);
+        }
+    }
+    if (!found) {
+        cout << "Couldnt Find Any Results For : " << name << endl;
+    }
+
+    pick:
+    cout << "Pick a Book by Number :";
+    int choice;
+    cin >> choice;
+    if (choice <= found)
+        return results[choice - 1];
+    else
+        goto pick;
+}
+

@@ -90,9 +90,9 @@ void Loan::saveLoans() {
     {
         json loanJSON;
         loanJSON["memberID"]=loan.memberID;
-        loanJSON["bookID"] =loan.bookID.str;
-        loanJSON["dueDate"] =loan.dueDate.getDate().str;
-        loanJSON["borrowDate"] =loan.borrowDate.getDate().str;
+        loanJSON["bookID"] =loan.bookID.getSTR();
+        loanJSON["dueDate"] =loan.dueDate.getDate().getSTR();
+        loanJSON["borrowDate"] =loan.borrowDate.getDate().getSTR();
         OUTPUT.push_back(loanJSON);
     }
     file<<std::setw(4)<<OUTPUT<<std::endl;

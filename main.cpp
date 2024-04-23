@@ -33,7 +33,9 @@ int main() {
 
             if(memberOption==6)
                 break;
+            system("cls");
             implementMemberChoice(member, memberOption);
+
         }
     }
     else if(type=="librarian"){
@@ -48,6 +50,9 @@ int main() {
             if (librarianOption == 11) {
                 break;
             }
+            system("cls");
+            implementLibrarianChoice(librarian, librarianOption);
+
         }
     }
     else if(type=="not found"){
@@ -58,6 +63,8 @@ int main() {
     Loan::saveLoans();
     Librarian::saveLibrarian();
     Book::savelibrary();
+
+    system("pause");
 
     return 0;
 }

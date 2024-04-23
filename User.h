@@ -36,6 +36,7 @@ public:
     int getID() const;
     Custom_String_Class getType() const;
     int getFines() const;
+    static vector<Member>& getMembers();
     vector<Loan>& getCheckedOutBooks();
     void setName(const Custom_String_Class&);
     void setID(int);
@@ -51,9 +52,10 @@ public:
     void requestBorrow(Book&);
     void returnBook(Book) ;
 
-
     static Member findByID(int);
+    static Book findBookByAuthor(Custom_String_Class);
     static void displayAllMembers();
+
 
 };
 
@@ -65,7 +67,7 @@ public:
 
     static std::vector<Loan> borrowRequests;
     static std::vector<Librarian> librarians;
-
+    static vector<Librarian>& getLibrarians();
 // Additional functionalities specific to Librarian
 
     void addBook();

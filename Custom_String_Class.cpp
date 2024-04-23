@@ -14,7 +14,7 @@ Custom_String_Class::Custom_String_Class(char * s){
     strcpy(str,s);
 }
 Custom_String_Class::Custom_String_Class(const string& s){
-   int m_length = s.length();
+    int m_length = s.length();
     str = new char[m_length + 1];
     strcpy(str, s.c_str());
 }
@@ -44,7 +44,7 @@ bool Custom_String_Class::operator==(const Custom_String_Class& str2) const {
 }
 bool Custom_String_Class::operator!=(const Custom_String_Class& s2) const
 {
-      return !(*this==s2);
+    return !(*this==s2);
 }
 
 char Custom_String_Class::operator[](int x) const
@@ -107,24 +107,30 @@ char Custom_String_Class::reverseCase(char c) {
         return c;
 }
 bool Custom_String_Class::find(Custom_String_Class& s)  {
-        for(int i=0;i<this->strlength();i++)
+    for(int i=0;i<this->strlength();i++)
+    {
+        bool found=true;
+        for(int j=i; j<i+s.strlength();j++)
         {
-            bool found=true;
-            for(int j=i; j<i+s.strlength();j++)
-            {
-                if(s[j-i] != this->str[j] && reverseCase(s[j-i]) != this->str[j]) {
-                    found=false;
-                    break;
-                }
+            if(s[j-i] != this->str[j] && reverseCase(s[j-i]) != this->str[j]) {
+                found=false;
+                break;
             }
-            if(found)
-                return true;
-
         }
-        return false;
+        if(found)
+            return true;
+
     }
+    return false;
+}
 void Custom_String_Class::display() const
 {
     cout<<str;
 }
-Custom_String_Class::~Custom_String_Class()= default;
+
+char * Custom_String_Class::getSTR() const {
+    return str;
+}
+
+Custom_String_Class::~Custom_String_Class()=default;
+

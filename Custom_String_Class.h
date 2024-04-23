@@ -12,8 +12,8 @@ using namespace std;
 
 class Custom_String_Class {
 private:
-public:
     char *str;
+public:
     Custom_String_Class();
     Custom_String_Class(char * s);
     Custom_String_Class(const string& s);
@@ -26,11 +26,14 @@ public:
         out << c.str;
         return out;
     }
-    friend istream& operator>>(std::istream& in, const Custom_String_Class& c){
-
-        in >> c.str;
-        return in;
+    friend istream& operator>>(istream& is, Custom_String_Class& obj) {
+        char* buffer = new char[256];
+        is.getline(buffer, 256);
+        obj = Custom_String_Class(buffer);
+        delete[] buffer;
+        return is;
     }
+    char * getSTR() const;
     char reverseCase(char c);
     void display() const;
     bool find(Custom_String_Class& s);

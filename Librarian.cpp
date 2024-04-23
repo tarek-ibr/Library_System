@@ -309,9 +309,9 @@ bool Librarian::saveLibrarian() {
         json bookJson;
 
         bookJson["memberID"] = ln.getMemberID();
-        bookJson["bookID"] = ln.getBookID().str;
-        bookJson["dueDate"] = ln.getDueDate().getDate().str;
-        bookJson["borrowDate"] = ln.getBorrowDate().getDate().str;
+        bookJson["bookID"] = ln.getBookID().getSTR();
+        bookJson["dueDate"] = ln.getDueDate().getDate().getSTR();
+        bookJson["borrowDate"] = ln.getBorrowDate().getDate().getSTR();
 
         OUTPUT.push_back(bookJson);
     }
@@ -384,9 +384,9 @@ bool Librarian::saveMembers() {
     {
         json bookJson;
 
-        bookJson["Name"] = member.getName().str;
+        bookJson["Name"] = member.getName().getSTR();
         bookJson["ID"] = member.getID();
-        bookJson["Type"] = member.getType().str;
+        bookJson["Type"] = member.getType().getSTR();
         bookJson["Fines"] = member.getFines();
 
         OUTPUT.push_back(bookJson);
@@ -395,9 +395,9 @@ bool Librarian::saveMembers() {
     {
         json bookJson;
 
-        bookJson["Name"] = librarian.getName().str;
+        bookJson["Name"] = librarian.getName().getSTR();
         bookJson["ID"] = librarian.getID();
-        bookJson["Type"] = librarian.getType().str;
+        bookJson["Type"] = librarian.getType().getSTR();
         bookJson["Fines"] = librarian.getFines();
 
         OUTPUT.push_back(bookJson);
@@ -405,4 +405,8 @@ bool Librarian::saveMembers() {
     file<<setw(4)<<OUTPUT<<endl;// what is the meaning of setw(4) ya ziad
     file.close();
     return true;
+}
+
+vector<Librarian>& Librarian::getLibrarians(){
+    return librarians;
 }

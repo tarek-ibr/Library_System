@@ -137,7 +137,6 @@ void Librarian::returnBook(Member& member, Book& book) {
     bkList[i].setQuantity(bkList[i].getQuantity()+1);
     for(auto it = checkedBooks.begin(); it != checkedBooks.end(); ) {
         if((it->getBookID() == bkList[i].getISBN()) && (it->getMemberID()==member.getID())) {
-            cout << "Now Iam removing \n";
             checkedBooks.erase(it);
             break;
         } else {
@@ -146,8 +145,8 @@ void Librarian::returnBook(Member& member, Book& book) {
     }
     for(auto it =loansList.begin(); it != loansList.end() ; ) {
         if((it->getBookID() == bkList[i].getISBN()) && (it->getMemberID()==member.getID())) {
-            cout << "Now Iam removing \n";
             loansList.erase(it);
+            cout<<"\nRemoved Book With ISBN("<<it->getBookID()<<")\n";
             break;
         } else {
             ++it;
@@ -164,6 +163,7 @@ void Librarian::editBook(Book& book)
     cin >> answer;
     if(answer == 'Y')
     {
+        cin.ignore();
         cout << "Enter book's title: " << endl;
         cin >> book.getTitle();
     }
@@ -171,27 +171,34 @@ void Librarian::editBook(Book& book)
     cin >> answer;
     if(answer == 'Y')
     {
+        cin.ignore();
         cout << "Enter book's ISBN: " << endl;
         cin >> book.getISBN();
     }
+
     cout << "Do you want to edit the author ?(Y/N)" << endl;
     cin >> answer;
     if(answer == 'Y')
     {
+        cin.ignore();
         cout << "Enter author's name: " << endl;
         cin >> book.getAuthor();
     }
+
     cout << "Do you want to edit the genre ?(Y/N)" << endl;
     cin >> answer;
     if(answer == 'Y')
     {
+        cin.ignore();
         cout << "Enter book's genre: " << endl;
         cin >> book.getGenre();
     }
+
     cout << "Do you want to edit the publication year ?(Y/N)" << endl;
     cin >> answer;
     if(answer == 'Y')
     {
+        cin.ignore();
         cout << "Enter book's publication year: " << endl;
         cin >> book.getPubYear();
     }
@@ -199,8 +206,10 @@ void Librarian::editBook(Book& book)
     cin >> answer;
     if(answer == 'Y')
     {
+        cin.ignore();
         cout<<"Enter Book's Quantity:";
         cin>>book.getQuantity();
+        cin.ignore();
     }
     book.setAvailability(book.getQuantity()>0);
 
@@ -213,6 +222,7 @@ void Librarian::registerNewMember(){
     cin >> name;
     cout << "Enter ID: ";
     cin >> id;
+    cin.ignore();
     cout << "Enter type: ";
     cin >> type;
     members.push_back(Member(name, id, type));

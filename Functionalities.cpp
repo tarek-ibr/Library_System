@@ -23,7 +23,7 @@ Custom_String_Class login(int id){
 }
 
 void diplayMenuMember(){
-    cout << "Select an option:\n";
+    cout << "\nSelect an option:\n";
     cout << "1. Request to borrow a book\n";
     cout << "2. Return a book\n";
     cout << "3. Display loaned books\n";
@@ -34,7 +34,7 @@ void diplayMenuMember(){
 
 void displayMenuLibrarian()
 {
-    cout << "Select an option:\n";
+    cout << "\nSelect an option:\n";
     cout << "1. Add book\n";
     cout << "2. Remove book\n";
     cout << "3. Register new member\n";
@@ -58,11 +58,13 @@ void implementMemberChoice(Member& member, int memberOption){
         Book book = bookList[choice-1];
         member.requestBorrow(book);
     } else if (memberOption == 2) {
-        cout << "Enter ISBN of book to return: ";
-        Custom_String_Class isbn;
-        cin >> isbn;
-        Book book = Book::findByISBN(isbn);
-        member.returnBook(book);
+        member.displayloaned();
+        cout<<"\n Choose a book to return: ";
+        int choice;
+        cin>>choice;
+        vector<Loan> loanedbooks = member.getCheckedOutBooks();
+        Book loanedbook = Book::findByISBN(loanedbooks[choice-1].getBookID());
+        member.returnBook(loanedbook);
     } else if (memberOption == 3) {
         member.displayloaned();
     } else if (memberOption == 4) {
@@ -73,23 +75,30 @@ void implementMemberChoice(Member& member, int memberOption){
 }
 
 void implementLibrarianChoice(Librarian& librarian, int librarianOption){
-
+    cin.ignore();
     if (librarianOption == 1) {
         librarian.addBook();
     } else if (librarianOption == 2) {
-        cout << "Enter ISBN of book to remove: ";
-        Custom_String_Class isbn;
-        cin >> isbn;
-        librarian.removeBook(isbn);
+        Book::displaylist();
+        int choice;
+        cout << "\n Enter you choice: ";
+        cin>>choice;
+        vector<Book> bookList = Book::getBookList();
+        Book book = bookList[choice-1];
+        librarian.removeBook(book.getISBN());
     } else if (librarianOption == 3) {
         librarian.registerNewMember();
     } else if (librarianOption == 4) {
+        librarian.displayAllMembers();
+        cout << "\n";
         librarian.removeMember();
     } else if (librarianOption == 5) {
-        cout << "Enter ISBN of book to edit: ";
-        Custom_String_Class isbn;
-        cin >> isbn;
-        Book book = Book::findByISBN(isbn);
+        Book::displaylist();
+        int choice;
+        cout << "\n Enter you choice: ";
+        cin>>choice;
+
+        Book& book =  Book::getBookList()[choice-1];
         librarian.editBook(book);
     } else if (librarianOption == 6) {
         librarian.displayRequests();

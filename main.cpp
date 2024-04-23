@@ -17,6 +17,7 @@ int main() {
     Librarian::loadMembers();
     Librarian::loadLibrarian();
 
+
     int id;
     cout<<"Enter your ID: ";
     cin>>id;
@@ -33,7 +34,7 @@ int main() {
 
             if(memberOption==6)
                 break;
-            system("cls");
+
             implementMemberChoice(member, memberOption);
 
         }
@@ -50,7 +51,7 @@ int main() {
             if (librarianOption == 11) {
                 break;
             }
-            system("cls");
+
             implementLibrarianChoice(librarian, librarianOption);
 
         }

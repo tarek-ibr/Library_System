@@ -196,7 +196,6 @@ Book Book::findByName(Custom_String_Class name) {
 Book Book::findByISBN(Custom_String_Class ID) {
     for (auto it : Book_List) {
         if (it.getISBN() == ID) {
-            cout << "found book :" << endl;
             return it;
         }
     }

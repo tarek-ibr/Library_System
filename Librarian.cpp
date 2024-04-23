@@ -74,8 +74,11 @@ bool Librarian::borrowBook(Book b, Member member){
             bkList[i].setAvailability(false);
         }
         bkList[i].setQuantity(bkList[i].getQuantity()-1);
-        if(member.getType()==Custom_String_Class("Member"))
+
+        if(member.getType()==Custom_String_Class("Member")||member.getType()==Custom_String_Class("Student")) {
             dueDate = Date::getCrrentDate() + 7;
+            cout<<dueDate.getDate();
+        }
         else if(member.getType()==Custom_String_Class("Staff"))
             dueDate = Date::getCrrentDate() + 10;
         else if(member.getType()==Custom_String_Class("Faculty"))
@@ -83,6 +86,7 @@ bool Librarian::borrowBook(Book b, Member member){
 
         Loan newloan(member.getID(), bkList[i].getISBN(), dueDate, Date::getCrrentDate());
         checkedBooks.push_back(newloan);
+        cout<<checkedBooks.back().getBookID();
         loansList.push_back(newloan);
         return true;
     }

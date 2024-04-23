@@ -49,7 +49,9 @@ void displayMenuLibrarian()
 }
 
 void implementMemberChoice(Member& member, int memberOption){
+    cin.ignore();
     if (memberOption == 1) {
+
         cout << "Enter ISBN of book to borrow: ";
         Custom_String_Class isbn;
         cin >> isbn;
@@ -71,6 +73,7 @@ void implementMemberChoice(Member& member, int memberOption){
 }
 
 void implementLibrarianChoice(Librarian& librarian, int librarianOption){
+
     if (librarianOption == 1) {
         librarian.addBook();
     } else if (librarianOption == 2) {
@@ -89,8 +92,12 @@ void implementLibrarianChoice(Librarian& librarian, int librarianOption){
         Book book = Book::findByISBN(isbn);
         librarian.editBook(book);
     } else if (librarianOption == 6) {
-        Loan loan = Loan::getLoans_List().back(); // will be edited ".back()"
+        librarian.displayRequests();
+        int choice;
+        cin>>choice;
+        Loan loan = Librarian::borrowRequests[choice-1];
         librarian.approveBorrowRequest(loan);
+
     } else if (librarianOption == 7) {
         cout << "Enter member ID: ";
         int memberId;

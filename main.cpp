@@ -42,7 +42,9 @@ int main() {
 
             if(memberOption==7)
                 goto Login;
-            else if (memberOption <1 || memberOption > 7){
+            else if(memberOption==8)
+                break;
+            else if (memberOption <1 || memberOption > 8){
                 cout<<"Invalid choice" <<endl;
                 goto Member_Choose_Option;
             }
@@ -66,7 +68,10 @@ int main() {
             if (librarianOption == 15) {
                 goto Login;
             }
-             else if (librarianOption <1 || librarianOption > 15){
+            else if (librarianOption == 16) {
+                break;
+            }
+             else if (librarianOption <1 || librarianOption > 16){
                 cout<<"Invalid choice" <<endl;
                 goto Librarian_Choose_Option;
             }

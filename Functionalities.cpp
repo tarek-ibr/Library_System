@@ -31,6 +31,7 @@ void diplayMenuMember(){
     cout << "5. Display book list\n";
     cout << "6. Find a book\n";
     cout << "7. Logout\n";
+    cout << "8. Exit\n";
 }
 
 void displayMenuLibrarian()
@@ -51,6 +52,7 @@ void displayMenuLibrarian()
     cout << "13. Find a member\n";
     cout << "14. Find a librarian\n";
     cout << "15. Logout\n";
+    cout << "16. Exit\n";
 }
 
 void displayMenuFindBook(){

@@ -8,6 +8,11 @@
 #include "Custom_String_Class.h"
 #include "User.h"
 
+void loadFiles();
+void saveFiles();
+
+vector<Custom_String_Class> executeGUIOption(vector<Custom_String_Class> options);
+
 Custom_String_Class login(int);
 
 void diplayMenuMember();

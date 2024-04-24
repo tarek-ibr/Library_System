@@ -12,10 +12,6 @@ using namespace std;
 using json = nlohmann::json;
 
 int main() {
-    Book::loadlibrary();
-    Loan::loadLoans();
-    Librarian::loadMembers();
-    Librarian::loadLibrarian();
     
     cout<<"\t\t\t\tNos far5a men ebn el sham library" <<endl;
     
@@ -24,7 +20,7 @@ int main() {
     cout<<"Enter your ID: ";
     cin>>id;
 
-
+    loadFiles();
 
     Custom_String_Class type = login(id);
 
@@ -40,8 +36,10 @@ int main() {
             Member_Choose_Option:
             cin>>memberOption;
 
-            if(memberOption==7)
+            if(memberOption==7) {
+                saveFiles();
                 goto Login;
+            }
             else if(memberOption==8)
                 break;
             else if (memberOption <1 || memberOption > 8){
@@ -66,6 +64,7 @@ int main() {
             cin >> librarianOption;
 
             if (librarianOption == 15) {
+                saveFiles();
                 goto Login;
             }
             else if (librarianOption == 16) {
@@ -85,10 +84,7 @@ int main() {
         goto Login;
     }
 
-    Librarian::saveMembers();
-    Loan::saveLoans();
-    Librarian::saveLibrarian();
-    Book::savelibrary();
+    saveFiles();
 
     system("pause");
 

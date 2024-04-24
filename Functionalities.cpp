@@ -5,6 +5,176 @@
 #include "Functionalities.h"
 
 
+void loadFiles(){
+    Librarian::saveMembers();
+    Loan::saveLoans();
+    Librarian::saveLibrarian();
+    Book::savelibrary();
+}
+
+void saveFiles(){
+    Librarian::saveMembers();
+    Loan::saveLoans();
+    Librarian::saveLibrarian();
+    Book::savelibrary();
+}
+
+vector<Custom_String_Class> executeGUIOption(vector<Custom_String_Class> options) {
+    vector<Custom_String_Class> response = {};
+
+    int menuType = stoi(options[0].getSTR());  //stoi bthawel mn string to int 3ashal custom string fe switch case btgeb error
+    int button = stoi(options[1].getSTR());
+
+    if (menuType == 1) {
+        response[0] = login(stoi(options[3].getSTR()));
+    } else if (menuType == 2) {
+        // Librarian menu
+        Librarian librarian = Librarian::findLibrarianByID(stoi(options[3].getSTR()));
+
+        switch (button) {
+            case 1:
+                librarian.addBook();
+                break;
+            case 2: {
+                Book::displaylist();
+                int choice;
+                cout << "\n Enter you choice: ";
+                cin >> choice;
+                vector<Book> bookList = Book::getBookList();
+                Book book = bookList[choice - 1];
+                librarian.removeBook(book.getISBN());
+                break;
+            }
+            case 3:
+                librarian.registerNewMember();
+                break;
+            case 4: {
+                librarian.displayAllMembers();
+                cout << "\n";
+                librarian.removeMember();
+                break;
+            }
+            case 5: {
+                Book::displaylist();
+                int choice;
+                cout << "\n Enter you choice: ";
+                cin >> choice;
+                Book& book = Book::getBookList()[choice - 1];
+                librarian.editBook(book);
+                break;
+            }
+            case 6: {
+                librarian.displayRequests();
+                int choice;
+                cin >> choice;
+                vector<Loan>& requests = Librarian::getBorrowRequests();
+                Loan loan = requests[choice - 1];
+                librarian.approveBorrowRequest(loan);
+                break;
+            }
+            case 7: {
+                cout << "Enter member ID: ";
+                int memberId;
+                cin >> memberId;
+                Member member = Librarian::findMemberByID(memberId);
+                cout << "Enter ISBN of book to return: ";
+                Custom_String_Class isbn;
+                cin >> isbn;
+                Book book = Book::findByISBN(isbn);
+                librarian.returnBook(member, book);
+                break;
+            }
+            case 8:
+                librarian.displayAllMembers();
+                break;
+            case 9:
+                Book::displaylist();
+                break;
+            case 10:
+                librarian.displayRequests();
+                break;
+            case 11:
+                Loan::displaylist();
+                break;
+            case 12: {
+                displayMenuFindBook();
+                int findOptions;
+                cin >> findOptions;
+                implementFindBookChoice(findOptions);
+                break;
+            }
+            case 13: {
+                displayMenuFindMember();
+                int findOptions;
+                cin >> findOptions;
+                implementFindMemberChoice(findOptions);
+                break;
+            }
+            case 14: {
+                displayMenuFindlibrarian();
+                int findOptions;
+                cin >> findOptions;
+                implementFindLibrarianChoice(findOptions);
+                break;
+            }
+            default:
+                break;
+        }
+    } else if (menuType == 3) {
+        // Member menu
+        Member member = Librarian::findMemberByID(stoi(options[3].getSTR()));
+
+        cin.ignore();
+        switch (button) {
+            case 1: {
+                //Book::displaylist();
+                //cout << "\n Choose a book to borrow: ";
+                //int choice;
+                //cin >> choice;
+                vector<Book> bookList = Book::getBookList();
+                Book book = bookList[stoi(options[4].getSTR()) - 1];
+                member.requestBorrow(book);
+                break;
+            }
+            case 2: {
+                //member.displayloaned();
+                //cout << "\n Choose a book to return: ";
+                //int choice;
+                //cin >> choice;
+                vector<Loan> loanedbooks = member.getCheckedOutBooks();
+                Book loanedbook = Book::findByISBN(loanedbooks[stoi(options[4].getSTR()) - 1].getBookID());
+                member.returnBook(loanedbook);
+                break;
+            }
+            case 3: {
+                //member.displayloaned();
+                break;
+            }
+            case 4: {
+                //member.display();
+                break;
+            }
+            case 5: {
+                //Book::displaylist();
+                break;
+            }
+            case 6: {
+                //displayMenuFindBook();
+                //int findOptions;
+                //cin >> findOptions;
+                implementFindBookChoice(stoi(options[4].getSTR()));
+                break;
+            }
+            default: {
+                break;
+            }
+        }
+    }
+
+    //return Custom_String_Class("Option executed");
+    return response;
+}
+
 Custom_String_Class login(int id){
     vector<Member>& member = Member::getMembers();
     vector<Librarian>& librarian = Librarian::getLibrarians();
@@ -80,6 +250,7 @@ void implementMemberChoice(Member& member, int memberOption){
   switch (memberOption) {
       case 1: {
           Book::displaylist();
+          cout << "\n Choose a book to borrow: ";
           int choice;
           cin >> choice;
           vector<Book> bookList = Book::getBookList();

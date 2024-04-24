@@ -259,6 +259,10 @@ void Librarian::displayAllMembers() {
     }
 
 }
+void Librarian::display(){
+    cout<<"Name: "<<getName()<<endl;
+    cout<<"ID: "<<getID()<<endl;
+}
 
 void Librarian::manageMemberAccounts() {
 
@@ -350,6 +354,7 @@ Librarian Librarian::findLibrarianByName(Custom_String_Class name){
     }
     if (!found) {
         cout << "Couldn't Find Any Results For : " << name << endl;
+        return Librarian();
     }
 
     pick:
@@ -388,6 +393,7 @@ Member Librarian::findMemberByName(Custom_String_Class name){
     }
     if (!found) {
         cout << "Couldn't Find Any Results For : " << name << endl;
+        return Member();
     }
 
     pick:
@@ -410,7 +416,7 @@ Member Librarian::findMemberByID(int id){
     }
     cout<<"Couldn't Find member"<<endl;
 
-    return Librarian();
+    return Member();
 }
 
 bool Librarian::loadMembers() {

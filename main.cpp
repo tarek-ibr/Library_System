@@ -16,10 +16,11 @@ int main() {
     Loan::loadLoans();
     Librarian::loadMembers();
     Librarian::loadLibrarian();
-
+    
     cout<<"\t\t\t\tNos far5a men ebn el sham library" <<endl;
-
+    
     int id;
+    Login:
     cout<<"Enter your ID: ";
     cin>>id;
 
@@ -34,12 +35,17 @@ int main() {
 
         while(true){
             diplayMenuMember();
-
+      
             int memberOption;
+            Member_Choose_Option:
             cin>>memberOption;
 
             if(memberOption==7)
-                break;
+                goto Login;
+            else if (memberOption <1 || memberOption > 7){
+                cout<<"Invalid choice" <<endl;
+                goto Member_Choose_Option;
+            }
 
             implementMemberChoice(member, memberOption);
 
@@ -54,10 +60,15 @@ int main() {
             displayMenuLibrarian();
 
             int librarianOption;
+            Librarian_Choose_Option:
             cin >> librarianOption;
 
             if (librarianOption == 15) {
-                break;
+                goto Login;
+            }
+             else if (librarianOption <1 || librarianOption > 15){
+                cout<<"Invalid choice" <<endl;
+                goto Librarian_Choose_Option;
             }
 
             implementLibrarianChoice(librarian, librarianOption);
@@ -65,7 +76,8 @@ int main() {
         }
     }
     else if(type=="not found"){
-        cout<<"You are not registered in our system, Please check your ID again!!"<<endl;
+        cout<<"You are not registered in our system, Please check your ID again!!"<<endl<<endl;
+        goto Login;
     }
 
     Librarian::saveMembers();

@@ -157,6 +157,7 @@ Book Book::findByAuthor(Custom_String_Class name) {
     }
     if (!found) {
         cout << "Couldnt Find Any Results For : " << name << endl;
+        return Book();
     }
 
     pick:

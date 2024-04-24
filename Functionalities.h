@@ -12,9 +12,15 @@ Custom_String_Class login(int);
 
 void diplayMenuMember();
 void displayMenuLibrarian();
+void displayMenuFindBook();
+void displayMenuFindMember();
+void displayMenuFindlibrarian();
 
 void implementMemberChoice(Member&, int);
 void implementLibrarianChoice(Librarian&, int);
+void implementFindBookChoice(int);           //all finds has logical errors does not cin
+void implementFindMemberChoice(int);
+void implementFindLibrarianChoice(int);
 
 
 #endif //PROJECT_FUNCTIONALITIES_H

@@ -17,22 +17,28 @@ int main() {
     Librarian::loadMembers();
     Librarian::loadLibrarian();
 
+    cout<<"\t\t\t\tNos far5a men ebn el sham library" <<endl;
 
     int id;
     cout<<"Enter your ID: ";
     cin>>id;
 
+
+
     Custom_String_Class type = login(id);
 
     if(type=="member"){
-        Member member = Member::findByID(id);
+        Member member = Librarian::findMemberByID(id);
+
+        cout<<endl <<"\t\t\t\tWelcome " <<member.getName() <<" to our library " <<endl;
+
         while(true){
             diplayMenuMember();
 
             int memberOption;
             cin>>memberOption;
 
-            if(memberOption==6)
+            if(memberOption==7)
                 break;
 
             implementMemberChoice(member, memberOption);
@@ -40,7 +46,9 @@ int main() {
         }
     }
     else if(type=="librarian"){
-        Librarian librarian = Librarian::findByID(id);
+        Librarian librarian = Librarian::findLibrarianByID(id);
+
+        cout<<endl <<"\t\t\t\tWelcome back " <<librarian.getName() <<endl;
 
         while(true){
             displayMenuLibrarian();
@@ -48,7 +56,7 @@ int main() {
             int librarianOption;
             cin >> librarianOption;
 
-            if (librarianOption == 11) {
+            if (librarianOption == 15) {
                 break;
             }
 

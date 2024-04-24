@@ -99,7 +99,7 @@ bool Librarian::borrowBook(Book b, Member member){
 void Librarian::approveBorrowRequest(Loan ln) {
     //int i=0;
     Book bk = Book::findByISBN(ln.getBookID());
-    Member member = Member::findByID(ln.getMemberID());
+    Member member = Librarian::findMemberByID(ln.getMemberID());
 
     /*for(auto it =borrowRequests.begin(); it != borrowRequests.end() + 1; ) {
         if(it->getBookID() == ln.getBookID() && it->getMemberID() ==ln.getMemberID()) {
@@ -337,7 +337,32 @@ bool Librarian::saveLibrarian() {
     return true;
 }
 
-Librarian Librarian::findByID(int id){
+Librarian Librarian::findLibrarianByName(Custom_String_Class name){
+    vector<Librarian> results;
+    int found = 0;
+    cout << "found :" << endl;
+    for (auto it : librarians) {
+        if (it.getName().find(name)) {
+            found++;
+            cout << found << ":" << it.getName() << endl;
+            results.push_back(it);
+        }
+    }
+    if (!found) {
+        cout << "Couldn't Find Any Results For : " << name << endl;
+    }
+
+    pick:
+    cout << "Pick a librarian by Number :";
+    int choice;
+    cin >> choice;
+    if (choice <= found)
+        return results[choice - 1];
+    else
+        goto pick;
+}
+
+Librarian Librarian::findLibrarianByID(int id){
     for(auto it:librarians)
     {
         if(it.getID()==id)
@@ -345,7 +370,47 @@ Librarian Librarian::findByID(int id){
             return it;
         }
     }
+    cout<<"Couldn't Find librarian"<<endl;
+
+    return Librarian();
+}
+
+Member Librarian::findMemberByName(Custom_String_Class name){
+    vector<Member> results;
+    int found = 0;
+    cout << "found :" << endl;
+    for (auto it : members) {
+        if (it.getName().find(name)) {
+            found++;
+            cout << found << ":" << it.getName() << endl;
+            results.push_back(it);
+        }
+    }
+    if (!found) {
+        cout << "Couldn't Find Any Results For : " << name << endl;
+    }
+
+    pick:
+    cout << "Pick a member by Number :";
+    int choice;
+    cin >> choice;
+    if (choice <= found)
+        return results[choice - 1];
+    else
+        goto pick;
+}
+
+Member Librarian::findMemberByID(int id){
+    for(auto it:members)
+    {
+        if(it.getID()==id)
+        {
+            return it;
+        }
+    }
     cout<<"Couldn't Find member"<<endl;
+
+    return Librarian();
 }
 
 bool Librarian::loadMembers() {

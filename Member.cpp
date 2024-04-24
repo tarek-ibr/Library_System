@@ -86,7 +86,7 @@ void Member::requestBorrow(Book& book) {
 void Member::returnBook(Book book) {
     Librarian::returnBook(*this, book);
 }
-Member Member::findByID(int id){
+/*Member Member::findByID(int id){
     for(auto it:members)
     {
         if(it.getID()==id)
@@ -95,9 +95,9 @@ Member Member::findByID(int id){
         }
     }
     cout<<"Couldn't Find member"<<endl;
-}
+}*/
 
-Book  Member::findBookByAuthor(Custom_String_Class name) {
+/*Book  Member::findBookByAuthor(Custom_String_Class name) {
     vector<Book> results;
     int found = 0;
     cout << "found :" << endl;
@@ -120,5 +120,5 @@ Book  Member::findBookByAuthor(Custom_String_Class name) {
         return results[choice - 1];
     else
         goto pick;
-}
+}*/
 

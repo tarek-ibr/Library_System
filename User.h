@@ -49,8 +49,8 @@ public:
     void requestBorrow(Book&);
     void returnBook(Book) ;
 
-    static Member findByID(int);
-    static Book findBookByAuthor(Custom_String_Class);
+    //static Member findByID(int);                        //should be removed
+    //static Book findBookByAuthor(Custom_String_Class);  //should be removed
 };
 
 
@@ -81,7 +81,11 @@ public:
     static bool loadLibrarian();
     static bool saveLibrarian();
 
-    static Librarian findByID(int);
+    static Librarian findLibrarianByName(Custom_String_Class);
+    static Librarian findLibrarianByID(int);
+    static Member findMemberByName(Custom_String_Class);
+    static Member findMemberByID(int);
+
 
     static bool loadMembers();
     static bool saveMembers();

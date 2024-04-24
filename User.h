@@ -9,7 +9,7 @@
 #include "Loan.h"
 #include <fstream>
 #include "json.h"
-#include "User.h"
+
 
 using json = nlohmann::json;
 using namespace std;
@@ -48,9 +48,6 @@ public:
 
     void requestBorrow(Book&);
     void returnBook(Book) ;
-
-    //static Member findByID(int);                        //should be removed
-    //static Book findBookByAuthor(Custom_String_Class);  //should be removed
 };
 
 
@@ -77,6 +74,7 @@ public:
     void removeMember();
 
     void displayAllMembers();
+    void display();
 
     static bool loadLibrarian();
     static bool saveLibrarian();

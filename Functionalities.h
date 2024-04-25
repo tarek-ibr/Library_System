@@ -11,7 +11,7 @@
 void loadFiles();
 void saveFiles();
 
-vector<Custom_String_Class> executeGUIOption(vector<Custom_String_Class> options);
+//Custom_String_Class *executeGUIOption(Custom_String_Class *options, size_t num_options);
 
 Custom_String_Class login(int);
 

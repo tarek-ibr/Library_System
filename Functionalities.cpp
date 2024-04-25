@@ -5,13 +5,6 @@
 #include "Functionalities.h"
 
 
-void loadFiles(){
-    Librarian::saveMembers();
-    Loan::saveLoans();
-    Librarian::saveLibrarian();
-    Book::savelibrary();
-}
-
 void saveFiles(){
     Librarian::saveMembers();
     Loan::saveLoans();
@@ -19,18 +12,27 @@ void saveFiles(){
     Book::savelibrary();
 }
 
-vector<Custom_String_Class> executeGUIOption(vector<Custom_String_Class> options) {
+void loadFiles(){
+    Librarian::loadMembers();
+    Loan::loadLoans();
+    Librarian::loadLibrarian();
+    Book::loadlibrary();
+}
+
+Custom_String_Class *executeGUIOption(Custom_String_Class *options, size_t num_options) {
 
     loadFiles();
 
-    vector<Custom_String_Class> response = {};
+    std::vector<Custom_String_Class> response = {};
 
-    int operation = stoi(options[0].getSTR());  //stoi bthawel mn string to int 3ashal custom string fe switch case btgeb error
-    //int button = stoi(options[1].getSTR());
+    // Allocate memory for the response vector
+    Custom_String_Class* response_array = new Custom_String_Class[num_options];
+
+    int operation = std::stoi(options[0].getSTR());
 
     switch (operation) {
         case 1:
-            response[0] = login(stoi(options[1].getSTR()));
+            response.push_back(login(std::stoi(options[1].getSTR())));
             break;
         case 2: {
             Librarian librarian = Librarian::findLibrarianByID(stoi(options[1].getSTR()));
@@ -84,8 +86,8 @@ vector<Custom_String_Class> executeGUIOption(vector<Custom_String_Class> options
             cin >> choice;
             vector<Loan>& requests = Librarian::getBorrowRequests();
             Loan loan = requests[choice - 1];
-            librarian.approveBorrowRequest(loan);*/
-            //to add approve request in gui
+            librarian.approveBorrowRequest(loan);
+            //to add approve request in gui*/
             break;
         }
         case 7: {
@@ -104,15 +106,20 @@ vector<Custom_String_Class> executeGUIOption(vector<Custom_String_Class> options
             cin >> choice;
             vector<Loan> loanedbooks = member.getCheckedOutBooks();
             Book loanedbook = Book::findByISBN(loanedbooks[choice - 1].getBookID());
-            member.returnBook(loanedbook);*/
-            //to add return book
+            member.returnBook(loanedbook);
+            //to add return book*/
             break;
         default:
             break;
     }
 
     saveFiles();
-    return response;
+
+    // Convert response vector to array
+    for (size_t i = 0; i < response.size(); ++i) {
+        response_array[i] = {response[i].getSTR()};
+    }
+    return response_array;
 }
 
 Custom_String_Class login(int id){

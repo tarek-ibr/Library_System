@@ -11,6 +11,14 @@
 using namespace std;
 using json = nlohmann::json;
 
+
+
+extern "C" {
+
+// Define the function prototype
+__declspec(dllexport)  Custom_String_Class *executeGUIOption(Custom_String_Class *options, size_t num_options);
+}
+
 int main() {
     
     cout<<"\t\t\t\tNos far5a men ebn el sham library" <<endl;

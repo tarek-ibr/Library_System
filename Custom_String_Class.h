@@ -45,6 +45,8 @@ public:
     char* strcpy(char*,const char*);
     char* strcat(char*,const char*);
     static int strlen(const char*);
+    string toString();
+
     ~Custom_String_Class();
 };
 

@@ -19,57 +19,56 @@ void loadFiles(){
     Book::loadlibrary();
 }
 
-Custom_String_Class *executeGUIOption(Custom_String_Class *options, size_t num_options) {
+string* executeGUIOption(string* options, size_t num_options) {
 
     loadFiles();
 
-    std::vector<Custom_String_Class> response = {};
+    vector<string> response = {};
 
-    // Allocate memory for the response vector
-    Custom_String_Class* response_array = new Custom_String_Class[num_options];
+    string* response_array = new string[num_options];
 
-    int operation = std::stoi(options[0].getSTR());
+    int operation = std::stoi(options[0]);
 
     switch (operation) {
         case 1:
-            response.push_back(login(std::stoi(options[1].getSTR())));
+            response.push_back(login(std::stoi(options[1])).toString());
             break;
         case 2: {
-            Librarian librarian = Librarian::findLibrarianByID(stoi(options[1].getSTR()));
+            Librarian librarian = Librarian::findLibrarianByID(stoi(options[1]));
 
-            Custom_String_Class title = (options[2].getSTR());
-            Custom_String_Class isbn = (options[3].getSTR());
-            Custom_String_Class author = (options[4].getSTR());
-            Custom_String_Class genre = (options[5].getSTR());
-            int publicationYear = stoi(options[6].getSTR());
-            int Quantity = stoi(options[7].getSTR());
+            string title = (options[2]);
+            string isbn = (options[3]);
+            string author = (options[4]);
+            string genre = (options[5]);
+            int publicationYear = stoi(options[6]);
+            int Quantity = stoi(options[7]);
             Book newBook(title,author,isbn,genre,publicationYear,Quantity);
             Book::getBookList().push_back(newBook);
 
             break;
         }
         case 3: {
-            Librarian librarian = Librarian::findLibrarianByID(stoi(options[1].getSTR()));
+            Librarian librarian = Librarian::findLibrarianByID(stoi(options[1]));
 
-            Custom_String_Class isbn = options[2].getSTR();
+            string isbn = options[2];
             librarian.removeBook(isbn);
             break;
         }
         case 4: {
-            Librarian librarian = Librarian::findLibrarianByID(stoi(options[1].getSTR()));
+            Librarian librarian = Librarian::findLibrarianByID(stoi(options[1]));
             vector<Member>& members= Librarian::getMembers();
 
-            Custom_String_Class name = options[2].getSTR();
-            Custom_String_Class type = options[3].getSTR();
-            int id = stoi(options[4].getSTR());
+            string name = options[2];
+            string type = options[3];
+            int id = stoi(options[4]);
             members.push_back(Member(name, id, type));
             break;
         }
         case 5: {
-            Librarian librarian = Librarian::findLibrarianByID(stoi(options[1].getSTR()));
+            Librarian librarian = Librarian::findLibrarianByID(stoi(options[1]));
             vector<Member>& members= Librarian::getMembers();
 
-            int id = stoi(options[2].getSTR());
+            int id = stoi(options[2]);
 
             for (auto it = members.begin(); it != members.end() ; ++it) {
                 if (it->getID() == id) {
@@ -91,9 +90,9 @@ Custom_String_Class *executeGUIOption(Custom_String_Class *options, size_t num_o
             break;
         }
         case 7: {
-            Member member = Librarian::findMemberByID(stoi(options[1].getSTR()));
+            Member member = Librarian::findMemberByID(stoi(options[1]));
 
-            Custom_String_Class isbn = (options[2].getSTR());
+            string isbn = (options[2]);
 
             Book book = Book::findByISBN(isbn);
             member.requestBorrow(book);
@@ -117,7 +116,7 @@ Custom_String_Class *executeGUIOption(Custom_String_Class *options, size_t num_o
 
     // Convert response vector to array
     for (size_t i = 0; i < response.size(); ++i) {
-        response_array[i] = {response[i].getSTR()};
+        response_array[i] = {response[i]};
     }
     return response_array;
 }

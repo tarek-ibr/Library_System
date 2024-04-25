@@ -7,6 +7,7 @@
 
 #include "Custom_String_Class.h"
 #include "User.h"
+#include <string>
 
 void loadFiles();
 void saveFiles();

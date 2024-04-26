@@ -10,6 +10,9 @@
 
 Custom_String_Class login(int);
 
+void LoadFiles();
+void SaveFiles();
+
 void diplayMenuMember();
 void displayMenuLibrarian();
 void displayMenuFindBook();

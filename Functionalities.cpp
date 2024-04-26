@@ -21,7 +21,20 @@ Custom_String_Class login(int id){
     }
     return "not found";
 }
-
+void LoadFiles()
+{
+    Book::loadlibrary();
+    Loan::loadLoans();
+    Librarian::loadMembers();
+    Librarian::loadLibrarian();
+}
+void SaveFiles()
+{
+    Book::savelibrary();
+    Loan::saveLoans();
+    Librarian::saveMembers();
+    Librarian::saveLibrarian();
+}
 void diplayMenuMember(){
     cout << "\nSelect an option:\n";
     cout << "1. Request to borrow a book\n";
@@ -144,8 +157,12 @@ void implementLibrarianChoice(Librarian& librarian, int librarianOption){
           break;
       case 4: {
           librarian.displayAllMembers();
-          cout << "\n";
-          librarian.removeMember();
+          int choice;
+          cout << "\n Enter you choice: ";
+          cin >> choice;
+          vector<Member> members= Member::getMembers();
+          Member member = members[choice-1];
+          librarian.removeMember(member.getID());
           break;
       }
       case 5: {
@@ -170,6 +187,7 @@ void implementLibrarianChoice(Librarian& librarian, int librarianOption){
           cout << "Enter member ID: ";
           int memberId;
           cin >> memberId;
+          cin.ignore();
           Member member = Librarian::findMemberByID(memberId);
           cout << "Enter ISBN of book to return: ";
           Custom_String_Class isbn;

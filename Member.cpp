@@ -76,7 +76,7 @@ void Member::displayloaned() const{
     int j=1;
     for (int i = 0; i < this->checkedOutBooks.size(); ++i) {
         cout<<j++<<" ";
-        std::cout << "you have borrowed a book with ID " << this->checkedOutBooks[i].getBookID() << " ";
+        std::cout << "you have borrowed a book with ID " << this->checkedOutBooks[i].getBookID() << " \n";
     }
 }
 void Member::requestBorrow(Book& book) {

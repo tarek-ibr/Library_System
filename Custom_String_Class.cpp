@@ -3,7 +3,7 @@
 //
 
 #include "Custom_String_Class.h"
-
+//atef
 Custom_String_Class::Custom_String_Class()
 {
     str = new char[50];

@@ -13,7 +13,7 @@
 
 using json = nlohmann::json;
 using namespace std;
-
+//atef
 
 class Member {
 private:
@@ -64,14 +64,13 @@ public:
 
     void addBook();
     void removeBook(const Custom_String_Class& ISBN);
-    void manageMemberAccounts();
     void editBook( Book& book);
     static void addBorrowRequest(Loan&);
     bool borrowBook(Book, Member);
     void approveBorrowRequest(Loan);
     static void returnBook(Member& member, Book& book);
     void registerNewMember();
-    void removeMember();
+    void removeMember(int);
 
     void displayAllMembers();
     void display();

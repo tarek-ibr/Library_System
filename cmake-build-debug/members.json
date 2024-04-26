@@ -21,13 +21,19 @@
         "Fines": 0,
         "ID": 55555,
         "Name": "Ammar",
-        "Type": "Student"
+        "Type": "Member"
     },
     {
         "Fines": 0,
         "ID": 66666,
         "Name": "Eljooker",
         "Type": "Faculty"
+    },
+    {
+        "Fines": 0,
+        "ID": 1,
+        "Name": "Eng . Tamer elgayar",
+        "Type": "Librarian"
     },
     {
         "Fines": 0,

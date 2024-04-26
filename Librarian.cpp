@@ -32,6 +32,13 @@ void Librarian::addBook() {
     Book::getBookList().push_back(newBook);
 }
 void Librarian::removeBook(const Custom_String_Class& ISBN) {
+    for(auto it:Loan::Loans_List){
+        if(ISBN==it.getBookID()){
+            cout<<"the book is loanded by someone you can't remove it";
+            return;
+        }
+    }
+
     for(auto it = Book::getBookList().begin(); it != Book::getBookList().end(); ) {        //removed +1
         if(it->getISBN() == ISBN) {
             cout << "Now Iam removing \n";
@@ -229,11 +236,16 @@ void Librarian::registerNewMember(){
     cout << "New member registered successfully.\n";
 }
 
-void Librarian::removeMember()
+void Librarian::removeMember(int id)
 {
-    int id;
-    cout << "Enter member ID to remove: ";
-    cin >> id;
+    for(auto it:Loan::Loans_List)
+    {
+        if(it.getMemberID()==id)
+        {
+            cout<<"This Member Has Not Returned A Loaned Book Yet!\n";
+            return;
+        }
+    }
     bool found = false;
     for (auto it = members.begin(); it != members.end() ; ++it) {
         if (it->getID() == id) {
@@ -264,44 +276,10 @@ void Librarian::display(){
     cout<<"ID: "<<getID()<<endl;
 }
 
-void Librarian::manageMemberAccounts() {
 
-    int choice;
-    do {
-        cout << "1. Register new member\n";
-        cout << "2. Remove member\n";
-        cout << "3. Display all members\n";
-        cout << "0. Exit\n";
-        cout << "Enter your choice: ";
-        cin >> choice;
-
-        switch(choice) {
-            case 1: {
-                // Register new member
-                registerNewMember();
-                break;
-            }
-            case 2: {
-                // Remove member
-                removeMember();
-                break;
-            }
-            case 3: {
-                // Display all members
-                displayAllMembers();
-                break;
-            }
-
-            case 0:
-                cout << "Exiting...\n";
-                break;
-            default:
-                cout << "Invalid choice. Please try again.\n";
-        }
-    } while (choice != 0);
-}
 
 bool Librarian::loadLibrarian() {
+    borrowRequests.clear();
     std::ifstream file("borrowRequests.json");
     if (!file.is_open()) {
         std::cerr << "Failed to open file." << std::endl;
@@ -420,6 +398,13 @@ Member Librarian::findMemberByID(int id){
 }
 
 bool Librarian::loadMembers() {
+    for(auto it:members)
+    {
+        it.getCheckedOutBooks().clear();
+    }
+    members.clear();
+    librarians.clear();
+
     std::ifstream file("members.json");
     if (!file.is_open()) {
         std::cerr << "Failed to open file." << std::endl;

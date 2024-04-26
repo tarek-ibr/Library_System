@@ -1,34 +1,82 @@
 [
     {
+        "author": "Fyodor Dostoevsky",
+        "genre": "Philosophical Fiction",
+        "isbn": "978-0374528379",
+        "publication_year": 1866,
+        "quantity": 7,
+        "title": "Crime and Punishment"
+    },
+    {
+        "author": "Margaret Atwood",
+        "genre": "Dystopian Fiction",
+        "isbn": "978-0385490818",
+        "publication_year": 1985,
+        "quantity": 6,
+        "title": "The Handmaid's Tale"
+    },
+    {
+        "author": "Gabriel García Márquez",
+        "genre": "Magic Realism",
+        "isbn": "978-0061120091",
+        "publication_year": 1967,
+        "quantity": 8,
+        "title": "One Hundred Years of Solitude"
+    },
+    {
+        "author": "T.S. Eliot",
+        "genre": "Poetry",
+        "isbn": "978-0156332255",
+        "publication_year": 1922,
+        "quantity": 5,
+        "title": "The Waste Land"
+    },
+    {
+        "author": "Khaled Hosseini",
+        "genre": "Historical Fiction",
+        "isbn": "978-1594489501",
+        "publication_year": 2003,
+        "quantity": 9,
+        "title": "The Kite Runner"
+    },
+    {
+        "author": "J.R.R. Tolkien",
+        "genre": "Fantasy",
+        "isbn": "978-0547928210",
+        "publication_year": 1937,
+        "quantity": 10,
+        "title": "The Hobbit"
+    },
+    {
+        "author": "Mary Shelley",
+        "genre": "Gothic Fiction",
+        "isbn": "978-0486282112",
+        "publication_year": 1818,
+        "quantity": 7,
+        "title": "Frankenstein"
+    },
+    {
+        "author": "Homer",
+        "genre": "Epic Poetry",
+        "isbn": "978-0140449181",
+        "publication_year": 2000,
+        "quantity": 4,
+        "title": "The Odyssey"
+    },
+    {
         "author": "George Orwell",
-        "genre": "Science Fiction",
-        "isbn": "978-0-451-52493-5",
+        "genre": "Dystopian Fiction",
+        "isbn": "978-0451524935",
         "publication_year": 1949,
-        "quantity": 12,
+        "quantity": 11,
         "title": "1984"
     },
     {
-        "author": "F. Scott Fitzgerald",
-        "genre": "Fiction",
-        "isbn": "978-0-7432-7356-5",
-        "publication_year": 1925,
-        "quantity": 7,
-        "title": "The Great Gatsby"
-    },
-    {
-        "author": "Jane Austen",
-        "genre": "Romance",
-        "isbn": "978-0-14-143951-8",
-        "publication_year": 1813,
-        "quantity": 8,
-        "title": "Pride and Prejudice"
-    },
-    {
-        "author": "J.K. Rowling",
-        "genre": "Fantasy",
-        "isbn": "978-0-7475-3269-6",
-        "publication_year": 1997,
-        "quantity": 19,
-        "title": "Harry Potter and the Philosopher's Stone"
+        "author": "Leo Tolstoy",
+        "genre": "Realist Fiction",
+        "isbn": "978-0679405741",
+        "publication_year": 1877,
+        "quantity": 6,
+        "title": "Anna Karenina"
     }
 ]

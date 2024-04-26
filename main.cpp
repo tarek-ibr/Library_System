@@ -12,18 +12,15 @@ using namespace std;
 using json = nlohmann::json;
 
 int main() {
-    Book::loadlibrary();
-    Loan::loadLoans();
-    Librarian::loadMembers();
-    Librarian::loadLibrarian();
+
     
     cout<<"\t\t\t\tNos far5a men ebn el sham library" <<endl;
     
     int id;
-    Login:
+Login:
+    LoadFiles();
     cout<<"Enter your ID: ";
     cin>>id;
-
 
 
     Custom_String_Class type = login(id);
@@ -40,16 +37,21 @@ int main() {
             Member_Choose_Option:
             cin>>memberOption;
 
-            if(memberOption==7)
+            if(memberOption==7) {
+                SaveFiles();
                 goto Login;
+            }
             else if(memberOption==8)
                 break;
             else if (memberOption <1 || memberOption > 8){
                 cout<<"Invalid choice" <<endl;
                 goto Member_Choose_Option;
             }
-
+            system("cls");
             implementMemberChoice(member, memberOption);
+            system("pause");
+            system("cls");
+
 
         }
     }
@@ -66,6 +68,7 @@ int main() {
             cin >> librarianOption;
 
             if (librarianOption == 15) {
+                SaveFiles();
                 goto Login;
             }
             else if (librarianOption == 16) {
@@ -75,8 +78,10 @@ int main() {
                 cout<<"Invalid choice" <<endl;
                 goto Librarian_Choose_Option;
             }
-
+            system("cls");
             implementLibrarianChoice(librarian, librarianOption);
+            system("pause");
+            system("cls");
 
         }
     }
@@ -85,10 +90,7 @@ int main() {
         goto Login;
     }
 
-    Librarian::saveMembers();
-    Loan::saveLoans();
-    Librarian::saveLibrarian();
-    Book::savelibrary();
+    SaveFiles();
 
     system("pause");
 

@@ -37,6 +37,7 @@ void Book::displaylist() {
 }
 
 bool Book::loadlibrary() {
+    Book_List.clear();
     std::ifstream file("books.json");
     if (!file.is_open()) {
         std::cerr << "Failed to open file." << std::endl;
@@ -182,7 +183,7 @@ Book Book::findByName(Custom_String_Class name) {
         }
     }
     if (!found) {
-        cout << "couldnt find a book ";
+        cout << "couldnt find a book \n";
         return Book();
     }
 

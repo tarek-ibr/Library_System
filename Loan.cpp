@@ -63,6 +63,7 @@ void Loan::displayDetails(){
     std::cout << "borrow date " <<borrowDate.getDate() <<endl;
 }
 void Loan::loadLoans() {
+    Loans_List.clear();
     std::ifstream file("loaned.json");
     if (!file.is_open()) {
         std::cerr << "Failed to open file." << std::endl;

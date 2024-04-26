@@ -2,32 +2,37 @@
 
 #include "Book.h"
 
-
+// Static vector to hold the list of books in the library
 vector<Book> Book::Book_List = {};
 
+// Default constructor initializing an empty book
 Book::Book() : Title(""), Author(""), ISBN(""), Genre(""), Publication_Year(0), Quantity(0), Available(false) {}
 
+// Parameterized constructor to create a book with given details
 Book::Book(const Custom_String_Class& tit, const Custom_String_Class& Auth, const Custom_String_Class& ISB, const Custom_String_Class& Gen, int Pub_yr, int Quant)
         : Title(tit), Author(Auth), ISBN(ISB), Genre(Gen), Publication_Year(Pub_yr), Quantity(Quant) {
-    Available = Quantity > 0;
+    Available = Quantity > 0; // Set availability based on quantity
 }
 
+// Function to display book details
 void Book::displayBook() const {
-    cout<< "--------------------\n";
+    cout << "--------------------\n";
+    // Output book details
     cout << "Title: " << Title << endl;
     cout << "Author: " << Author << endl;
     cout << "ISBN: " << ISBN << endl;
     cout << "Publication Year: " << Publication_Year << endl;
     cout << "Genre: " << Genre << endl;
     cout << "Availability: " << (Quantity > 0 ? "Available" : "Checked out") << endl;
-    cout<< "--------------------\n";
+    cout << "--------------------\n";
 }
 
+// Function to display the list of all books
 void Book::displaylist() {
-    int i=1;
-    cout<< "--------------------\n";
+    int i = 1;
+    cout << "--------------------\n";
+    // Iterate through the list of books and display each one
     for (const auto& it : Book::Book_List) {
-
         cout<<i++<<" ";
         cout << "Title: " << it.Title << endl;
         cout << "Author: " << it.Author << endl;
@@ -40,8 +45,9 @@ void Book::displaylist() {
     }
 }
 
+// Function to load the library from a JSON file
 bool Book::loadlibrary() {
-    Book_List.clear();
+    Book_List.clear(); // Clear the existing book list
     std::ifstream file("books.json");
     if (!file.is_open()) {
         std::cerr << "Failed to open file." << std::endl;
@@ -66,6 +72,7 @@ bool Book::loadlibrary() {
     return true;
 }
 
+// Function to save the library to a JSON file
 bool Book::savelibrary() {
     std::ofstream file("books.json");
     if (!file.is_open()) {
@@ -89,66 +96,29 @@ bool Book::savelibrary() {
     return true;
 }
 
-Custom_String_Class& Book::getISBN() {
-    return ISBN;
-}
+// Getters and setters for book attributes
+Custom_String_Class& Book::getISBN() { return ISBN; }
+Custom_String_Class& Book::getTitle() { return Title; }
+Custom_String_Class& Book::getAuthor() { return Author; }
+Custom_String_Class& Book::getGenre() { return Genre; }
+unsigned int& Book::getPubYear() { return Publication_Year; }
+unsigned int& Book::getQuantity() { return Quantity; }
+vector<Book>& Book::getBookList() { return Book_List; }
 
-Custom_String_Class& Book::getTitle() {
-    return Title;
-}
+void Book::setAuthor(const Custom_String_Class& AuthorName) { Author = AuthorName; }
+void Book::setTitle(const Custom_String_Class& newTitle) { Title = newTitle; }
+void Book::setGenre(const Custom_String_Class& newGenre) { Author = newGenre; }
+void Book::setISBN(const Custom_String_Class& newISBN) { ISBN = newISBN; }
+void Book::setPubYear(unsigned int newPubYear) { Publication_Year = newPubYear; }
+void Book::setQuantity(unsigned int newQuantity) { Quantity = newQuantity; }
 
-Custom_String_Class& Book::getAuthor() {
-    return Author;
-}
+// Function to check if a book is available
+bool Book::checkAvailability() const { return (Quantity > 0); }
 
-Custom_String_Class& Book::getGenre() {
-    return Genre;
-}
+// Function to set the availability of a book
+void Book::setAvailability(bool X) { Available = X; }
 
-unsigned int& Book::getPubYear() {
-    return Publication_Year;
-}
-
-unsigned int& Book::getQuantity() {
-    return Quantity;
-}
-
-vector<Book>& Book::getBookList() {
-    return Book_List;
-}
-
-void Book::setAuthor(const Custom_String_Class& AuthorName) {
-    Author = AuthorName;
-}
-
-void Book::setTitle(const Custom_String_Class& newTitle) {
-    Title = newTitle;
-}
-
-void Book::setGenre(const Custom_String_Class& newGenre) {
-    Author = newGenre;
-}
-
-void Book::setISBN(const Custom_String_Class& newISBN) {
-    ISBN = newISBN;
-}
-
-void Book::setPubYear(unsigned int newPubYear) {
-    Publication_Year = newPubYear;
-}
-
-void Book::setQuantity(unsigned int newQuantity) {
-    Quantity = newQuantity;
-}
-
-bool Book::checkAvailability() const {
-    return (Quantity > 0);
-}
-
-void Book::setAvailability(bool X) {
-    Available = X;
-}
-
+// Function to find a book by author
 Book Book::findByAuthor(Custom_String_Class name) {
     vector<Book> results;
     int found = 0;
@@ -175,6 +145,7 @@ Book Book::findByAuthor(Custom_String_Class name) {
         goto pick;
 }
 
+// Function to find a book by name
 Book Book::findByName(Custom_String_Class name) {
     vector<Book> results;
     int found = 0;
@@ -201,6 +172,7 @@ Book Book::findByName(Custom_String_Class name) {
         goto pick;
 }
 
+// Function to find a book by ISBN
 Book Book::findByISBN(Custom_String_Class ID) {
     for (auto it : Book_List) {
         if (it.getISBN() == ID) {

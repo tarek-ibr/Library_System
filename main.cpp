@@ -8,18 +8,25 @@
 #include "Custom_String_Class.h"
 #include "Functionalities.h"
 
+
 using namespace std;
 using json = nlohmann::json;
 
 int main() {
+    cout<<"\t\t\t\t    __    ________  ____  ___    ______  __   _______  _____________________  ___\n"
+          "\t\t\t\t   / /   /  _/ __ )/ __ \\/   |  / __ \\ \\/ /  / ___/\\ \\/ / ___/_  __/ ____/  |/  /\n"
+          "\t\t\t\t  / /    / // __  / /_/ / /| | / /_/ /\\  /   \\__ \\  \\  /\\__ \\ / / / __/ / /|_/ / \n"
+          "\t\t\t\t / /____/ // /_/ / _, _/ ___ |/ _, _/ / /   ___/ /  / /___/ // / / /___/ /  / /  \n"
+          "\t\t\t\t/_____/___/_____/_/ |_/_/  |_/_/ |_| /_/   /____/  /_//____//_/ /_____/_/  /_/   \n"
+          "                                                                                 ";
+    cout << "\e[8;200;150t";
+    system("Color 0A");
 
-    
-    cout<<"\t\t\t\tNos far5a men ebn el sham library" <<endl;
-    
     int id;
 Login:
     LoadFiles();
     cout<<"Enter your ID: ";
+
     cin>>id;
 
 

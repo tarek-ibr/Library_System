@@ -35,7 +35,7 @@ public:
     bool operator!=(const Custom_String_Class& s2) const;
 
     // Overloaded subscript operator for accessing characters in the string
-    char operator const;
+    char operator[](int) const;
 
     // Overloaded stream insertion operator for outputting the string
     friend ostream& operator<<(std::ostream& out, const Custom_String_Class& c){

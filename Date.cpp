@@ -1,12 +1,16 @@
-//
 // Created by tarek on 4/8/2024.
-//
 
 #include "Date.h"
-//atef
+
+// Default constructor initializing date to 0/0/0
 Date::Date():day(0), month(0), year(0){}
+
+// Parameterized constructor to create a date with given day, month, and year
 Date::Date(int d, int m, int y): day(d), month(m), year(y){}
+
+// Constructor that takes a string in the format "dd/mm/yyyy"
 Date::Date(Custom_String_Class d) {
+    // Extract day, month, and year from the string
     day=int(d[0])-48;
     day=day*10+int(d[1])-48;
 
@@ -18,7 +22,10 @@ Date::Date(Custom_String_Class d) {
     year=year*10+int(d[8])-48;
     year=year*10+int(d[9])-48;
 }
+
+// Function to set the date from a string in the format "dd/mm/yyyy"
 void Date::setDate (Custom_String_Class d){
+    // Extract day, month, and year from the string
     day=int(d[0])-48;
     day=day*10+int(d[1])-48;
 
@@ -30,6 +37,8 @@ void Date::setDate (Custom_String_Class d){
     year=year*10+int(d[8])-48;
     year=year*10+int(d[9])-48;
 }
+
+// Function to get the date as a string in the format "dd/mm/yyyy"
 Custom_String_Class Date::getDate() const{
     Custom_String_Class d;
     if (day<10)
@@ -43,6 +52,8 @@ Custom_String_Class Date::getDate() const{
 
     return d;
 }
+
+// Function to get the current date
 Date Date::getCrrentDate(){
     // Get the current system time point
     auto now = std::chrono::system_clock::now();
@@ -57,29 +68,38 @@ Date Date::getCrrentDate(){
 
     return {day,month,year};
 }
+
+// Overloaded greater than operator to compare two dates
 bool Date::operator>( Date d)  {
     int days =*this-d;
     return days>0;  // Return true if day is greater, false otherwise
 }
 
+// Overloaded less than operator to compare two dates
 bool Date::operator<( Date d) {
     int days =*this-d;
     return days<0; // Return true if day is less, false otherwise
 }
 
+// Overloaded equality operator to compare two dates
 bool Date::operator == (Date d) const{
     if (year==d.year && month==d.month && day==d.day)
         return true;
     else
         return false;
 }
+
+// Overloaded assignment operator to assign one date to another
 Date Date::operator = (Date d){
     day=d.day;
     month=d.month;
     year=d.year;
     return *this;
 }
+
+// Overloaded assignment operator to assign a string to a date
 Date Date::operator = (Custom_String_Class d){
+    // Extract day, month, and year from the string
     day=int(d[0])-48;
     day=day*10+int(d[1])-48;
 
@@ -93,6 +113,8 @@ Date Date::operator = (Custom_String_Class d){
 
     return *this;
 }
+
+// Overloaded addition operator to add days to a date
 Date Date::operator + (int days){
     day+=days;
     int daysinmonth= daysInMonth(month, year);
@@ -107,6 +129,8 @@ Date Date::operator + (int days){
     }
     return *this;
 }
+
+// Overloaded subtraction operator to find the difference between two dates
 int Date::operator - (Date d){
     int thisDays = daysSinceReferenceDate();
     int dDays = d.daysSinceReferenceDate();
@@ -114,6 +138,7 @@ int Date::operator - (Date d){
     return thisDays - dDays;
 }
 
+// Function to calculate the number of days since a reference date
 int Date::daysSinceReferenceDate() {
     int days = 0;
     for (int yr = REFERENCE_YEAR; yr < year; ++yr) {
@@ -125,6 +150,8 @@ int Date::daysSinceReferenceDate() {
     days += day;
     return days;
 }
+
+// Function to calculate the number of days in a month
 int Date::daysInMonth(int m, int y) {
     switch (m) {
         case 1: case 3: case 5: case 7: case 8: case 10: case 12:

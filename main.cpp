@@ -13,6 +13,7 @@
 #  endif // USE_ASIO
 #endif //_WIN32
 
+// Include necessary libraries and files
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -24,128 +25,183 @@
 #include "Functionalities.h"
 #include <thread>
 
-
 using namespace std;
 using json = nlohmann::json;
 
+// Get the standard output handle
 HANDLE  hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
-
+// Function declarations
 void displayLibraryName();
 void playSound(const char* wavPath);
 
-
+// Main function
 int main() {
+    // Path to the sound file
     const char* wavPath = "music.wav";
 
+    // Start a new thread to play the sound
     std::thread soundThread(playSound, wavPath);
 
+    // Set the console size
     cout << "\e[8;200;150t";
 
-
-
+    // Login label for goto statement
     Login:
 
+    // Display the library name
     displayLibraryName();
 
+    // Load the files
     LoadFiles();
 
+    // Set the console text attribute
     SetConsoleTextAttribute(hConsole, 8);
 
+    // Prompt the user to enter their ID
     cout<<"Enter your ID: ";
     int id;
     cin>>id;
 
+    // Clear the console
     system("cls");
 
+    // Login with the entered ID
     Custom_String_Class type = login(id);
 
+    // Set the console text attribute
     SetConsoleTextAttribute(hConsole, 3);
+
+    // If the user is a member
     if(type=="member"){
+        // Find the member by ID
         Member member = Librarian::findMemberByID(id);
 
-
-
-
+        // Infinite loop for the member menu
         while(true){
 
+            // Display the library name
             displayLibraryName();
+
+            // Welcome the member
             cout<<endl <<"\t\t\t\t\t\t\tWelcome " <<member.getName() <<" to our library " <<endl;
 
+            // Display the member menu
             diplayMenuMember();
-      
+
+            // Prompt the user to choose an option
             int memberOption;
             Member_Choose_Option:
             cin>>memberOption;
 
+            // If the user chooses to logout
             if(memberOption==7) {
+                // Save the files
                 SaveFiles();
+
+                // Clear the console
                 system("cls");
+
+                // Go to the login label
                 goto Login;
             }
+            // If the user chooses to exit
             else if(memberOption==8)
                 break;
+            // If the user enters an invalid choice
             else if (memberOption <1 || memberOption > 8){
                 cout<<"Invalid choice" <<endl;
                 goto Member_Choose_Option;
             }
+
+            // Clear the console
             system("cls");
+
+            // Implement the chosen option
             implementMemberChoice(member, memberOption);
+
+            // Pause the console
             system("pause");
+
+            // Clear the console
             system("cls");
-
-
         }
     }
+    // If the user is a librarian
     else if(type=="librarian"){
+        // Find the librarian by ID
         Librarian librarian = Librarian::findLibrarianByID(id);
 
-
-
+        // Infinite loop for the librarian menu
         while(true){
 
+            // Display the library name
             displayLibraryName();
+
+            // Welcome the librarian
             cout<<endl <<"\t\t\t\t\t\t\tWelcome back " <<librarian.getName() <<endl;
 
+            // Display the librarian menu
             displayMenuLibrarian();
 
+            // Prompt the user to choose an option
             int librarianOption;
             Librarian_Choose_Option:
             cin >> librarianOption;
 
+            // If the user chooses to logout
             if (librarianOption == 15) {
+                // Save the files
                 SaveFiles();
+
+                // Clear the console
                 system("cls");
+
+                // Go to the login label
                 goto Login;
             }
+            // If the user chooses to exit
             else if (librarianOption == 16) {
                 break;
             }
-             else if (librarianOption <1 || librarianOption > 16){
+            // If the user enters an invalid choice
+            else if (librarianOption <1 || librarianOption > 16){
                 cout<<"Invalid choice" <<endl;
                 goto Librarian_Choose_Option;
             }
-            system("cls");
-            implementLibrarianChoice(librarian, librarianOption);
-            system("pause");
+
+            // Clear the console
             system("cls");
 
+            // Implement the chosen option
+            implementLibrarianChoice(librarian, librarianOption);
+
+            // Pause the console
+            system("pause");
+
+            // Clear the console
+            system("cls");
         }
     }
+    // If the user is not found
     else if(type=="not found"){
         cout<<"You are not registered in our system, Please check your ID again!!"<<endl<<endl;
         goto Login;
     }
 
+    // Save the files
     SaveFiles();
 
+    // Pause the console
     system("pause");
 
+    // Join the sound thread
     soundThread.join();
 
     return 0;
 }
 
+// Function to display the library name
 void displayLibraryName(){
     SetConsoleTextAttribute(hConsole, 6);
     cout<<"\t\t\t    ________         ___   _____ ____  ____    ___    ___       __    ________  ____  ___    ______  __\n"
@@ -157,6 +213,7 @@ void displayLibraryName(){
     cout<<"\n\n\n";
 }
 
+// Function to display the member menu
 void diplayMenuMember(){
     SetConsoleTextAttribute(hConsole, 3);
     cout << "\nSelect an option:\n";
@@ -170,6 +227,7 @@ void diplayMenuMember(){
     cout << "8. Exit\n";
 }
 
+// Function to display the librarian menu
 void displayMenuLibrarian()
 {
     SetConsoleTextAttribute(hConsole, 3);
@@ -192,6 +250,7 @@ void displayMenuLibrarian()
     cout << "16. Exit\n";
 }
 
+// Function to display the find book menu
 void displayMenuFindBook(){
     SetConsoleTextAttribute(hConsole, 3);
     cout << "\nSelect an option:\n";
@@ -200,6 +259,7 @@ void displayMenuFindBook(){
     cout << "3. Find the book by author\n";
 }
 
+// Function to display the find member menu
 void displayMenuFindMember(){
     SetConsoleTextAttribute(hConsole, 3);
     cout << "\nSelect an option:\n";
@@ -207,6 +267,7 @@ void displayMenuFindMember(){
     cout << "2. Find the member by ID\n";
 }
 
+// Function to display the find librarian menu
 void displayMenuFindlibrarian(){
     SetConsoleTextAttribute(hConsole, 3);
     cout << "\nSelect an option:\n";
@@ -214,8 +275,8 @@ void displayMenuFindlibrarian(){
     cout << "2. Find the librarian by ID\n";
 }
 
+// Function to play a sound
 void playSound(const char* wavPath) {
 
     PlaySoundA(wavPath, NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
 }
-

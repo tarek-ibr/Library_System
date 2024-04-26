@@ -72,7 +72,7 @@ void Member::setFines(int f){
 // Function to calculate total fines
 int Member::calculateTotalFines (){
     Fines=0;
-    for(auto it: checkedOutBooks){
+    for(auto it: checkedOutBooks){//iterate over the list of checkedout books for a member and calculate their total fines
         Fines+=it.calculateFines();
     }
     return Fines;
@@ -108,11 +108,11 @@ void Member::displayloaned() const{
 
 // Function to request to borrow a book
 void Member::requestBorrow(Book& book) {
-    Loan ln(ID, book.getISBN());
-    Librarian::addBorrowRequest(ln);
+    Loan ln(ID, book.getISBN());//create a new loan
+    Librarian::addBorrowRequest(ln);//send loan request to the library
 }
 
 // Function to return a book
 void Member::returnBook(Book book) {
-    Librarian::returnBook(*this, book);
+    Librarian::returnBook(*this, book);//send return request to library which will be processed automatically
 }

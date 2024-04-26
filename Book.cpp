@@ -48,41 +48,42 @@ void Book::displaylist() {
 // Function to load the library from a JSON file
 bool Book::loadlibrary() {
     Book_List.clear(); // Clear the existing book list
-    std::ifstream file("books.json");
-    if (!file.is_open()) {
+    std::ifstream file("books.json");//opening books.json which has all book information
+    if (!file.is_open()) {//making sure books.json was opened successfully
         std::cerr << "Failed to open file." << std::endl;
         return false;
     }
 
-    json j;
-    file >> j;
+    json j;//creating a variable of type json which can hold json data
+    file >> j;//moving data from file to j
 
-    for (const auto& book_json : j) {
-        Book bk;
-
+    for (const auto& book_json : j) {//iterating over j(book data)
+        Book bk;//creating a temporary book to push in book list
+        //getting member attributes from j
         bk.Title = (book_json["title"].get<string>());
         bk.Author = book_json["author"].get<string>();
         bk.ISBN = book_json["isbn"].get<string>();
         bk.Genre = book_json["genre"].get<string>();
         bk.Publication_Year = book_json["publication_year"];
         bk.Quantity = book_json["quantity"];
-        Book_List.push_back(bk);
+        Book_List.push_back(bk);//pushing book in book list
     }
-    file.close();
+    file.close();//closing the file
     return true;
 }
 
 // Function to save the library to a JSON file
 bool Book::savelibrary() {
-    std::ofstream file("books.json");
+    std::ofstream file("books.json");//same as load
     if (!file.is_open()) {
         std::cerr << "Failed to open file." << endl;
         return false;
     }
 
     json OUTPUT;
-    for (const auto& book : Book_List) {
+    for (const auto& book : Book_List) {//iterating over the booklist
         json bookJson;
+        //creating json keys and assigning values to it from book list
         bookJson["title"] = book.Title.getSTR();
         bookJson["author"] = book.Author.getSTR();
         bookJson["publication_year"] = book.Publication_Year;
@@ -91,7 +92,7 @@ bool Book::savelibrary() {
         bookJson["quantity"] = book.Quantity;
         OUTPUT.push_back(bookJson);
     }
-    file << setw(4) << OUTPUT << endl;
+    file << setw(4) << OUTPUT << endl;//writing to Book.json .. setw(4) is just to maintain the format of the file
     file.close();
     return true;
 }
@@ -104,7 +105,7 @@ Custom_String_Class& Book::getGenre() { return Genre; }
 unsigned int& Book::getPubYear() { return Publication_Year; }
 unsigned int& Book::getQuantity() { return Quantity; }
 vector<Book>& Book::getBookList() { return Book_List; }
-
+//setters just in case we need them because getters are actually returning a reference
 void Book::setAuthor(const Custom_String_Class& AuthorName) { Author = AuthorName; }
 void Book::setTitle(const Custom_String_Class& newTitle) { Title = newTitle; }
 void Book::setGenre(const Custom_String_Class& newGenre) { Author = newGenre; }
@@ -120,33 +121,33 @@ void Book::setAvailability(bool X) { Available = X; }
 
 // Function to find a book by author
 Book Book::findByAuthor(Custom_String_Class name) {
-    vector<Book> results;
-    int found = 0;
+    vector<Book> results;//vector of books to hold search results
+    int found = 0;//counts books found
     cout << "found :" << endl;
-    for (auto it : Book_List) {
+    for (auto it : Book_List) {//iterating over book list and searching for the name sent to function
         if (it.getAuthor().find(name)) {
-            found++;
-            cout << found << ":" << it.getTitle() << endl;
-            results.push_back(it);
+            found++;//incrementing number of found books
+            cout << found << ":" << it.getTitle() << endl;//printing the found book title
+            results.push_back(it);//pushing it in the results vector which the user will choose a book from
         }
     }
     if (!found) {
         cout << "Couldnt Find Any Results For : " << name << endl;
-        return Book();
+        return Book();//if we didn't find a book we return the default book which has NULL data members
     }
 
     pick:
     cout << "Pick a Book by Number :";
     int choice;
-    cin >> choice;
+    cin >> choice;//make user choose which book he wants from the results
     if (choice <= found)
-        return results[choice - 1];
+        return results[choice - 1];//return the book
     else
-        goto pick;
+        goto pick;//user entered an invalid number go back and make him choose again
 }
 
 // Function to find a book by name
-Book Book::findByName(Custom_String_Class name) {
+Book Book::findByName(Custom_String_Class name) {//this function is nearly identical to findByAuthor, but it searches by book name instead
     vector<Book> results;
     int found = 0;
     cout << "found :" << endl;
@@ -174,11 +175,11 @@ Book Book::findByName(Custom_String_Class name) {
 
 // Function to find a book by ISBN
 Book Book::findByISBN(Custom_String_Class ID) {
-    for (auto it : Book_List) {
-        if (it.getISBN() == ID) {
+    for (auto it : Book_List) {//iterating over the book list
+        if (it.getISBN() == ID) {//if sent id is equal to somebook id return that book
             return it;
         }
     }
     cout << "Couldnt Find a Book" << endl;
-    return Book();
+    return Book();//if not found return the default book
 }

@@ -32,10 +32,13 @@ HANDLE  hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
 
 void displayLibraryName();
+void playSound(const char* wavPath);
 
 
 int main() {
+    const char* wavPath = "music.wav";
 
+    std::thread soundThread(playSound, wavPath);
 
     cout << "\e[8;200;150t";
 
@@ -138,6 +141,8 @@ int main() {
 
     system("pause");
 
+    soundThread.join();
+
     return 0;
 }
 
@@ -214,6 +219,3 @@ void playSound(const char* wavPath) {
     PlaySoundA(wavPath, NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
 }
 
-const char* wavPath = "music.wav";
-
-std::thread soundThread(playSound, wavPath);

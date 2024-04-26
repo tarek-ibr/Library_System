@@ -92,7 +92,7 @@ bool Librarian::borrowBook(Book b, Member member){
     int i;
     for(i=0; !(bkList[i].getISBN() == b.getISBN()); i++);
 
-    // Check if the book is available
+    // Check if the book is  available
     if(bkList[i].getQuantity()>0) {
         Date dueDate;
         // If only one copy is left, set the book as unavailable

@@ -60,11 +60,13 @@ void Member::updateTotalFines (){
     Fines=calculateTotalFines();
 }
 void Member::display(){
+
     std::cout << "Name: " << Name << std::endl;
     std::cout << "ID: " << ID << std::endl;
     std::cout << "Type: " << Type << std::endl;
     std::cout << "Number of Checked Out Books: " << checkedOutBooks.size() << std::endl;
     std::cout << "Overdue Fines: " << calculateTotalFines() << std::endl;
+    cout<< "--------------------\n";
 }
 void Member::displayloaned() const{
 
@@ -74,10 +76,12 @@ void Member::displayloaned() const{
         }
     }*/
     int j=1;
+    cout<< "--------------------\n";
     for (int i = 0; i < this->checkedOutBooks.size(); ++i) {
         cout<<j++<<" ";
         std::cout << "you have borrowed a book with ID " << this->checkedOutBooks[i].getBookID() << " \n";
     }
+    cout<< "--------------------\n";
 }
 void Member::requestBorrow(Book& book) {
     Loan ln(ID, book.getISBN());

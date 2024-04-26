@@ -264,16 +264,19 @@ void Librarian::displayAllMembers() {
     int i=1;
 
     std::cout << "List of Members:\n";
+
+    cout<< "--------------------\n";
     for (auto& member : members) {
         cout<<i++<<" ";
         member.display();
-        std::cout << "-------------------------\n";
     }
 
 }
 void Librarian::display(){
+    cout<< "--------------------\n";
     cout<<"Name: "<<getName()<<endl;
     cout<<"ID: "<<getID()<<endl;
+    cout<< "--------------------\n";
 }
 
 

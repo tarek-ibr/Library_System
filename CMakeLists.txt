@@ -19,3 +19,6 @@ add_executable(project main.cpp
         Functionalities.h
         Functionalities.cpp
 )
+
+# Add winmm library
+target_link_libraries(project PRIVATE winmm)

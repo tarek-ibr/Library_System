@@ -151,57 +151,7 @@ void SaveFiles()
     Librarian::saveMembers();
     Librarian::saveLibrarian();
 }
-void diplayMenuMember(){
-    cout << "\nSelect an option:\n";
-    cout << "1. Request to borrow a book\n";
-    cout << "2. Return a book\n";
-    cout << "3. Display loaned books\n";
-    cout << "4. Display your information\n";
-    cout << "5. Display book list\n";
-    cout << "6. Find a book\n";
-    cout << "7. Logout\n";
-    cout << "8. Exit\n";
-}
 
-void displayMenuLibrarian()
-{
-    cout << "\nSelect an option:\n";
-    cout << "1. Add book\n";
-    cout << "2. Remove book\n";
-    cout << "3. Register new member\n";
-    cout << "4. Remove member\n";
-    cout << "5. Edit book\n";
-    cout << "6. Approve borrow request\n";
-    cout << "7. Return book\n";      //ana shayef nsheel de
-    cout << "8. Display all members\n";
-    cout << "9. Display all books\n";
-    cout << "10. Display borrow requests\n";
-    cout << "11. Display all loans\n";
-    cout << "12. Find a book\n";
-    cout << "13. Find a member\n";
-    cout << "14. Find a librarian\n";
-    cout << "15. Logout\n";
-    cout << "16. Exit\n";
-}
-
-void displayMenuFindBook(){
-    cout << "\nSelect an option:\n";
-    cout << "1. Find the book by ISBN\n";
-    cout << "2. Find the book by name\n";
-    cout << "3. Find the book by author\n";
-}
-
-void displayMenuFindMember(){
-    cout << "\nSelect an option:\n";
-    cout << "1. Find the member by name\n";
-    cout << "2. Find the member by ID\n";
-}
-
-void displayMenuFindlibrarian(){
-    cout << "\nSelect an option:\n";
-    cout << "1. Find the librarian by name\n";
-    cout << "2. Find the librarian by ID\n";
-}
 
 void implementMemberChoice(Member& member, int memberOption){
 
@@ -399,6 +349,7 @@ void implementFindMemberChoice(int option){
           cin.ignore();
           cin >> name;
           Member member = Librarian::findMemberByName(name);
+          cout<<"\n";
           if (!(member.getName() == Member().getName()))
               member.display();
           break;
@@ -408,6 +359,7 @@ void implementFindMemberChoice(int option){
           int id;
           cin >> id;
           Member member = Librarian::findMemberByID(id);
+          cout<<"\n";
           if (!(member.getName() == Member().getName()))
               member.display();
           break;
@@ -427,6 +379,7 @@ void implementFindLibrarianChoice(int option){
           cin.ignore();
           cin >> name;
           Librarian librarian = Librarian::findLibrarianByName(name);
+          cout<<"\n";
           if (!(librarian.getName() == Librarian().getName()))
               librarian.display();
           break;
@@ -436,6 +389,7 @@ void implementFindLibrarianChoice(int option){
           int id;
           cin >> id;
           Librarian librarian = Librarian::findLibrarianByID(id);
+          cout<<"\n";
           if (!(librarian.getName() == Librarian().getName()))
               librarian.display();
           break;
@@ -446,3 +400,4 @@ void implementFindLibrarianChoice(int option){
   }
 
 }
+

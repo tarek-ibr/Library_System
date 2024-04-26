@@ -9,7 +9,6 @@
 #include "json.h"
 #include <fstream>
 
-// Using the standard namespace and json namespace for convenience
 using namespace std;
 using json = nlohmann::json;
 

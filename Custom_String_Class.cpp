@@ -59,7 +59,7 @@ bool Custom_String_Class::operator!=(const Custom_String_Class& s2) const
 }
 
 // Overloaded subscript operator for accessing characters in the string
-char Custom_String_Class::operator const
+char Custom_String_Class::operator[](int x) const
 {
     return *(this->str+x); // Return the character at the given index
 }

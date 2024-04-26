@@ -83,20 +83,26 @@ void Librarian::displayRequests() {
 
 // Function to process a borrow request for a book
 bool Librarian::borrowBook(Book b, Member member){
-    vector<Book>& bkList= Book::getBookList();
-    vector<Loan>& checkedBooks= member.getCheckedOutBooks();
-    vector<Loan>& loansList= Loan::getLoans_List();
+    vector<Book>& bkList= Book::getBookList(); // Get the list of all books
+    vector<Loan>& checkedBooks= member.getCheckedOutBooks(); // Get the list of books checked out by the member
+    vector<Loan>& loansList= Loan::getLoans_List(); // Get the list of all loans
+
+    // Find the index of the book in the book list
 
     int i;
     for(i=0; !(bkList[i].getISBN() == b.getISBN()); i++);
 
+    // Check if the book is available
     if(bkList[i].getQuantity()>0) {
         Date dueDate;
+        // If only one copy is left, set the book as unavailable
         if (bkList[i].getQuantity()==1){
             bkList[i].setAvailability(false);
         }
+        // Decrease the quantity of the book
         bkList[i].setQuantity(bkList[i].getQuantity()-1);
 
+        // Set the due date based on the member type
         if(member.getType()==Custom_String_Class("Member")||member.getType()==Custom_String_Class("Student")) {
             dueDate = Date::getCrrentDate() + 7;
             cout<<dueDate.getDate();
@@ -106,13 +112,13 @@ bool Librarian::borrowBook(Book b, Member member){
         else if(member.getType()==Custom_String_Class("Faculty"))
             dueDate = Date::getCrrentDate() + 14;
 
-        Loan newloan(member.getID(), bkList[i].getISBN(), dueDate, Date::getCrrentDate());
-        checkedBooks.push_back(newloan);
+        Loan newloan(member.getID(), bkList[i].getISBN(), dueDate, Date::getCrrentDate());         // Create a new loan
+        checkedBooks.push_back(newloan);         // Add the loan to the member's checked out books
         cout<<checkedBooks.back().getBookID();
-        loansList.push_back(newloan);
+        loansList.push_back(newloan);         // Add the loan to the list of all loans
         return true;
     }
-    else{
+    else{ // If the book is not available
         cout << "there are no copies of the book available"<<endl;
         return false;
     }
@@ -457,8 +463,7 @@ bool Librarian::loadMembers() {
     members.clear();
     librarians.clear();
 
-    std::ifstream file("members.json");
-    // If the file is not open
+    std::ifstream file("users.json");    // If the file is not open
     if (!file.is_open()) {
         std::cerr << "Failed to open file." << std::endl;
         return false;
@@ -509,7 +514,7 @@ bool Librarian::loadMembers() {
 
 // Function to save members
 bool Librarian::saveMembers() {
-    std::ofstream file("members.json");
+    std::ofstream file("users.json");
     // If the file is not open
     if (!file.is_open()) {
         std::cerr << "Failed to open file." << endl;

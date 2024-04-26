@@ -211,7 +211,7 @@ void displayMenuFindlibrarian(){
 
 void playSound(const char* wavPath) {
 
-    PlaySoundA(wavPath, NULL, SND_FILENAME);
+    PlaySoundA(wavPath, NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
 }
 
 const char* wavPath = "music.wav";

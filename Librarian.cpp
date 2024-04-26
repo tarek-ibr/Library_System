@@ -125,7 +125,6 @@ void Librarian::approveBorrowRequest(Loan ln) {
 
     for(auto it =borrowRequests.begin(); it != borrowRequests.end(); ) {
         if(it->getBookID() == ln.getBookID() && it->getMemberID() ==ln.getMemberID()) {
-            cout << "Now I am removing \n";
             borrowRequests.erase(it); // Remove the request from the borrow requests list
             break;
         } else {

@@ -132,5 +132,10 @@ char * Custom_String_Class::getSTR() const {
     return str;
 }
 
+string Custom_String_Class::toString() {
+    string s = str;
+    return s;
+}
+
 Custom_String_Class::~Custom_String_Class()=default;
 

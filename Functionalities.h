@@ -7,6 +7,12 @@
 
 #include "Custom_String_Class.h"
 #include "User.h"
+#include <string>
+
+void loadFiles();
+void saveFiles();
+
+//Custom_String_Class *executeGUIOption(Custom_String_Class *options, size_t num_options);
 
 Custom_String_Class login(int);
 

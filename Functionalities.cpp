@@ -5,6 +5,122 @@
 #include "Functionalities.h"
 
 
+void saveFiles(){
+    Librarian::saveMembers();
+    Loan::saveLoans();
+    Librarian::saveLibrarian();
+    Book::savelibrary();
+}
+
+void loadFiles(){
+    Librarian::loadMembers();
+    Loan::loadLoans();
+    Librarian::loadLibrarian();
+    Book::loadlibrary();
+}
+
+string* executeGUIOption(string* options, size_t num_options) {
+
+    loadFiles();
+
+    vector<string> response = {};
+
+    string* response_array = new string[num_options];
+
+    int operation = std::stoi(options[0]);
+
+    switch (operation) {
+        case 1:
+            response.push_back(login(std::stoi(options[1])).toString());
+            break;
+        case 2: {
+            Librarian librarian = Librarian::findLibrarianByID(stoi(options[1]));
+
+            string title = (options[2]);
+            string isbn = (options[3]);
+            string author = (options[4]);
+            string genre = (options[5]);
+            int publicationYear = stoi(options[6]);
+            int Quantity = stoi(options[7]);
+            Book newBook(title,author,isbn,genre,publicationYear,Quantity);
+            Book::getBookList().push_back(newBook);
+
+            break;
+        }
+        case 3: {
+            Librarian librarian = Librarian::findLibrarianByID(stoi(options[1]));
+
+            string isbn = options[2];
+            librarian.removeBook(isbn);
+            break;
+        }
+        case 4: {
+            Librarian librarian = Librarian::findLibrarianByID(stoi(options[1]));
+            vector<Member>& members= Librarian::getMembers();
+
+            string name = options[2];
+            string type = options[3];
+            int id = stoi(options[4]);
+            members.push_back(Member(name, id, type));
+            break;
+        }
+        case 5: {
+            Librarian librarian = Librarian::findLibrarianByID(stoi(options[1]));
+            vector<Member>& members= Librarian::getMembers();
+
+            int id = stoi(options[2]);
+
+            for (auto it = members.begin(); it != members.end() ; ++it) {
+                if (it->getID() == id) {
+                    members.erase(it);
+                    break;
+                }
+            }
+
+            break;
+        }
+        case 6: {
+            /*librarian.displayRequests();
+            int choice;
+            cin >> choice;
+            vector<Loan>& requests = Librarian::getBorrowRequests();
+            Loan loan = requests[choice - 1];
+            librarian.approveBorrowRequest(loan);
+            //to add approve request in gui*/
+            break;
+        }
+        case 7: {
+            Member member = Librarian::findMemberByID(stoi(options[1]));
+
+            string isbn = (options[2]);
+
+            Book book = Book::findByISBN(isbn);
+            member.requestBorrow(book);
+            break;
+        }
+        case 8:
+            /*member.displayloaned();
+            cout << "\n Choose a book to return: ";
+            int choice;
+            cin >> choice;
+            vector<Loan> loanedbooks = member.getCheckedOutBooks();
+            Book loanedbook = Book::findByISBN(loanedbooks[choice - 1].getBookID());
+            member.returnBook(loanedbook);
+            //to add return book*/
+            break;
+        default:
+            break;
+    }
+
+    saveFiles();
+
+    // Convert response vector to array
+    for (size_t i = 0; i < response.size(); ++i) {
+        response_array[i] = {response[i]};
+    }
+    return response_array;
+}
+
 Custom_String_Class login(int id){
     vector<Member>& member = Member::getMembers();
     vector<Librarian>& librarian = Librarian::getLibrarians();
@@ -93,6 +209,7 @@ void implementMemberChoice(Member& member, int memberOption){
   switch (memberOption) {
       case 1: {
           Book::displaylist();
+          cout << "\n Choose a book to borrow: ";
           int choice;
           cin >> choice;
           vector<Book> bookList = Book::getBookList();

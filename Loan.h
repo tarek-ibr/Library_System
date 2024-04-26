@@ -4,46 +4,57 @@
 
 #ifndef PROJECT_LOAN_H
 #define PROJECT_LOAN_H
+
+// Include necessary libraries and files
 #include "Custom_String_Class.h"
 #include "Date.h"
 #include <iostream>
 #include <fstream>
 #include <vector>
 #include "json.h"
-//atef
+
+// Use nlohmann's json library
 using json = nlohmann::json;
+
+// Loan class definition
 class Loan  {
 private:
-    int memberID;
-    Custom_String_Class bookID;
-    Date dueDate;
-    Date borrowDate;
-    static vector<Loan> Loans_List;
-    friend class Librarian;
+    // Private member variables
+    int memberID; // Member ID
+    Custom_String_Class bookID; // Book ID
+    Date dueDate; // Due date
+    Date borrowDate; // Borrow date
+    static vector<Loan> Loans_List; // Static list of all loans
+    friend class Librarian; // Friend class declaration
+
 public:
+    // Public member functions
 
-    Loan();
-    Loan(int, const Custom_String_Class&, Date, Date);
-    Loan(int, const Custom_String_Class&, Date);
-    Loan(int m, const Custom_String_Class& b);
+    // Constructors
+    Loan(); // Default constructor
+    Loan(int, const Custom_String_Class&, Date, Date); // Constructor with member ID, book ID, due date, and borrow date
+    Loan(int, const Custom_String_Class&, Date); // Constructor with member ID, book ID, and due date. Borrow date is set to current date.
+    Loan(int m, const Custom_String_Class& b); // Constructor with member ID and book ID. Due date and borrow date are set to 0.
 
-    Custom_String_Class getBookID() const;
-    int getMemberID() const;
-    Date getDueDate() const;
-    Date getBorrowDate() const;
-    static vector<Loan>& getLoans_List();
-    void setMemberID(int);
-    void setBookID(const Custom_String_Class&);
-    void setDueDate(Date);
-    void setBorrowDate(Date);
+    // Getters
+    Custom_String_Class getBookID() const; // Getter for book ID
+    int getMemberID() const; // Getter for member ID
+    Date getDueDate() const; // Getter for due date
+    Date getBorrowDate() const; // Getter for borrow date
+    static vector<Loan>& getLoans_List(); // Getter for list of loans
 
-    static void loadLoans();
-    static void saveLoans();
+    // Setters
+    void setMemberID(int); // Setter for member ID
+    void setBookID(const Custom_String_Class&); // Setter for book ID
+    void setDueDate(Date); // Setter for due date
+    void setBorrowDate(Date); // Setter for borrow date
 
-    int calculateFines();
-    void displayDetails();
-    static void displaylist();
+    // Other member functions
+    static void loadLoans(); // Function to load loans from a file
+    static void saveLoans(); // Function to save loans to a file
+    int calculateFines(); // Function to calculate fines
+    void displayDetails(); // Function to display details of the loan
+    static void displaylist(); // Function to display the list of loans
 };
-
 
 #endif //PROJECT_LOAN_H

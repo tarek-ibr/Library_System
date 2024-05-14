@@ -8,24 +8,24 @@ The library system includes classes for books, members, loans, and the library i
 
 Librarian Features: 
  Add book 
- Remove book 
- Register new member 
- Remove member 
- Edit book 
- Approve borrow request  
- Display all members 
- Display all books 
- Display borrow requests 
- Display all loans 
- Find a book 
- Find a member 
- Find a librarian 
+, Remove book 
+, Register new member 
+, Remove member 
+, Edit book 
+, Approve borrow request  
+, Display all members 
+, Display all books 
+, Display borrow requests 
+, Display all loans 
+, Find a book 
+, Find a member 
+, Find a librarian 
 
 Member Features: 
-Request to borrow a book 
-Return a book 
-Display loaned books 
-Display your information 
-Display book list 
-Find a book 
+, Request to borrow a book 
+, Return a book 
+, Display loaned books 
+, Display your information 
+, Display book list 
+, Find a book 
 
